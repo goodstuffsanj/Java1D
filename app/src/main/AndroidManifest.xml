@@ -18,7 +18,8 @@
         </activity>
         <activity android:name=".HomePage" />
         <activity android:name=".BookProf" />
-        <activity android:name=".BookFacilities"></activity>
+        <activity android:name=".BookFacilities" />
+        <activity android:name=".LoginPage"></activity>
     </application>
 
 </manifest>
