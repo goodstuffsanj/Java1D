@@ -19,7 +19,9 @@
         <activity android:name=".HomePage" />
         <activity android:name=".BookProf" />
         <activity android:name=".BookFacilities" />
-        <activity android:name=".LoginPage"></activity>
+        <activity android:name=".LoginPage" />
+        <activity android:name=".Prof" />
+        <activity android:name=".Facility"></activity>
     </application>
 
 </manifest>
