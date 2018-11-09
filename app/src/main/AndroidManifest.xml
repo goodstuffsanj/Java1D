@@ -20,9 +20,11 @@
         <activity android:name=".MainActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".BookProf"
+            android:label="Book Prof"
             android:parentActivityName=".HomePage"
             android:screenOrientation="portrait"></activity>
         <activity android:name=".BookFacilities"
+            android:label="Book Facilities"
             android:parentActivityName=".HomePage"
             android:screenOrientation="portrait"></activity>
         <activity android:name=".LoginPage" />
