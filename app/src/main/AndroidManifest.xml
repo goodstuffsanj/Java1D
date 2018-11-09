@@ -9,19 +9,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".HomePage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".HomePage" />
-        <activity android:name=".BookProf" />
-        <activity android:name=".BookFacilities" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".BookProf"
+            android:parentActivityName=".HomePage"></activity>
+        <activity android:name=".BookFacilities"
+            android:parentActivityName=".HomePage"></activity>
         <activity android:name=".LoginPage" />
-        <activity android:name=".Prof" />
-        <activity android:name=".Facility"></activity>
+        <activity android:name=".Prof"
+            android:parentActivityName=".BookProf"></activity>
+        <activity android:name=".Facility"
+            android:parentActivityName=".BookFacilities"></activity>
     </application>
 
 </manifest>
