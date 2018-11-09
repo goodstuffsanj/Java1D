@@ -1,32 +1,74 @@
 package com.example.personal.sutdbookingapp;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
-public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> {
+import com.bumptech.glide.Glide;
+
+import java.util.ArrayList;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+
+public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
+
+    private static final String TAG = "ListAdapter";
+    private ArrayList<String> images = new ArrayList<>();
+    private ArrayList<String> image_names = new ArrayList<>();
+    private Context context;
+
+    public ListAdapter(ArrayList<String> images, ArrayList<String> image_names, Context context) {
+        this.images = images;
+        this.image_names = image_names;
+        this.context = context;
+    }
 
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return null;
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.layout_list_item, viewGroup, false);
+        ViewHolder holder = new ViewHolder(view);
+        return holder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder viewHolder, int i) {
-
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
+        Log.d(TAG, "onBindViewHolder: called");
+        Glide.with(context).load(images.get(i)).into(viewHolder.image);
+        viewHolder.image_name.setText(image_names.get(i));
+        viewHolder.list_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "onclick: clicked on: "+ image_names.get(i));
+                Toast.makeText(context, image_names.get(i), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return image_names.size();
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
 
-        public MyViewHolder(@NonNull View itemView) {
+        CircleImageView image;
+        TextView image_name;
+        RelativeLayout list_layout;
+
+        public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            image = itemView.findViewById(R.id.image);
+            image_name = itemView.findViewById(R.id.image_name);
+            list_layout = itemView.findViewById(R.id.list_layout);
         }
     }
+
 }
