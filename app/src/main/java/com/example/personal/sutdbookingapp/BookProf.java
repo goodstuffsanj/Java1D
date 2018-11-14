@@ -36,7 +36,7 @@ public class BookProf extends AppCompatActivity {
     private void initImage() {
         for (int i=0; i<300; i++) {
             names.add("Professor "+i);
-            image_urls.add("https://images.pexels.com/photos/248797/pexels-photo-248797.jpeg?auto=compress&cs=tinysrgb&h=350");
+            image_urls.add("https://www.biography.com/.image/t_share/MTE5NDg0MDU0OTU2OTAxOTAz/albert-einstein-9285408-1-402.jpg");
         }
         initRecyclerView();
     }

@@ -28,7 +28,7 @@ public class BookFacilities extends AppCompatActivity {
     private void initImage() {
         for (int i=0; i<50; i++) {
             names.add("Facility "+i);
-            image_urls.add("https://images.pexels.com/photos/248797/pexels-photo-248797.jpeg?auto=compress&cs=tinysrgb&h=350");
+            image_urls.add("http://www.sunandmoonhotel.com/uploads/images/Gallery/Meeting-Room-Board-Room-Gallery/meeting-room-g1.jpg");
         }
         initRecyclerView();
     }
