@@ -18,24 +18,10 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
 public class HomePage extends AppCompatActivity {
     private CardView book_facilities;
     private CardView book_prof;
-    DynamoDBMapper dynamoDBMapper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        AWSMobileClient.getInstance().initialize(this).execute();
-        AWSCredentialsProvider credentialsProvider = AWSMobileClient.getInstance().getCredentialsProvider();
-        AWSConfiguration configuration = AWSMobileClient.getInstance().getConfiguration();
-
-
-        // Add code to instantiate a AmazonDynamoDBClient
-        AmazonDynamoDBClient dynamoDBClient = new AmazonDynamoDBClient(credentialsProvider);
-
-        this.dynamoDBMapper = DynamoDBMapper.builder()
-                .dynamoDBClient(dynamoDBClient)
-                .awsConfiguration(configuration)
-                .build();
 
         setContentView(R.layout.activity_home_page);
         setTitle("My Activity");
