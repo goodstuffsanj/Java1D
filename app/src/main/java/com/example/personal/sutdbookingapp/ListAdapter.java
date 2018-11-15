@@ -25,8 +25,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     private ArrayList<String> image_names = new ArrayList<>();
     private Context context;
     public final static String FACIL_ID = "FACIL_ID";
-    public SharedPreferences mPreferences;
-
+    public final static String PROF_ID = "PROF_ID";
     public ListAdapter(ArrayList<String> images, ArrayList<String> image_names, Context context) {
         this.images = images;
         this.image_names = image_names;
@@ -52,10 +51,16 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
             public void onClick(View view) {
                 Log.d(TAG, "onclick: clicked on: "+ image_names.get(i));
                 Toast.makeText(context, image_names.get(i), Toast.LENGTH_SHORT).show();
-
-                Intent intent = new Intent(context, Facility.class);
-                intent.putExtra(FACIL_ID, image_names.get(i));
-                context.startActivity(intent);
+                if (image_names.get(i).toCharArray()[0] == 'F') {
+                    Intent intent = new Intent(context, Facility.class);
+                    intent.putExtra(FACIL_ID, image_names.get(i));
+                    context.startActivity(intent);
+                }
+                else {
+                    Intent intent = new Intent(context, Prof.class);
+                    intent.putExtra(PROF_ID, image_names.get(i));
+                    context.startActivity(intent);
+                }
             }
         });
     }
