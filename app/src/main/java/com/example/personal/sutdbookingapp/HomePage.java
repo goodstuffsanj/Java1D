@@ -15,6 +15,7 @@ import com.amazonaws.mobile.config.AWSConfiguration;
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBMapper;
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBQueryExpression;
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.PaginatedList;
+import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.PaginatedQueryList;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import com.amazonaws.services.dynamodbv2.model.ComparisonOperator;
@@ -46,9 +47,10 @@ public class HomePage extends AppCompatActivity {
                 .awsConfiguration(configuration)
                 .build();
 
-        ida = "kk";
+        ida = new NewsDO().getUserId();
 
-        createNews();
+        //createNews();
+        queryNews();
         //readNews();
         //updateNews();
         //readNews();
@@ -87,6 +89,7 @@ public class HomePage extends AppCompatActivity {
 
         newsItem.setArticleId("Article1");
         newsItem.setContent("This is the article content");
+        newsItem.setAuthor("James");
 
         new Thread(new Runnable() {
             @Override
@@ -150,25 +153,24 @@ public class HomePage extends AppCompatActivity {
         }).start();
     }
 
-    /*public void queryNews() {
+    public void queryNews() {
 
         new Thread(new Runnable() {
             @Override
             public void run() {
-                com.amazonaws.models.nosql.NewsDO news = new com.amazonaws.models.nosql.NewsDO();
-                news.setUserId(id);
-                news.setArticleId("Article1");
+                NewsDO news = new NewsDO();
+                news.setAuthor("James");
 
                 Condition rangeKeyCondition = new Condition()
                         .withComparisonOperator(ComparisonOperator.BEGINS_WITH)
-                        .withAttributeValueList(new AttributeValue().withS("Trial"));
+                        .withAttributeValueList(new AttributeValue().withS(""));
 
-                DynamoDBQueryExpression queryExpression = new DynamoDBQueryExpression()
-                        .withHashKeyValues(note)
-                        .withRangeKeyCondition("articleId", rangeKeyCondition)
-                        .withConsistentRead(false);
+                DynamoDBQueryExpression<NewsDO> queryExpression = new DynamoDBQueryExpression<>();
+                queryExpression.setHashKeyValues(news);
+                queryExpression.setIndexName("Authors");
+                queryExpression.setConsistentRead(false);
 
-                PaginatedList<com.amazonaws.models.nosql.NewsDO> result = dynamoDBMapper.query(com.amazonaws.models.nosql.NewsDO.class, queryExpression);
+                PaginatedList<NewsDO> result = dynamoDBMapper.query(NewsDO.class, queryExpression);
 
                 Gson gson = new Gson();
                 StringBuilder stringBuilder = new StringBuilder();
@@ -182,10 +184,32 @@ public class HomePage extends AppCompatActivity {
                 // Add your code here to deal with the data result
                 Log.d("Query result: ", stringBuilder.toString());
 
+                NewsDO news2 = new NewsDO();
+                news2.setUserId("123");
+                //news2.setArticleId("Article1");
+
+                DynamoDBQueryExpression<NewsDO> queryExpression2 = new DynamoDBQueryExpression<NewsDO>()
+                        .withHashKeyValues(news2)
+                        .withConsistentRead(false);
+
+                PaginatedList<NewsDO> result2 = dynamoDBMapper.query(NewsDO.class, queryExpression2);
+
+                Gson gson2 = new Gson();
+                StringBuilder stringBuilder2 = new StringBuilder();
+
+                // Loop through query results
+                for (int i = 0; i < result2.size(); i++) {
+                    String jsonFormOfItem = gson2.toJson(result2.get(i));
+                    stringBuilder2.append(jsonFormOfItem + "\n\n");
+                }
+
+                // Add your code here to deal with the data result
+                Log.d("Query result: ", stringBuilder2.toString());
+
                 if (result.isEmpty()) {
                     // There were no items matching your query.
                 }
             }
         }).start();
-    }*/
+    }
 }
