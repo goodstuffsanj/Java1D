@@ -42,7 +42,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
+    public void onBindViewHolder(ViewHolder viewHolder, final int i) {
         Log.d(TAG, "onBindViewHolder: called");
         Glide.with(context).load(images.get(i)).into(viewHolder.image);
         viewHolder.image_name.setText(image_names.get(i));
@@ -50,13 +50,12 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "onclick: clicked on: "+ image_names.get(i));
-                Toast.makeText(context, image_names.get(i), Toast.LENGTH_SHORT).show();
-                if (image_names.get(i).toCharArray()[0] == 'F') {
+                if (context.getClass()==BookProf.class) {
                     Intent intent = new Intent(context, Facility.class);
                     intent.putExtra(FACIL_ID, image_names.get(i));
                     context.startActivity(intent);
                 }
-                else {
+                else if (context.getClass()==BookFacilities.class) {
                     Intent intent = new Intent(context, Prof.class);
                     intent.putExtra(PROF_ID, image_names.get(i));
                     context.startActivity(intent);
