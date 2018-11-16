@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">SUTD Booking App</string>
     <string name="what">What do you want to do today?</string>
+    <string name="book_this_facility">Book this facility"</string>
 </resources>
