@@ -124,7 +124,7 @@
             <android.support.v7.widget.CardView
                 android:id="@+id/announcement"
                 android:layout_width="0dp"
-                android:layout_height="173dp"
+                android:layout_height="190dp"
 
                 android:layout_marginBottom="52dp"
                 android:layout_marginEnd="23dp"
