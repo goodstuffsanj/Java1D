@@ -6,13 +6,14 @@ import android.os.Bundle;
 
 public class Facility extends AppCompatActivity {
     public String facilityId;
+    public final static String FACIL_ID = "FACIL_ID";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_facility);
-
         Intent intent = getIntent();
-        facilityId = intent.getStringExtra(ListAdapter.FACIL_ID);
+        String name = intent.getStringExtra(FACIL_ID);
+        setTitle(name);
     }
 }

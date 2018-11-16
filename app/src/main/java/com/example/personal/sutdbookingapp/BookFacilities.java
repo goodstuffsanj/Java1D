@@ -10,8 +10,7 @@ import java.util.ArrayList;
 
 public class BookFacilities extends AppCompatActivity {
 
-    private ArrayList<String> names = new ArrayList<>();
-    private ArrayList<String> image_urls = new ArrayList<>();
+    private ArrayList<Bookable> facilities = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,15 +27,17 @@ public class BookFacilities extends AppCompatActivity {
 
     private void initImage() {
         for (int i=0; i<50; i++) {
-            names.add("Facility "+i);
-            image_urls.add("http://www.sunandmoonhotel.com/uploads/images/Gallery/Meeting-Room-Board-Room-Gallery/meeting-room-g1.jpg");
+            Bookable facility = new Bookable();
+            facility.setName("Facility "+i);
+            facility.setImage("http://www.sunandmoonhotel.com/uploads/images/Gallery/Meeting-Room-Board-Room-Gallery/meeting-room-g1.jpg");
+            facilities.add(facility);
         }
         initRecyclerView();
     }
 
     private void initRecyclerView() {
         RecyclerView recyclerView= findViewById(R.id.recycler_view);
-        ListAdapter listAdapter = new ListAdapter(image_urls, names, this);
+        ListAdapter listAdapter = new ListAdapter(facilities, this);
         recyclerView.setAdapter(listAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }

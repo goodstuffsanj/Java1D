@@ -21,14 +21,14 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
     private static final String TAG = "ListAdapter";
-    private ArrayList<String> images = new ArrayList<>();
-    private ArrayList<String> image_names = new ArrayList<>();
+
+    private ArrayList<Bookable> bookables = new ArrayList<>();
     private Context context;
     public final static String FACIL_ID = "FACIL_ID";
     public final static String PROF_ID = "PROF_ID";
-    public ListAdapter(ArrayList<String> images, ArrayList<String> image_names, Context context) {
-        this.images = images;
-        this.image_names = image_names;
+
+    public ListAdapter(ArrayList<Bookable> bookables, Context context) {
+        this.bookables = bookables;
         this.context = context;
     }
 
@@ -43,20 +43,22 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, final int i) {
         Log.d(TAG, "onBindViewHolder: called");
-        Glide.with(context).load(images.get(i)).into(viewHolder.image);
-        viewHolder.image_name.setText(image_names.get(i));
+
+        final Bookable bookable = bookables.get(i);
+        Glide.with(context).load(bookable.getImage()).into(viewHolder.image);
+        viewHolder.image_name.setText(bookable.getName());
         viewHolder.list_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d(TAG, "onclick: clicked on: "+ image_names.get(i));
-                if (context.getClass()==BookProf.class) {
+                Log.d(TAG, "onclick: clicked on: "+ bookable.getName());
+                if (context.getClass()==BookFacilities.class) {
                     Intent intent = new Intent(context, Facility.class);
-                    intent.putExtra(FACIL_ID, image_names.get(i));
+                    intent.putExtra(FACIL_ID, bookable.getName());
                     context.startActivity(intent);
                 }
-                else if (context.getClass()==BookFacilities.class) {
+                else if (context.getClass()==BookProf.class) {
                     Intent intent = new Intent(context, Prof.class);
-                    intent.putExtra(PROF_ID, image_names.get(i));
+                    intent.putExtra(PROF_ID, bookable.getName());
                     context.startActivity(intent);
                 }
             }
@@ -65,7 +67,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return image_names.size();
+        return bookables.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

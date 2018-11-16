@@ -1,5 +1,6 @@
 package com.example.personal.sutdbookingapp;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -10,7 +11,9 @@ public class Prof extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prof);
-
+        Intent intent = getIntent();
+        String name = intent.getStringExtra(PROF_ID);
+        setTitle(name);
 
     }
 }

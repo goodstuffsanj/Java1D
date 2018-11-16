@@ -10,9 +10,7 @@ import java.util.ArrayList;
 public class BookProf extends AppCompatActivity {
 
     private static final String TAG = "BookProf";
-
-    private ArrayList<String> names = new ArrayList<>();
-    private ArrayList<String> image_urls = new ArrayList<>();
+    private ArrayList<Bookable> profs = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,15 +33,17 @@ public class BookProf extends AppCompatActivity {
 
     private void initImage() {
         for (int i=0; i<300; i++) {
-            names.add("Professor "+i);
-            image_urls.add("https://www.biography.com/.image/t_share/MTE5NDg0MDU0OTU2OTAxOTAz/albert-einstein-9285408-1-402.jpg");
+            Bookable prof = new Bookable();
+            prof.setName("Professor "+i);
+            prof.setImage("https://www.biography.com/.image/t_share/MTE5NDg0MDU0OTU2OTAxOTAz/albert-einstein-9285408-1-402.jpg");
+            profs.add(prof);
         }
         initRecyclerView();
     }
 
     private void initRecyclerView() {
         RecyclerView recyclerView= findViewById(R.id.recycler_view);
-        ListAdapter listAdapter = new ListAdapter(image_urls, names, this);
+        ListAdapter listAdapter = new ListAdapter(profs, this);
         recyclerView.setAdapter(listAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
