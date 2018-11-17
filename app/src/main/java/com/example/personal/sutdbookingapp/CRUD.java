@@ -25,10 +25,10 @@ public class CRUD {
             }
         }).start();
     }
-}
 
-class CRUDtest {
-    static void main(String args[]) {
+
+
+    public static void main(String args[]) {
         DBstudent_table.AWS aws = new DBstudent_table.AWS();
         CRUD crud = new CRUD();
         aws.getStudent_id();

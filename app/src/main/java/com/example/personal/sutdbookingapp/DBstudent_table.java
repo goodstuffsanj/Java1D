@@ -16,8 +16,8 @@ public class DBstudent_table {
     @DynamoDBTable(tableName = "Student_table")
     public static class AWS {
         private DynamoDBMapper dynamoDBMapper;
-        private String student_id;
-        private String password;
+        private String student_id ="1234";
+        private String password="123";
 
         @DynamoDBHashKey(attributeName = "Student_id")
         @DynamoDBAttribute(attributeName = "student_id")
@@ -99,11 +99,10 @@ public class DBstudent_table {
 
     }
 
-}
+
 //    public static void main(String args[]) {
 //        AWS aws = new AWS();
 //        aws.getStudent_id();
 //        aws.getPassword();
-//        aws.createNews();
 //    }
-//}
+}
