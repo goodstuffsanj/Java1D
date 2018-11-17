@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class BookProf extends AppCompatActivity {
+public class BookProf extends AppCompatActivity implements SearchView.OnQueryTextListener{
 
     private static final String TAG = "BookProf";
 
@@ -49,7 +49,6 @@ public class BookProf extends AppCompatActivity {
                     Log.i(TAG, "handleIntent: " + item.name);
                     filteredList.add(item);
                 }
-
             }
             initRecyclerView();
         }
@@ -85,6 +84,24 @@ public class BookProf extends AppCompatActivity {
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        searchView.setOnQueryTextListener(this);
         return true;
+    }
+
+    public boolean onQueryTextChange(String newText) {
+        String query = newText;
+        filteredList.clear();
+        for (ListAdapter.ListItem item: listItems) {
+            if (item.name.toLowerCase().contains(query.toLowerCase())){
+                Log.i(TAG, "handleIntent: " + item.name);
+                filteredList.add(item);
+            }
+        }
+        initRecyclerView();
+        return true;
+    }
+
+    public boolean onQueryTextSubmit(String query) {
+        return false;
     }
 }
