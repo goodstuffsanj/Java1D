@@ -15,20 +15,19 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
+import java.util.ListIterator;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
     private static final String TAG = "ListAdapter";
-    private ArrayList<String> images = new ArrayList<>();
-    private ArrayList<String> image_names = new ArrayList<>();
+    private ArrayList<ListItem> listOfItems;
     private Context context;
     public final static String FACIL_ID = "FACIL_ID";
     public final static String PROF_ID = "PROF_ID";
-    public ListAdapter(ArrayList<String> images, ArrayList<String> image_names, Context context) {
-        this.images = images;
-        this.image_names = image_names;
+    public ListAdapter(ArrayList<ListItem> list, Context context) {
+        this.listOfItems = list;
         this.context = context;
     }
 
@@ -43,21 +42,25 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int i) {
+        String image = listOfItems.get(i).image;
+        String name = listOfItems.get(i).name;
         Log.d(TAG, "onBindViewHolder: called");
-        Glide.with(context).load(images.get(i)).into(viewHolder.image);
-        viewHolder.image_name.setText(image_names.get(i));
+        Glide.with(context).load(image).into(viewHolder.image);
+        viewHolder.image_name.setText(name);
         viewHolder.list_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d(TAG, "onclick: clicked on: "+ image_names.get(i));
+                String name = listOfItems.get(i).name;
+                Log.d(TAG, "onclick: clicked on: "+ name);
+                Toast.makeText(context, name, Toast.LENGTH_SHORT).show();
                 if (context.getClass()==BookProf.class) {
                     Intent intent = new Intent(context, Facility.class);
-                    intent.putExtra(FACIL_ID, image_names.get(i));
+                    intent.putExtra(FACIL_ID, name);
                     context.startActivity(intent);
                 }
                 else if (context.getClass()==BookFacilities.class) {
                     Intent intent = new Intent(context, Prof.class);
-                    intent.putExtra(PROF_ID, image_names.get(i));
+                    intent.putExtra(PROF_ID, name);
                     context.startActivity(intent);
                 }
             }
@@ -66,7 +69,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return image_names.size();
+        return listOfItems.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -82,5 +85,30 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
             list_layout = itemView.findViewById(R.id.list_layout);
         }
     }
+
+    public ArrayList<String>[] toNameImage(){
+        ArrayList<String>[] ans = new ArrayList[2];
+        ArrayList<String> names = new ArrayList<>();
+        ArrayList<String> images = new ArrayList<>();
+        for (int i = 0; i <listOfItems.size(); i ++ ) {
+            names.add(listOfItems.get(i).name);
+            images.add(listOfItems.get(i).image);
+        }
+        ans[0] = names;
+        ans[1] = images;
+        return ans;
+
+    }
+
+
+    static public class ListItem{
+        public String name;
+        public String image;
+        public ListItem(String name, String image) {
+            this.name = name;
+            this.image = image;
+        }
+    }
+
 
 }
