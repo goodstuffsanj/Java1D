@@ -4,7 +4,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.example.personal.sutdbookingapp"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -40,4 +40,6 @@ dependencies {
     implementation('com.amazonaws:aws-android-sdk-mobile-client:2.7.+@aar') { transitive = true }
     // DynamoDb
     implementation 'com.amazonaws:aws-android-sdk-ddb-mapper:2.7.+'
+    // Styleable Toast
+    implementation 'com.muddzdev:styleabletoast:2.0.1'
 }
