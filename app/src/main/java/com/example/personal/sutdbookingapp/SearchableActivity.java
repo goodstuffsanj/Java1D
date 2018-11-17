@@ -2,6 +2,7 @@ package com.example.personal.sutdbookingapp;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.SearchView;
 
 public class SearchableActivity extends AppCompatActivity {
 

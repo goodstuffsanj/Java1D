@@ -7,6 +7,7 @@
     android:orientation="vertical">
 
     <RelativeLayout
+        android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="15dp">
@@ -26,10 +27,10 @@
             android:layout_marginLeft="30dp"
             android:textSize="17sp"/>
     </RelativeLayout>
-
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:background="@android:color/darker_gray"></View>
+        android:background="@android:color/darker_gray"
+        android:layout_alignBottom="@+id/list"></View>
 
 </RelativeLayout>

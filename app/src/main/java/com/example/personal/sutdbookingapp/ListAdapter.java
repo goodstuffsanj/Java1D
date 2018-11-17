@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,18 +20,22 @@ import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
+public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> implements Filterable{
 
     private static final String TAG = "ListAdapter";
 
     private ArrayList<Bookable> bookables = new ArrayList<>();
+    private ArrayList<Bookable> copies = new ArrayList<>();
     private Context context;
     public final static String FACIL_ID = "FACIL_ID";
     public final static String PROF_ID = "PROF_ID";
+    public final static String IMAGE = "IMAGE";
+    private final static String DESCRIPTION = "DESCRIPTION";
 
     public ListAdapter(ArrayList<Bookable> bookables, Context context) {
         this.bookables = bookables;
         this.context = context;
+        copies = new ArrayList<>(bookables);
     }
 
 
@@ -54,11 +60,15 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
                 if (context.getClass()==BookFacilities.class) {
                     Intent intent = new Intent(context, Facility.class);
                     intent.putExtra(FACIL_ID, bookable.getName());
+                    intent.putExtra(IMAGE, bookable.getImage());
+                    intent.putExtra(DESCRIPTION, bookable.getDescription());
                     context.startActivity(intent);
                 }
                 else if (context.getClass()==BookProf.class) {
                     Intent intent = new Intent(context, Prof.class);
                     intent.putExtra(PROF_ID, bookable.getName());
+                    intent.putExtra(IMAGE, bookable.getImage());
+                    intent.putExtra(DESCRIPTION, bookable.getDescription());
                     context.startActivity(intent);
                 }
             }
@@ -84,4 +94,35 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         }
     }
 
+    @Override
+    public Filter getFilter() {
+        return listFilter;
+    }
+
+    private Filter listFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence charSequence) {
+            ArrayList<Bookable> filtered = new ArrayList<>();
+            if (charSequence == null || charSequence.length()==0) {
+                filtered.addAll(copies);
+            } else {
+                String filterPattern = charSequence.toString().toLowerCase().trim();
+                for (Bookable item: copies) {
+                    if (item.getName().toLowerCase().contains(filterPattern)) {
+                        filtered.add(item);
+                    }
+                }
+            }
+            FilterResults results = new FilterResults();
+            results.values = filtered;
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+            bookables.clear();
+            bookables.addAll((ArrayList) filterResults.values);
+            notifyDataSetChanged();
+        }
+    };
 }
