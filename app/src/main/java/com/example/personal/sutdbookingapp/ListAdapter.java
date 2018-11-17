@@ -2,7 +2,6 @@ package com.example.personal.sutdbookingapp;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -15,6 +14,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ListIterator;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -54,12 +54,12 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
                 Log.d(TAG, "onclick: clicked on: "+ name);
                 Toast.makeText(context, name, Toast.LENGTH_SHORT).show();
                 if (context.getClass()==BookProf.class) {
-                    Intent intent = new Intent(context, Facility.class);
+                    Intent intent = new Intent(context, Prof.class);
                     intent.putExtra(FACIL_ID, name);
                     context.startActivity(intent);
                 }
                 else if (context.getClass()==BookFacilities.class) {
-                    Intent intent = new Intent(context, Prof.class);
+                    Intent intent = new Intent(context, Facility.class);
                     intent.putExtra(PROF_ID, name);
                     context.startActivity(intent);
                 }
@@ -86,18 +86,18 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         }
     }
 
-    public ArrayList<String>[] toNameImage(){
-        ArrayList<String>[] ans = new ArrayList[2];
+    //to get ArrayList of name, ArrayList of image_urls
+    public List<ArrayList<String>> toNameImage(){
+        List<ArrayList<String>> ans = new ArrayList<>();
         ArrayList<String> names = new ArrayList<>();
         ArrayList<String> images = new ArrayList<>();
         for (int i = 0; i <listOfItems.size(); i ++ ) {
             names.add(listOfItems.get(i).name);
             images.add(listOfItems.get(i).image);
         }
-        ans[0] = names;
-        ans[1] = images;
+        ans.add(0, names);
+        ans.add(1, images);
         return ans;
-
     }
 
 
@@ -109,6 +109,4 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
             this.image = image;
         }
     }
-
-
 }
