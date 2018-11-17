@@ -42,16 +42,22 @@ public class BookProf extends AppCompatActivity implements SearchView.OnQueryTex
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
             Toast.makeText(this, query, Toast.LENGTH_SHORT).show();
-            //use the query to search your data somehow
-            filteredList.clear();
-            for (ListAdapter.ListItem item: listItems) {
-                if (item.name.toLowerCase().contains(query.toLowerCase())){
-                    Log.i(TAG, "handleIntent: " + item.name);
-                    filteredList.add(item);
-                }
-            }
-            initRecyclerView();
+            doSearch(query);
+
+
         }
+    }
+
+    //use the query to search your data somehow
+    private void doSearch(String query) {
+        filteredList.clear();
+        for (ListAdapter.ListItem item: listItems) {
+            if (item.name.toLowerCase().contains(query.toLowerCase())){
+                Log.i(TAG, "handleIntent: " + item.name);
+                filteredList.add(item);
+            }
+        }
+        initRecyclerView();
     }
 
 
@@ -89,16 +95,8 @@ public class BookProf extends AppCompatActivity implements SearchView.OnQueryTex
     }
 
     public boolean onQueryTextChange(String newText) {
-        String query = newText;
-        filteredList.clear();
-        for (ListAdapter.ListItem item: listItems) {
-            if (item.name.toLowerCase().contains(query.toLowerCase())){
-                Log.i(TAG, "handleIntent: " + item.name);
-                filteredList.add(item);
-            }
-        }
-        initRecyclerView();
-        return true;
+        doSearch(newText);
+        return false;
     }
 
     public boolean onQueryTextSubmit(String query) {
