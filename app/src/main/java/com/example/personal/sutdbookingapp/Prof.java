@@ -5,7 +5,17 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
+
+import com.applandeo.materialcalendarview.CalendarView;
+import com.applandeo.materialcalendarview.DatePicker;
+import com.applandeo.materialcalendarview.EventDay;
+import com.applandeo.materialcalendarview.builders.DatePickerBuilder;
+import com.applandeo.materialcalendarview.listeners.OnDayClickListener;
+import com.applandeo.materialcalendarview.listeners.OnSelectDateListener;
 import com.bumptech.glide.Glide;
+
+import java.util.List;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Prof extends AppCompatActivity {
@@ -14,6 +24,7 @@ public class Prof extends AppCompatActivity {
     private final static String DESCRIPTION = "DESCRIPTION";
     CircleImageView imageProf;
     TextView textDesc;
+    CalendarView calendarView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +42,24 @@ public class Prof extends AppCompatActivity {
 
         Glide.with(this).load(image).into(imageProf);
         textDesc.setText(desc);
+        calendarView = findViewById(R.id.calendarView);
+        OnSelectDateListener listener = new OnSelectDateListener() {
+            @Override
+            public void onSelect(List<java.util.Calendar> calendars) {
+
+            }
+        };
+        DatePickerBuilder builder = new DatePickerBuilder(this, listener)
+                .pickerType(CalendarView.ONE_DAY_PICKER);
+
+        DatePicker datePicker = builder.build();
+        datePicker.show();
+        calendarView.setOnDayClickListener(new OnDayClickListener() {
+            @Override
+            public void onDayClick(EventDay eventDay) {
+                java.util.Calendar clickedDayCalendar = eventDay.getCalendar();
+            }
+        });
 
     }
 }
