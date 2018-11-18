@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.applandeo.materialcalendarview.CalendarView;
@@ -14,6 +15,7 @@ import com.applandeo.materialcalendarview.listeners.OnDayClickListener;
 import com.applandeo.materialcalendarview.listeners.OnSelectDateListener;
 import com.bumptech.glide.Glide;
 
+import java.util.Calendar;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -43,17 +45,18 @@ public class Prof extends AppCompatActivity {
         Glide.with(this).load(image).into(imageProf);
         textDesc.setText(desc);
         calendarView = findViewById(R.id.calendarView);
+        Calendar yesterday = Calendar.getInstance();
+        yesterday.add(Calendar.DATE,-1);
+        Calendar nextWeek = Calendar.getInstance();
+        nextWeek.add(Calendar.DATE,6);
+        calendarView.setMinimumDate(yesterday);
+        calendarView.setMaximumDate(nextWeek);
         OnSelectDateListener listener = new OnSelectDateListener() {
             @Override
             public void onSelect(List<java.util.Calendar> calendars) {
 
             }
         };
-        DatePickerBuilder builder = new DatePickerBuilder(this, listener)
-                .pickerType(CalendarView.ONE_DAY_PICKER);
-
-        DatePicker datePicker = builder.build();
-        datePicker.show();
         calendarView.setOnDayClickListener(new OnDayClickListener() {
             @Override
             public void onDayClick(EventDay eventDay) {

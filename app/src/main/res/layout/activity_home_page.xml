@@ -12,6 +12,7 @@
         android:layout_height="wrap_content">
 
         <android.support.constraint.ConstraintLayout
+            android:orientation="vertical"
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">

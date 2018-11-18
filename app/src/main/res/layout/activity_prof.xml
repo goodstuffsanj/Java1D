@@ -30,9 +30,13 @@
         <com.applandeo.materialcalendarview.CalendarView
             android:id="@+id/calendarView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:selectionColor="@color/blue"
-            app:headerColor="@color/red"/>
+            android:layout_height="wrap_content"
+            app:selectionColor="@color/red"
+            app:headerColor="@color/red"
+            app:todayLabelColor="@color/red"
+            app:eventsEnabled="true"
+            app:datePicker="true"
+            app:type="range_picker"/>
     </android.support.v7.widget.CardView>
 
 </LinearLayout>
