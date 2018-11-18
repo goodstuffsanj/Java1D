@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">SUTD Booking App</string>
     <string name="what">What do you want to do today?</string>
+    <string name="book_this_facility">Book this facility"</string>
+    <string name="search">Search</string>
+    <string name="book_consultation">Book consultation</string>
+    <string name="prof_name">Ngai Man Cheung</string>
+    <string name="prof_office">Building 2 Level 5</string>
+    <string name="prof_contact">+65 6499 4542</string>
+    <string name="prof_email">ngaiman_cheung@sutd.edu.sg</string>
 </resources>

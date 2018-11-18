@@ -15,24 +15,24 @@ import com.amazonaws.mobile.config.AWSConfiguration;
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
 
-public class HomePage extends AppCompatActivity {
+public class ProfHomePage extends AppCompatActivity {
     private CardView book_facilities;
-    private CardView book_prof;
+    private CardView meeting_requests;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_home_page);
+        setContentView(R.layout.activity_prof_home_page);
         setTitle("My Activity");
 
         book_facilities = (CardView) findViewById(R.id.book_facilities);
-        book_prof = (CardView) findViewById(R.id.book_prof);
+        meeting_requests = (CardView) findViewById(R.id.meeting_requests);
 
-        book_prof.setOnClickListener(new View.OnClickListener() {
+        meeting_requests.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(HomePage.this, BookProf.class);
+                Intent intent = new Intent(ProfHomePage.this, MeetingRequests.class);
                 startActivity(intent);
             }
         });
@@ -40,7 +40,7 @@ public class HomePage extends AppCompatActivity {
         book_facilities.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(HomePage.this, BookFacilities.class);
+                Intent intent = new Intent(ProfHomePage.this, BookFacilities.class);
                 startActivity(intent);
             }
         });
