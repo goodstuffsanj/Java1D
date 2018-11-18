@@ -6,4 +6,97 @@
     android:layout_height="match_parent"
     tools:context=".Prof">
 
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profImage"
+        android:layout_width="150dp"
+        android:layout_height="151dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:padding="10dp"
+        android:src="@mipmap/ic_launcher"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/description_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginRight="8dp"
+        android:text="@string/prof_name"
+        android:textAllCaps="true"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/description_office"
+        app:layout_constraintEnd_toEndOf="@+id/description_office"
+        app:layout_constraintStart_toStartOf="@+id/description_office"
+        app:layout_constraintTop_toBottomOf="@+id/profImage" />
+
+    <TextView
+        android:id="@+id/description_office"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="@string/prof_office"
+        app:layout_constraintEnd_toEndOf="@+id/description_email"
+        app:layout_constraintHorizontal_bias="0.606"
+        app:layout_constraintStart_toStartOf="@+id/description_email"
+        app:layout_constraintTop_toBottomOf="@+id/description_name" />
+
+    <TextView
+        android:id="@+id/description_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="@string/prof_email"
+        app:layout_constraintEnd_toEndOf="@+id/description_contact"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="@+id/description_contact"
+        app:layout_constraintTop_toBottomOf="@+id/description_office" />
+
+    <TextView
+        android:id="@+id/description_contact"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="@string/prof_contact"
+        app:layout_constraintEnd_toEndOf="@+id/bookConsult"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="@+id/bookConsult"
+        app:layout_constraintTop_toBottomOf="@+id/description_email" />
+
+    <Button
+        android:id="@+id/bookConsult"
+        android:layout_width="300dp"
+        android:layout_height="48dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="@string/book_consultation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/description_contact" />
+
+
 </android.support.constraint.ConstraintLayout>
