@@ -27,19 +27,26 @@
         <activity
             android:name=".BookProf"
             android:label="Book Prof"
+            android:launchMode="singleTop"
             android:parentActivityName=".HomePage"
             android:screenOrientation="portrait">
-        <intent-filter>
-            <action android:name="android.intent.action.SEARCH" />
-        </intent-filter>
-        <meta-data android:name="android.app.searchable"
-            android:resource="@xml/searchable"/>
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+            <meta-data android:name="android.app.searchable"
+                android:resource="@xml/searchable"/>
         </activity>
-        <activity
-            android:name=".BookFacilities"
+        <activity android:name=".BookFacilities"
+            android:launchMode="singleTop"
             android:label="Book Facilities"
             android:parentActivityName=".HomePage"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+            <meta-data android:name="android.app.searchable"
+                android:resource="@xml/searchable"/>
+        </activity>
         <activity android:name=".LoginPage" />
         <activity
             android:name=".Prof"
@@ -49,15 +56,7 @@
             android:name=".Facility"
             android:parentActivityName=".BookFacilities"
             android:screenOrientation="portrait" />
-        <activity android:name=".SearchableActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.SEARCH" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.app.searchable"
-                android:resource="@xml/searchable" />
-        </activity>
+        <activity android:name=".ProfModeHomePage"></activity>
     </application>
 
 </manifest>

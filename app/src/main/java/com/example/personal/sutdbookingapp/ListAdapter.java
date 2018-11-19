@@ -2,7 +2,6 @@ package com.example.personal.sutdbookingapp;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -13,7 +12,6 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
@@ -93,7 +91,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
             list_layout = itemView.findViewById(R.id.list_layout);
         }
     }
-
     @Override
     public Filter getFilter() {
         return listFilter;
