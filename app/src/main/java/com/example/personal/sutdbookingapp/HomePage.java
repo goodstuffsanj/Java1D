@@ -50,10 +50,10 @@ public class HomePage extends AppCompatActivity {
         ida = new StudentTableDO().getUserId();
 
 //        createNews();
-//        queryNews();
-        readNews();
+        queryNews();
+//        readNews();
         updateNews();
-        deleteNews();
+//        deleteNews();
 
         book_facilities = (CardView) findViewById(R.id.book_facilities);
         book_prof = (CardView) findViewById(R.id.book_prof);
@@ -123,13 +123,13 @@ public class HomePage extends AppCompatActivity {
         }).start();
     }
 
-    private String userId = "2333";
-    private String password = "gooood";
+    private String userId = "bugaosuni";
+    private String password = "update and delete";
+
     public void updateNews() {
         final StudentTableDO newsItem = new StudentTableDO();
 
         newsItem.setUserId(userId);
-
         newsItem.setPassword(password);
         newsItem.setName("call me minion");
         deleteNews();
@@ -154,7 +154,7 @@ public class HomePage extends AppCompatActivity {
 
                 newsItem.setUserId(userId);    //partition key
 
-                newsItem.setPassword("update and delete");  //range (sort) key
+                newsItem.setPassword("testest");  //range (sort) key
 
                 dynamoDBMapper.delete(newsItem);
                 Log.i(tag, "deleted");
@@ -168,19 +168,29 @@ public class HomePage extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                NewsDO news = new NewsDO();
-                news.setAuthor("James");
+                Log.i(tag, "start to query******");
+                StudentTableDO news = new StudentTableDO();
+                news.setName("kingkingking");
 
                 Condition rangeKeyCondition = new Condition()
                         .withComparisonOperator(ComparisonOperator.BEGINS_WITH)
                         .withAttributeValueList(new AttributeValue().withS(""));
 
-                DynamoDBQueryExpression<NewsDO> queryExpression = new DynamoDBQueryExpression<>();
+//                Condition rangeKeyCondition = new Condition()
+//                        .withComparisonOperator(ComparisonOperator.BEGINS_WITH)
+//                        .withAttributeValueList(new AttributeValue().withS("Trial"));
+//
+//                DynamoDBQueryExpression queryExpression = new DynamoDBQueryExpression()
+//                        .withHashKeyValues(note)
+//                        .withRangeKeyCondition("articleId", rangeKeyCondition)
+//                        .withConsistentRead(false);
+
+                DynamoDBQueryExpression<StudentTableDO> queryExpression = new DynamoDBQueryExpression<>();
                 queryExpression.setHashKeyValues(news);
-                queryExpression.setIndexName("Authors");
+                queryExpression.setIndexName("Names");
                 queryExpression.setConsistentRead(false);
 
-                PaginatedList<NewsDO> result = dynamoDBMapper.query(NewsDO.class, queryExpression);
+                PaginatedList<StudentTableDO> result = dynamoDBMapper.query(StudentTableDO.class, queryExpression);
 
                 Gson gson = new Gson();
                 StringBuilder stringBuilder = new StringBuilder();
@@ -192,29 +202,29 @@ public class HomePage extends AppCompatActivity {
                 }
 
                 // Add your code here to deal with the data result
-                Log.d("Query result: ", stringBuilder.toString());
+                Log.i(tag, stringBuilder.toString());
 
-                NewsDO news2 = new NewsDO();
-                news2.setUserId("123");
-                //news2.setArticleId("Article1");
-
-                DynamoDBQueryExpression<NewsDO> queryExpression2 = new DynamoDBQueryExpression<NewsDO>()
-                        .withHashKeyValues(news2)
-                        .withConsistentRead(false);
-
-                PaginatedList<NewsDO> result2 = dynamoDBMapper.query(NewsDO.class, queryExpression2);
-
-                Gson gson2 = new Gson();
-                StringBuilder stringBuilder2 = new StringBuilder();
-
-                // Loop through query results
-                for (int i = 0; i < result2.size(); i++) {
-                    String jsonFormOfItem = gson2.toJson(result2.get(i));
-                    stringBuilder2.append(jsonFormOfItem + "\n\n");
-                }
-
-                // Add your code here to deal with the data result
-                Log.d("Query result: ", stringBuilder2.toString());
+//                NewsDO news2 = new NewsDO();
+//                news2.setUserId("123");
+//                //news2.setArticleId("Article1");
+//
+//                DynamoDBQueryExpression<NewsDO> queryExpression2 = new DynamoDBQueryExpression<NewsDO>()
+//                        .withHashKeyValues(news2)
+//                        .withConsistentRead(false);
+//
+//                PaginatedList<NewsDO> result2 = dynamoDBMapper.query(NewsDO.class, queryExpression2);
+//
+//                Gson gson2 = new Gson();
+//                StringBuilder stringBuilder2 = new StringBuilder();
+//
+//                // Loop through query results
+//                for (int i = 0; i < result2.size(); i++) {
+//                    String jsonFormOfItem = gson2.toJson(result2.get(i));
+//                    stringBuilder2.append(jsonFormOfItem + "\n\n");
+//                }
+//
+//                // Add your code here to deal with the data result
+//                Log.d("Query result: ", stringBuilder2.toString());
 
                 if (result.isEmpty()) {
                     // There were no items matching your query.
