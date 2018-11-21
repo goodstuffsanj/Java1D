@@ -26,6 +26,7 @@ public class HomePage extends AppCompatActivity {
     private CardView book_facilities;
     private CardView book_prof;
     DynamoDBMapper dynamoDBMapper;
+    private String tag = "DB";
     private String ida;
 
     @Override
@@ -46,13 +47,13 @@ public class HomePage extends AppCompatActivity {
                 .awsConfiguration(configuration)
                 .build();
 
-        ida = new NewsDO().getUserId();
+        ida = new StudentTableDO().getUserId();
 
-        //createNews();
-        queryNews();
-        //readNews();
-        //updateNews();
-        //readNews();
+//        createNews();
+//        queryNews();
+        readNews();
+        updateNews();
+        deleteNews();
 
         book_facilities = (CardView) findViewById(R.id.book_facilities);
         book_prof = (CardView) findViewById(R.id.book_prof);
@@ -82,18 +83,17 @@ public class HomePage extends AppCompatActivity {
     }
 
     public void createNews() {
-        final NewsDO newsItem = new NewsDO();
+        final StudentTableDO newsItem = new StudentTableDO();
 
-        newsItem.setUserId(ida);
-
-        newsItem.setArticleId("Article1");
-        newsItem.setContent("This is the article content");
-        newsItem.setAuthor("James");
+        newsItem.setUserId("2333");
+        newsItem.setName("six god");
+        newsItem.setPassword("123");
 
         new Thread(new Runnable() {
             @Override
             public void run() {
                 dynamoDBMapper.save(newsItem);
+                Log.i("DB", "new Item is created");
                 // Item saved
             }
         }).start();
@@ -103,31 +103,42 @@ public class HomePage extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
+                try {
+                    StudentTableDO newsItem1 = dynamoDBMapper.load(
+                            StudentTableDO.class,
+                            "2333",
+                            "123");
 
-                NewsDO newsItem = dynamoDBMapper.load(
-                        NewsDO.class,
-                        ida,
-                        "Article1");
-
-                // Item read
-                //Log.d("News Item:", newsItem.toString());
+                    StudentTableDO newsItem2 = dynamoDBMapper.load(
+                            StudentTableDO.class,
+                            "where is the name",
+                            "testtest");
+                    Log.i(tag, "read item1: " + String.valueOf(newsItem1.toString()));
+                    Log.i(tag, "read item2: " + newsItem2.toString());
+                } catch (NullPointerException nullpointer_ex) {
+                    Log.i(tag, "cannot can the item" );
+                }
             }
+
         }).start();
     }
 
+    private String userId = "2333";
+    private String password = "gooood";
     public void updateNews() {
-        final NewsDO newsItem = new NewsDO();
+        final StudentTableDO newsItem = new StudentTableDO();
 
-        newsItem.setUserId(ida);
+        newsItem.setUserId(userId);
 
-        newsItem.setArticleId("Article1");
-        newsItem.setContent("This is the updated content.");
-
+        newsItem.setPassword(password);
+        newsItem.setName("call me minion");
+        deleteNews();
         new Thread(new Runnable() {
             @Override
             public void run() {
 
                 dynamoDBMapper.save(newsItem);
+                Log.i(tag, "item is updated yaho~~");
 
                 // Item updated
             }
@@ -139,14 +150,14 @@ public class HomePage extends AppCompatActivity {
             @Override
             public void run() {
 
-                NewsDO newsItem = new NewsDO();
+                StudentTableDO newsItem = new StudentTableDO();
 
-                newsItem.setUserId(ida);    //partition key
+                newsItem.setUserId(userId);    //partition key
 
-                newsItem.setArticleId("Article1");  //range (sort) key
+                newsItem.setPassword("update and delete");  //range (sort) key
 
                 dynamoDBMapper.delete(newsItem);
-
+                Log.i(tag, "deleted");
                 // Item deleted
             }
         }).start();
