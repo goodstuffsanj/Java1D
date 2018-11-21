@@ -14,10 +14,16 @@
     </style>
 
     <style name="MyActionBarTitle" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
-        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textColor">#ffffff</item>
     </style>
     <!-- Customize your theme here. -->
-
+    <style name="mytoast">
+        <item name="colorBackground">#d15e5e</item>
+        <item name="textColor">#ffffff</item>
+        <item name="iconLeft">@drawable/ic_search</item>
+        <item name="strokeColor">#ec0f0f</item>
+        <item name="strokeWidth">2dp</item>
+    </style>
 
 
 </resources>

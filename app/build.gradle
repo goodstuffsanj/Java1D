@@ -4,11 +4,16 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.example.personal.sutdbookingapp"
-        minSdkVersion 15
+        minSdkVersion 26
+        compileSdkVersion 28
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
     }
     buildTypes {
         release {
@@ -37,7 +42,11 @@ dependencies {
     // Circle ImageView
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     // AWS
-    implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.7.+@aar') { transitive = true }
+    implementation('com.amazonaws:aws-android-sdk-mobile-client:2.7.+@aar') { transitive = true }
     // DynamoDb
     implementation 'com.amazonaws:aws-android-sdk-ddb-mapper:2.7.+'
+    // Styleable Toast
+    implementation 'com.muddzdev:styleabletoast:2.0.1'
+
+    implementation 'com.applandeo:material-calendar-view:1.5.0'
 }
