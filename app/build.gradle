@@ -4,7 +4,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.example.personal.sutdbookingapp"
-        minSdkVersion 26
+        minSdkVersion 25
         compileSdkVersion 28
         targetSdkVersion 28
         versionCode 1
