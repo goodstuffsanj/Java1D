@@ -43,7 +43,8 @@
             android:name=".Facility"
             android:parentActivityName=".BookFacilities"
             android:screenOrientation="portrait" />
-        <activity android:name=".ProfModeHomePage"></activity>
+        <activity android:name=".ProfModeHomePage" />
+        <activity android:name=".ProfModeRequestsPage"></activity>
     </application>
 
 </manifest>
