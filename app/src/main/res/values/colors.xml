@@ -5,5 +5,7 @@
     <color name="colorAccent">#333333</color>
     <color name="colorText">#F4EDED</color>
     <color name="colorText2">#D8D4D4</color>
-
+    <color name="transparent">#123456</color> <!-- need to change the hexcode-->
+    <color name="base">#00266B</color> <!-- need to change the hexcode-->
+    <color name="red">#ef5000</color>
 </resources>
