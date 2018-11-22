@@ -92,7 +92,7 @@
         app:layout_constraintTop_toTopOf="@+id/password" />
 
     <ImageButton
-        android:id="@+id/login"
+        android:id="@+id/imageButtonLoginStaff"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -108,7 +108,7 @@
 
 
     <Button
-        android:id="@+id/student"
+        android:id="@+id/buttonStudent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"

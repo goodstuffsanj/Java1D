@@ -28,6 +28,7 @@ public class Prof extends AppCompatActivity {
     private final static String DESCRIPTION = "DESCRIPTION";
     CircleImageView imageProf;
     TextView description_about;
+    TextView textViewProfName;
     CalendarView calendarView;
     Button book;
 
@@ -39,13 +40,14 @@ public class Prof extends AppCompatActivity {
         String name = intent.getStringExtra(PROF_ID);
         String image = intent.getStringExtra(IMAGE);
         String desc = intent.getStringExtra(DESCRIPTION);
-        setTitle(name);
+        setTitle("BookProf");
 
         imageProf = findViewById(R.id.imageProf);
         description_about = (TextView) findViewById(R.id.description_about);
         book = (Button) findViewById(R.id.bookConsult);
+        textViewProfName = findViewById(R.id.textViewProfName);
 
-
+        textViewProfName.setText(name);
         Glide.with(this).load(image).into(imageProf);
         description_about.setText(desc);
         calendarView = findViewById(R.id.calendarView);

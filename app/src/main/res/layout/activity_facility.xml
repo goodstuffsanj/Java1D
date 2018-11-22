@@ -10,10 +10,25 @@
     <de.hdodenhof.circleimageview.CircleImageView
         android:padding="10dp"
         android:layout_gravity="center"
-        android:id="@+id/image"
+        android:id="@+id/imageFacility"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:src="@mipmap/ic_launcher"/>
+
+    <TextView
+        android:layout_gravity="center"
+        android:id="@+id/textViewFacilityName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginRight="8dp"
+        android:text="@string/prof_name"
+        android:textAllCaps="true"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
 
     <Button
         android:id="@+id/buttonBookFacility"
