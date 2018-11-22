@@ -23,7 +23,7 @@ public class ProfHomePage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_prof_home_page);
+        setContentView(R.layout.activity_prof_mode_home_page);
         setTitle("My Activity");
 
         book_facilities = (CardView) findViewById(R.id.book_facilities);
