@@ -20,7 +20,7 @@
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
-        android:text="Book this facility"/>
+        android:text="@string/book_this_facility"/>
 
 
 </LinearLayout>
