@@ -9,4 +9,7 @@
     <string name="prof_office">Building 2 Level 5</string>
     <string name="prof_contact">+65 6499 4542</string>
     <string name="prof_email">ngaiman_cheung@sutd.edu.sg</string>
+    <string name="what_do_you_want_to_do_today">What do you want to do today?</string>
+    <string name="view_requests">View Requests</string>
+    <string name="book_facilities">Book Facilities</string>
 </resources>

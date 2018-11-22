@@ -5,66 +5,56 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Prof">
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
         <LinearLayout
-            android:orientation="vertical"
+            android:id="@+id/linearLayout2"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="start">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/imageProf"
+                android:padding="10dp"
+                android:layout_gravity="center"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                android:src="@mipmap/ic_launcher"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"/>
+                android:src="@mipmap/ic_launcher"/>
 
             <TextView
-                android:layout_gravity="center"
                 android:id="@+id/description_name"
+                android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="4dp"
-                android:layout_marginRight="8dp"
                 android:text="@string/prof_name"
                 android:textAllCaps="true"
                 android:textSize="18sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
             <TextView
-                android:layout_gravity="center"
                 android:id="@+id/description_office"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:text="@string/prof_office"/>
+                android:text="@string/prof_office"
+                android:layout_gravity="center" />
 
             <TextView
-                android:layout_gravity="center"
                 android:id="@+id/description_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:text="@string/prof_email"/>
+                android:text="@string/prof_email"
+                android:layout_gravity="center" />
 
             <TextView
                 android:id="@+id/description_contact"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:layout_gravity="center"
-                android:text="@string/prof_contact"/>
+                android:text="@string/prof_contact"
+                android:layout_gravity="center" />
 
 
             <TextView
@@ -72,40 +62,37 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/vegan"
-                android:layout_marginHorizontal="30dp"/>
+                android:layout_gravity="center" />
 
             <android.support.v7.widget.CardView
-                android:layout_width="match_parent"
+                android:id="@+id/cardView"
+                android:layout_width="276dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                app:cardCornerRadius="15dp">
+                android:layout_marginBottom="27dp"
+                app:cardCornerRadius="15dp"
+                android:layout_gravity="center">
+
                 <com.applandeo.materialcalendarview.CalendarView
                     android:id="@+id/calendarView"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:selectionColor="@color/red"
-                    app:headerColor="@color/red"
-                    app:todayLabelColor="@color/red"
-                    app:eventsEnabled="true"
+                    android:layout_gravity="center"
                     app:datePicker="true"
-                    app:type="range_picker"/>
+                    app:eventsEnabled="true"
+                    app:headerColor="@color/red"
+                    app:selectionColor="@color/red"
+                    app:todayLabelColor="@color/red"
+                    app:type="range_picker" />
+
             </android.support.v7.widget.CardView>
 
             <Button
                 android:id="@+id/bookConsult"
-                android:layout_width="300dp"
-                android:layout_height="48dp"
-                android:layout_gravity="center"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="135dp"
                 android:text="@string/book_consultation"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/description_contact" />
+                android:layout_gravity="center"/>
         </LinearLayout>
 
     </ScrollView>
