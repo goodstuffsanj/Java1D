@@ -170,7 +170,7 @@ public class HomePage extends AppCompatActivity {
             public void run() {
                 Log.i(tag, "start to query******");
                 StudentTableDO news = new StudentTableDO();
-                news.setName("kingkingking");
+                news.setName("call me minion");
 
                 Condition rangeKeyCondition = new Condition()
                         .withComparisonOperator(ComparisonOperator.BEGINS_WITH)
@@ -181,8 +181,8 @@ public class HomePage extends AppCompatActivity {
 //                        .withAttributeValueList(new AttributeValue().withS("Trial"));
 //
 //                DynamoDBQueryExpression queryExpression = new DynamoDBQueryExpression()
-//                        .withHashKeyValues(note)
-//                        .withRangeKeyCondition("articleId", rangeKeyCondition)
+//                        .withHashKeyValues(news)
+//                        .withRangeKeyCondition("password", rangeKeyCondition)
 //                        .withConsistentRead(false);
 
                 DynamoDBQueryExpression<StudentTableDO> queryExpression = new DynamoDBQueryExpression<>();
