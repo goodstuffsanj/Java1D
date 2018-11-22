@@ -70,6 +70,7 @@ public class Prof extends AppCompatActivity {
         calendarView.setVisibility(View.GONE);
 
 
+
         book.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,7 +79,8 @@ public class Prof extends AppCompatActivity {
                         .maximumDate(nextWeek) // Maximum available date
                         .headerColor(R.color.red) // Color of the dialog header
                         .selectionColor(R.color.red) // Color of the selection circle
-                        .pickerType(CalendarView.ONE_DAY_PICKER);
+                        .pickerType(CalendarView.MANY_DAYS_PICKER)
+                        .todayLabelColor(R.color.red);
 
                 DatePicker datePicker = builder.build();
                 datePicker.show();

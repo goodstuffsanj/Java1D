@@ -64,28 +64,6 @@
                 android:fontFamily="@font/vegan"
                 android:layout_gravity="center" />
 
-            <android.support.v7.widget.CardView
-                android:id="@+id/cardView"
-                android:layout_width="276dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="27dp"
-                app:cardCornerRadius="15dp"
-                android:layout_gravity="center">
-
-                <com.applandeo.materialcalendarview.CalendarView
-                    android:id="@+id/calendarView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    app:datePicker="true"
-                    app:eventsEnabled="true"
-                    app:headerColor="@color/red"
-                    app:selectionColor="@color/red"
-                    app:todayLabelColor="@color/red"
-                    app:type="range_picker" />
-
-            </android.support.v7.widget.CardView>
-
             <Button
                 android:id="@+id/bookConsult"
                 android:layout_width="wrap_content"

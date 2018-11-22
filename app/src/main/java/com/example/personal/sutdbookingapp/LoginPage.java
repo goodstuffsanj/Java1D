@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 public class LoginPage extends AppCompatActivity {
-    ImageButton imageButtonLoginStudent;
+    Button imageButtonLoginStudent;
     Button buttonStaff;
 
     @Override

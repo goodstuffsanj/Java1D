@@ -1,11 +1,17 @@
 package com.example.personal.sutdbookingapp;
 
 import android.content.Intent;
+import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.View;
+
+import com.applandeo.materialcalendarview.CalendarUtils;
+import com.applandeo.materialcalendarview.CalendarView;
+import java.util.Calendar;
 
 import com.amazonaws.auth.AWSCredentialsProvider;
 import com.amazonaws.mobile.client.AWSMobileClient;
@@ -20,18 +26,34 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import com.amazonaws.services.dynamodbv2.model.ComparisonOperator;
 import com.amazonaws.services.dynamodbv2.model.Condition;
+import com.applandeo.materialcalendarview.EventDay;
 import com.google.gson.Gson;
+import com.applandeo.materialcalendarview.adapters.CalendarPageAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class HomePage extends AppCompatActivity {
     private CardView book_facilities;
     private CardView book_prof;
     DynamoDBMapper dynamoDBMapper;
     private String ida;
+    CalendarView calendarView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
+
+        List<EventDay> events = new ArrayList<>();
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(2018,10,28);
+        Drawable a = CalendarUtils.getDrawableText(this, "+32", null, R.color.green, 10);
+        events.add(new EventDay(calendar, a));
+
+        CalendarView calendarView = (CalendarView) findViewById(R.id.calendarView);
+        calendarView.setEvents(events);
 
         AWSMobileClient.getInstance().initialize(this).execute();
         AWSCredentialsProvider credentialsProvider = AWSMobileClient.getInstance().getCredentialsProvider();
