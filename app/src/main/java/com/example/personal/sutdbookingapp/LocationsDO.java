@@ -1,4 +1,4 @@
-package com.amazonaws.models.nosql;
+package com.example.personal.sutdbookingapp;
 
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBAttribute;
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBHashKey;
