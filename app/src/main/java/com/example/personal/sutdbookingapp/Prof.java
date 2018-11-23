@@ -59,15 +59,10 @@ public class Prof extends AppCompatActivity {
         textViewProfName.setText(name);
         Glide.with(this).load(image).into(imageProf);
         description_about.setText(desc);
-        calendarView = findViewById(R.id.calendarView);
         Calendar yesterday = Calendar.getInstance();
         yesterday.add(DATE,-1);
         Calendar nextWeek = Calendar.getInstance();
         nextWeek.add(DATE,6);
-        calendarView.setMinimumDate(Calendar.getInstance());
-        calendarView.setMaximumDate(nextWeek);
-
-        calendarView.setVisibility(View.GONE);
 
 
 
