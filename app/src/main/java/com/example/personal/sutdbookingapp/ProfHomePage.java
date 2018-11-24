@@ -15,7 +15,7 @@ import com.amazonaws.mobile.config.AWSConfiguration;
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
 
-public class ProfHomePage extends AppCompatActivity {
+public class addProfHomePage extends AppCompatActivity {
     private CardView book_facilities;
     private CardView meeting_requests;
 
