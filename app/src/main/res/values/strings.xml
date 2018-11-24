@@ -12,4 +12,6 @@
     <string name="what_do_you_want_to_do_today">What do you want to do today?</string>
     <string name="view_requests">View Requests</string>
     <string name="book_facilities">Book Facilities</string>
+    <string name="open">open</string>
+    <string name="close">close</string>
 </resources>

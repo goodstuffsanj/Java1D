@@ -3,11 +3,18 @@ package com.example.personal.sutdbookingapp;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
@@ -27,18 +34,24 @@ import java.util.List;
 public class HomePage extends AppCompatActivity {
     private CardView book_facilities;
     private CardView book_prof;
-    DynamoDBMapper dynamoDBMapper;
-    private String ida;
-    CalendarView calendarView;
-    ScrollView scrollHome;
-    Database database;
+    private CalendarView calendarView;
+    private ScrollView scrollHome;
+    private DrawerLayout drawerLayout;
+    private ActionBarDrawerToggle mToggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
         scrollHome = findViewById(R.id.scrollHome);
+        scrollHome.smoothScrollTo(0,0);
         List<EventDay> events = new ArrayList<>();
+
+        drawerLayout = findViewById(R.id.drawer);
+        mToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
+        drawerLayout.addDrawerListener(mToggle);
+        mToggle.syncState();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Database b = new Database(HomePage.this);
 
@@ -128,4 +141,11 @@ public class HomePage extends AppCompatActivity {
         overridePendingTransition(0, 0);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (mToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

@@ -19,7 +19,8 @@
         android:layout_height="339dp"
         android:src="@drawable/loginred"
         android:layout_below="@+id/appicon"
-        android:layout_alignParentLeft="true"/>
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="-50dp"/>
 
     <ImageView
         android:id="@+id/poplogin"
@@ -28,12 +29,13 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:src="@drawable/poplogin"
-        android:layout_below="@+id/appicon"/>
+        android:layout_below="@+id/appicon" />
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/appicon">
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="220dp">
 
         <ImageView
             android:id="@+id/usericon"
@@ -64,7 +66,7 @@
             android:layout_marginStart="1dp"
             android:layout_marginTop="6dp"
             android:src="@drawable/ic_lock_black_24dp"
-            android:layout_below="@+id/usericon"/>
+            android:layout_below="@+id/username"/>
 
         <EditText
             android:id="@+id/password"
@@ -74,17 +76,19 @@
             android:layout_marginBottom="8dp"
             android:hint="enter your password"
             android:textAlignment="center"
+            android:layout_below="@+id/username"
             android:layout_toRightOf="@+id/passwordicon"/>
 
         <Button
             android:id="@+id/imageButtonLoginStudent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_margin="20dp"
             android:fontFamily="@font/skia"
             android:text="Login"
             android:background="@color/red"
-            android:layout_below="@+id/passwordicon"/>
+            android:layout_below="@+id/passwordicon"
+            android:layout_centerHorizontal="true"/>
     </RelativeLayout>
 
 
