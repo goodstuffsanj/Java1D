@@ -6,8 +6,11 @@
     <color name="blue">#4790ea</color>
     <color name="red">#c71717</color>
     <color name="green">#4be229</color>
-    <color name="base">#f1eaea</color>
+    <color name="base">#ffffff</color>
     <color name="transparent">#003333</color>
+    <color name="primary_material_dark">#e81e1e</color>
+    <color name="primary_dark_material_dark">#af1818</color>
+    <color name="background_material_dark">#ffffff</color>
 
 
 </resources>

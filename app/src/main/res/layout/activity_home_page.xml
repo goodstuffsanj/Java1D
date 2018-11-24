@@ -14,7 +14,8 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:menu="@menu/navigation_menu"
-        app:headerLayout="@layout/header_layout"/>
+        app:headerLayout="@layout/header_layout"
+        app:itemTextColor="@color/colorAccent"/>
 
     <ScrollView
         android:layout_marginTop="-10dp"

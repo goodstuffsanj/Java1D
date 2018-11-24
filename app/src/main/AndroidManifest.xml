@@ -14,7 +14,8 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".LoginPage"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -33,26 +34,34 @@
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
-            <meta-data android:name="android.app.searchable"
-                android:resource="@xml/searchable"/>
+
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
         </activity>
-        <activity android:name=".BookFacilities"
-            android:launchMode="singleTop"
+        <activity
+            android:name=".BookFacilities"
             android:label="Book Facilities"
+            android:launchMode="singleTop"
             android:parentActivityName=".HomePage"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
-            <meta-data android:name="android.app.searchable"
-                android:resource="@xml/searchable"/>
+
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
         </activity>
-        <activity android:name=".HomePage"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".LoginPageStaff"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ProfHomePage"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".HomePage"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".LoginPageStaff"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ProfHomePage"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Prof"
             android:parentActivityName=".BookProf"
@@ -61,8 +70,10 @@
             android:name=".Facility"
             android:parentActivityName=".BookFacilities"
             android:screenOrientation="portrait" />
-        <activity android:name=".ProfModeHomePage"
-            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ProfModeHomePage"
+            android:screenOrientation="portrait" />
+        <activity android:name=".Bookings"></activity>
     </application>
 
 </manifest>
