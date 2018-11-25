@@ -71,7 +71,10 @@
             android:layout_marginTop="54dp"
             android:layout_toRightOf="@id/usericon"
             android:hint="enter your ID"
-            android:textAlignment="center" />
+            android:textColor="@color/colorAccent"
+            android:singleLine="true"
+            android:maxLines="1"
+            android:lines="1"/>
 
         <ImageView
             android:id="@+id/passwordicon"
@@ -91,9 +94,14 @@
             android:layout_marginLeft="0dp"
             android:layout_marginTop="32dp"
             android:layout_marginBottom="8dp"
-            android:layout_toRightOf="@+id/passwordicon"
             android:hint="enter your password"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent"
+            android:inputType="textPassword"
+            android:layout_toRightOf="@+id/passwordicon"
+            android:singleLine="true"
+            android:maxLines="1"
+            android:lines="1"/>
 
         <Button
             android:id="@+id/imageButtonLoginStudent"
