@@ -22,7 +22,7 @@ public class LoginPageStaff extends AppCompatActivity {
         imageButtonLoginStaff.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginPageStaff.this,ProfHomePage.class);
+                Intent intent = new Intent(LoginPageStaff.this,ProfModeHomePage.class);
                 startActivity(intent);
             }
         });
