@@ -73,7 +73,9 @@
         <activity
             android:name=".ProfModeHomePage"
             android:screenOrientation="portrait" />
-        <activity android:name=".Bookings"></activity>
+        <activity android:name=".Bookings"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".HomePage"></activity>
     </application>
 
 </manifest>

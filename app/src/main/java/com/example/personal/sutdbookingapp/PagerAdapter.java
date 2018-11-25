@@ -15,8 +15,8 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int i) {
         switch(i) {
             case 0:
-                Booked booked = new Booked();
-                return booked;
+                Upcoming waiti= new Upcoming();
+                return (Fragment) waiti;
             case 1:
                 Waiting waiting = new Waiting();
                 return waiting;
@@ -27,6 +27,6 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return 0;
+        return n;
     }
 }
