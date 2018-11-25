@@ -5,13 +5,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".LoginPage">
+    <ScrollView
+        android:layout_marginTop="-10dp"
+        android:id="@+id/scrollLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
 
     <ImageView
         android:id="@+id/appicon"
-        android:layout_width="206dp"
-        android:layout_height="161dp"
-        android:src="@drawable/appicon"
-        android:layout_centerHorizontal="true"/>
+        android:layout_width="171dp"
+        android:layout_height="106dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="35dp"
+        android:layout_toEndOf="@+id/student"
+        android:src="@drawable/applogo1" />
 
     <ImageView
         android:id="@+id/redback"
@@ -26,10 +37,12 @@
         android:id="@+id/poplogin"
         android:layout_width="432dp"
         android:layout_height="311dp"
-        android:layout_marginTop="8dp"
+        android:layout_below="@+id/appicon"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="37dp"
         android:layout_marginBottom="8dp"
-        android:src="@drawable/poplogin"
-        android:layout_below="@+id/appicon" />
+        android:src="@drawable/poplogin" />
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -41,9 +54,10 @@
             android:id="@+id/usericon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="1dp"
+            android:layout_alignParentTop="true"
             android:layout_marginStart="1dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginLeft="1dp"
+            android:layout_marginTop="62dp"
             android:src="@drawable/ic_person_black_24dp"
             app:layout_constraintStart_toStartOf="@+id/username"
             app:layout_constraintTop_toTopOf="@+id/username" />
@@ -52,43 +66,51 @@
             android:id="@+id/username"
             android:layout_width="236dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="54dp"
+            android:layout_toRightOf="@id/usericon"
             android:hint="enter your ID"
-            android:textAlignment="center"
-            android:layout_toRightOf="@id/usericon"/>
+            android:textAlignment="center" />
 
         <ImageView
             android:id="@+id/passwordicon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="1dp"
+            android:layout_alignBottom="@+id/usericon"
             android:layout_marginStart="1dp"
-            android:layout_marginTop="6dp"
-            android:src="@drawable/ic_lock_black_24dp"
-            android:layout_below="@+id/username"/>
+            android:layout_marginLeft="1dp"
+            android:layout_marginBottom="-79dp"
+            android:src="@drawable/ic_lock_black_24dp" />
 
         <EditText
             android:id="@+id/password"
             android:layout_width="236dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:hint="enter your password"
-            android:textAlignment="center"
             android:layout_below="@+id/username"
-            android:layout_toRightOf="@+id/passwordicon"/>
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="8dp"
+            android:layout_toRightOf="@+id/passwordicon"
+            android:hint="enter your password"
+            android:textAlignment="center" />
 
         <Button
             android:id="@+id/imageButtonLoginStudent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="208dp"
+            android:layout_marginBottom="20dp"
+            android:bottomLeftRadius="30dp"
+            android:bottomRightRadius="30dp"
+            android:topLeftRadius="30dp"
+            android:topRightRadius="30dp"
+            android:background="@color/red"
             android:fontFamily="@font/skia"
             android:text="Login"
-            android:background="@color/red"
-            android:layout_below="@+id/passwordicon"
-            android:layout_centerHorizontal="true"/>
+             />
     </RelativeLayout>
 
 
@@ -96,9 +118,11 @@
         android:id="@+id/student"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:background="@color/transparent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="180dp"
+        android:background="?android:attr/selectableItemBackground"
         android:fontFamily="@font/skia"
         android:text="STUDENT"
         android:textColor="@color/base"
@@ -114,12 +138,17 @@
         android:id="@+id/buttonStaff"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/transparent"
+        android:layout_alignTop="@+id/redback"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="285dp"
+        android:layout_marginTop="11dp"
+        android:background="?android:attr/selectableItemBackground"
         android:fontFamily="@font/skia"
         android:text="STAFF"
         android:textColor="@color/colorPrimary"
         android:textStyle="bold"
         tools:layout_editor_absoluteX="265dp"
         tools:layout_editor_absoluteY="169dp" />
+    </ScrollView>
 
 </RelativeLayout>

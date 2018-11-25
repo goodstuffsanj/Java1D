@@ -4,6 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ScrollView
+        android:layout_marginTop="-10dp"
+        android:id="@+id/scrollLoginStaff"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
     <ImageView
         android:id="@+id/background"
         android:layout_width="0dp"
@@ -35,22 +41,19 @@
         android:src="@drawable/poplogin"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.58"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.99" />
+        app:layout_constraintVertical_bias="0.916" />
 
     <EditText
         android:id="@+id/username"
         android:layout_width="236dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:hint="enter your ID"
         android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="@+id/login"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButtonLoginStaff"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.52"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/poplogin"
         app:layout_constraintVertical_bias="0.32" />
@@ -70,15 +73,14 @@
         android:id="@+id/password"
         android:layout_width="236dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:hint="enter your password"
         android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="@+id/login"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButtonLoginStaff"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/username"
-        app:layout_constraintVertical_bias="0.06999999" />
+        app:layout_constraintVertical_bias="0.229" />
 
     <ImageView
         android:id="@+id/passwordicon"
@@ -102,9 +104,10 @@
         android:background="@drawable/loginicon"
         app:layout_constraintBottom_toBottomOf="@+id/redback"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/poplogin"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.947" />
 
 
     <Button
@@ -131,7 +134,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="40dp"
         android:layout_marginBottom="8dp"
         android:background="@color/transparent"
         android:fontFamily="@font/skia"
@@ -143,21 +146,22 @@
         app:layout_constraintHorizontal_bias="0.91"
         app:layout_constraintStart_toEndOf="@+id/student"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.36" />
+        app:layout_constraintVertical_bias="0.419" />
 
     <ImageView
         android:id="@+id/appicon"
-        android:layout_width="206dp"
-        android:layout_height="161dp"
+        android:layout_width="118dp"
+        android:layout_height="92dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:src="@drawable/appicon"
+        android:src="@drawable/applogo1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/background"
-        app:layout_constraintHorizontal_bias="0.65"
+        app:layout_constraintHorizontal_bias="0.513"
         app:layout_constraintStart_toStartOf="@+id/background"
         app:layout_constraintTop_toTopOf="@+id/background"
-        app:layout_constraintVertical_bias="0.050000012" />
+        app:layout_constraintVertical_bias="0.125" />
+    </ScrollView>
 
 
 
