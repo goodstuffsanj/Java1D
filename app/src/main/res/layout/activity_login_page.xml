@@ -11,152 +11,156 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scrollbars="none">
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/appicon"
+                android:layout_width="171dp"
+                android:layout_height="106dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="35dp"
+                android:layout_toEndOf="@+id/student"
+                android:src="@drawable/applogo1" />
 
-    <ImageView
-        android:id="@+id/appicon"
-        android:layout_width="171dp"
-        android:layout_height="106dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="35dp"
-        android:layout_toEndOf="@+id/student"
-        android:src="@drawable/applogo1" />
+            <ImageView
+                android:id="@+id/redback"
+                android:layout_width="270dp"
+                android:layout_height="339dp"
+                android:src="@drawable/loginred"
+                android:layout_below="@+id/appicon"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="-50dp"/>
 
-    <ImageView
-        android:id="@+id/redback"
-        android:layout_width="270dp"
-        android:layout_height="339dp"
-        android:src="@drawable/loginred"
-        android:layout_below="@+id/appicon"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="-50dp"/>
+            <ImageView
+                android:id="@+id/poplogin"
+                android:layout_width="432dp"
+                android:layout_height="311dp"
+                android:layout_below="@+id/appicon"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="37dp"
+                android:layout_marginBottom="8dp"
+                android:src="@drawable/poplogin" />
 
-    <ImageView
-        android:id="@+id/poplogin"
-        android:layout_width="432dp"
-        android:layout_height="311dp"
-        android:layout_below="@+id/appicon"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="37dp"
-        android:layout_marginBottom="8dp"
-        android:src="@drawable/poplogin" />
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="220dp">
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="220dp">
+                <ImageView
+                    android:id="@+id/usericon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginTop="62dp"
+                    android:src="@drawable/ic_person_black_24dp"
+                    app:layout_constraintStart_toStartOf="@+id/username"
+                    app:layout_constraintTop_toTopOf="@+id/username" />
 
-        <ImageView
-            android:id="@+id/usericon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="1dp"
-            android:layout_marginLeft="1dp"
-            android:layout_marginTop="62dp"
-            android:src="@drawable/ic_person_black_24dp"
-            app:layout_constraintStart_toStartOf="@+id/username"
-            app:layout_constraintTop_toTopOf="@+id/username" />
+                <EditText
+                    android:id="@+id/username"
+                    android:layout_width="236dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginTop="54dp"
+                    android:layout_toRightOf="@id/usericon"
+                    android:hint="enter your ID"
+                    android:textColor="@color/colorAccent"
+                    android:singleLine="true"
+                    android:maxLines="1"
+                    android:lines="1"/>
 
-        <EditText
-            android:id="@+id/username"
-            android:layout_width="236dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="0dp"
-            android:layout_marginTop="54dp"
-            android:layout_toRightOf="@id/usericon"
-            android:hint="enter your ID"
-            android:textColor="@color/colorAccent"
-            android:singleLine="true"
-            android:maxLines="1"
-            android:lines="1"/>
+                <ImageView
+                    android:id="@+id/passwordicon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/usericon"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginBottom="-79dp"
+                    android:src="@drawable/ic_lock_black_24dp" />
 
-        <ImageView
-            android:id="@+id/passwordicon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/usericon"
-            android:layout_marginStart="1dp"
-            android:layout_marginLeft="1dp"
-            android:layout_marginBottom="-79dp"
-            android:src="@drawable/ic_lock_black_24dp" />
+                <EditText
+                    android:id="@+id/password"
+                    android:layout_width="236dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/username"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginBottom="8dp"
+                    android:hint="enter your password"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorAccent"
+                    android:inputType="textPassword"
+                    android:layout_toRightOf="@+id/passwordicon"
+                    android:singleLine="true"
+                    android:maxLines="1"
+                    android:lines="1"/>
 
-        <EditText
-            android:id="@+id/password"
-            android:layout_width="236dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/username"
-            android:layout_marginLeft="0dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginBottom="8dp"
-            android:hint="enter your password"
-            android:textAlignment="center"
-            android:textColor="@color/colorAccent"
-            android:inputType="textPassword"
-            android:layout_toRightOf="@+id/passwordicon"
-            android:singleLine="true"
-            android:maxLines="1"
-            android:lines="1"/>
-
-        <Button
-            android:id="@+id/imageButtonLoginStudent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="208dp"
-            android:layout_marginBottom="20dp"
-            android:bottomLeftRadius="30dp"
-            android:bottomRightRadius="30dp"
-            android:topLeftRadius="30dp"
-            android:topRightRadius="30dp"
-            android:background="@color/red"
-            android:fontFamily="@font/skia"
-            android:text="Login"
-             />
-    </RelativeLayout>
+                <Button
+                    android:id="@+id/imageButtonLoginStudent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="208dp"
+                    android:layout_marginBottom="20dp"
+                    android:bottomLeftRadius="30dp"
+                    android:bottomRightRadius="30dp"
+                    android:topLeftRadius="30dp"
+                    android:topRightRadius="30dp"
+                    android:background="@color/red"
+                    android:fontFamily="@font/skia"
+                    android:text="Login"
+                    />
+            </RelativeLayout>
 
 
-    <Button
-        android:id="@+id/student"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="23dp"
-        android:layout_marginTop="180dp"
-        android:background="?android:attr/selectableItemBackground"
-        android:fontFamily="@font/skia"
-        android:text="STUDENT"
-        android:textColor="@color/base"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/redback"
-        app:layout_constraintEnd_toEndOf="@+id/redback"
-        app:layout_constraintHorizontal_bias="0.14"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/redback"
-        app:layout_constraintVertical_bias="0.120000005" />
+            <Button
+                android:id="@+id/student"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="23dp"
+                android:layout_marginTop="180dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:fontFamily="@font/skia"
+                android:text="STUDENT"
+                android:textColor="@color/base"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/redback"
+                app:layout_constraintEnd_toEndOf="@+id/redback"
+                app:layout_constraintHorizontal_bias="0.14"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/redback"
+                app:layout_constraintVertical_bias="0.120000005" />
 
-    <Button
-        android:id="@+id/buttonStaff"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/redback"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="285dp"
-        android:layout_marginTop="11dp"
-        android:background="?android:attr/selectableItemBackground"
-        android:fontFamily="@font/skia"
-        android:text="STAFF"
-        android:textColor="@color/colorPrimary"
-        android:textStyle="bold"
-        tools:layout_editor_absoluteX="265dp"
-        tools:layout_editor_absoluteY="169dp" />
+            <Button
+                android:id="@+id/buttonStaff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/redback"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="285dp"
+                android:layout_marginTop="11dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:fontFamily="@font/skia"
+                android:text="STAFF"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                tools:layout_editor_absoluteX="265dp"
+                tools:layout_editor_absoluteY="169dp" />
+        </android.support.constraint.ConstraintLayout>
+
     </ScrollView>
 
 </RelativeLayout>
