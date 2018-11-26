@@ -41,6 +41,7 @@ public class Prof extends AppCompatActivity {
     Button book;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,6 +95,7 @@ public class Prof extends AppCompatActivity {
                 public void onSelect(List<Calendar> calendars) {
                     String print = calendars.get(0).getTime().toString();
                     Intent intent = new Intent ( Prof.this, Calendar.class );
+                    intent.putExtra ( DATE_PICKED, print );
                     startActivity ( intent );
 
                     Toast.makeText(book.getContext(), print, Toast.LENGTH_LONG).show();
