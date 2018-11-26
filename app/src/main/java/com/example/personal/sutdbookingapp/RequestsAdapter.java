@@ -25,10 +25,10 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.Reques
     private static final String TAG = "RequestsAdapter";
 
     //private List RequestsData;
-    private ArrayList<String> RequestsData = new ArrayList<>();
+    private ArrayList<RequestsData> RequestsData = new ArrayList<>();
     private Context context;
 
-    public RequestsAdapter(Context context, ArrayList<String> RequestsData) {
+    public RequestsAdapter(Context context, ArrayList<RequestsData> RequestsData) {
         this.RequestsData = RequestsData;
         this.context = context;
     }
@@ -46,9 +46,9 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.Reques
     public void onBindViewHolder(RequestsViewHolder holder, int position) {
         Log.i(TAG, "onBindViewHolder() is called");  //for every item that is in the list
 
-        holder.senderName.setText(RequestsData.get(position));
-        holder.date.setText(RequestsData.get(position));
-        holder.reason.setText(RequestsData.get(position));
+        holder.senderName.setText(RequestsData.get(position).getSenderName());
+        holder.date.setText(RequestsData.get(position).getDate());
+        holder.reason.setText(RequestsData.get(position).getReason());
 
         holder.tick.setOnClickListener(new View.OnClickListener() {
             @Override

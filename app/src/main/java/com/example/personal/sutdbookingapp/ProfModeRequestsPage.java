@@ -59,7 +59,8 @@ public class ProfModeRequestsPage extends AppCompatActivity {
         RecyclerView RecyclerView = findViewById(R.id.recyclerView);
         LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(ProfModeRequestsPage.this,
                 LinearLayoutManager.VERTICAL, false);
-
+        RequestsAdapter adapter = new RequestsAdapter(ProfModeRequestsPage.this, RequestsData);
+        RecyclerView.setAdapter(adapter);
         RecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         RecyclerView.addItemDecoration(new DividerItemDecoration(ProfModeRequestsPage.this,
