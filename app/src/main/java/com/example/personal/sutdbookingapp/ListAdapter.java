@@ -8,27 +8,32 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.ListIterator;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
+public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> implements Filterable{
 
     private static final String TAG = "ListAdapter";
-    private ArrayList<ListItem> listOfItems;
+
+    private ArrayList<Bookable> bookables = new ArrayList<>();
+    private ArrayList<Bookable> copies = new ArrayList<>();
     private Context context;
     public final static String FACIL_ID = "FACIL_ID";
     public final static String PROF_ID = "PROF_ID";
-    public ListAdapter(ArrayList<ListItem> list, Context context) {
-        this.listOfItems = list;
+    public final static String IMAGE = "IMAGE";
+    private final static String DESCRIPTION = "DESCRIPTION";
+
+    public ListAdapter(ArrayList<Bookable> bookables, Context context) {
+        this.bookables = bookables;
         this.context = context;
+        copies = new ArrayList<>(bookables);
     }
 
 
@@ -40,27 +45,28 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         return holder;
     }
 
-    @Override
-    public void onBindViewHolder(ViewHolder viewHolder, final int i) {
-        String image = listOfItems.get(i).image;
-        String name = listOfItems.get(i).name;
+    public void onBindViewHolder(@NonNull final ViewHolder viewHolder, final int i) {
         Log.d(TAG, "onBindViewHolder: called");
-        Glide.with(context).load(image).into(viewHolder.image);
-        viewHolder.image_name.setText(name);
+
+        final Bookable bookable = bookables.get(i);
+        Glide.with(context).load(bookable.getImage()).into(viewHolder.image);
+        viewHolder.image_name.setText(bookable.getName());
         viewHolder.list_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String name = listOfItems.get(i).name;
-                Log.d(TAG, "onclick: clicked on: "+ name);
-                Toast.makeText(context, name, Toast.LENGTH_SHORT).show();
-                if (context.getClass()==BookProf.class) {
-                    Intent intent = new Intent(context, Prof.class);
-                    intent.putExtra(FACIL_ID, name);
+                Log.d(TAG, "onclick: clicked on: "+ bookable.getName());
+                if (context.getClass()==BookFacilities.class) {
+                    Intent intent = new Intent(context, Facility.class);
+                    intent.putExtra(FACIL_ID, bookable.getName());
+                    intent.putExtra(IMAGE, bookable.getImage());
+                    intent.putExtra(DESCRIPTION, bookable.getDescription());
                     context.startActivity(intent);
                 }
-                else if (context.getClass()==BookFacilities.class) {
-                    Intent intent = new Intent(context, Facility.class);
-                    intent.putExtra(PROF_ID, name);
+                else if (context.getClass()==BookProf.class) {
+                    Intent intent = new Intent(context, Prof.class);
+                    intent.putExtra(PROF_ID, bookable.getName());
+                    intent.putExtra(IMAGE, bookable.getImage());
+                    intent.putExtra(DESCRIPTION, bookable.getDescription());
                     context.startActivity(intent);
                 }
             }
@@ -69,7 +75,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return listOfItems.size();
+        return bookables.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -85,28 +91,35 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
             list_layout = itemView.findViewById(R.id.list_layout);
         }
     }
-
-    //to get ArrayList of name, ArrayList of image_urls
-    public List<ArrayList<String>> toNameImage(){
-        List<ArrayList<String>> ans = new ArrayList<>();
-        ArrayList<String> names = new ArrayList<>();
-        ArrayList<String> images = new ArrayList<>();
-        for (int i = 0; i <listOfItems.size(); i ++ ) {
-            names.add(listOfItems.get(i).name);
-            images.add(listOfItems.get(i).image);
-        }
-        ans.add(0, names);
-        ans.add(1, images);
-        return ans;
+    @Override
+    public Filter getFilter() {
+        return listFilter;
     }
 
-
-    static public class ListItem{
-        public String name;
-        public String image;
-        public ListItem(String name, String image) {
-            this.name = name;
-            this.image = image;
+    private Filter listFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence charSequence) {
+            ArrayList<Bookable> filtered = new ArrayList<>();
+            if (charSequence == null || charSequence.length()==0) {
+                filtered.addAll(copies);
+            } else {
+                String filterPattern = charSequence.toString().toLowerCase().trim();
+                for (Bookable item: copies) {
+                    if (item.getName().toLowerCase().contains(filterPattern)) {
+                        filtered.add(item);
+                    }
+                }
+            }
+            FilterResults results = new FilterResults();
+            results.values = filtered;
+            return results;
         }
-    }
+
+        @Override
+        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+            bookables.clear();
+            bookables.addAll((ArrayList) filterResults.values);
+            notifyDataSetChanged();
+        }
+    };
 }

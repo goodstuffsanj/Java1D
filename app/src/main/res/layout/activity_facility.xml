@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,35 +8,34 @@
     tools:context=".Facility">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/facilityImage"
+        android:padding="10dp"
+        android:layout_gravity="center"
+        android:id="@+id/imageFacility"
         android:layout_width="150dp"
         android:layout_height="150dp"
+        android:src="@mipmap/ic_launcher"/>
+
+    <TextView
         android:layout_gravity="center"
+        android:id="@+id/textViewFacilityName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="4dp"
         android:layout_marginRight="8dp"
-        android:padding="10dp"
-        android:src="@mipmap/ic_launcher"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="@string/prof_name"
+        android:textAllCaps="true"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
 
     <Button
-        android:id="@+id/bookFacility"
+        android:id="@+id/buttonBookFacility"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:text="@string/book_this_facility"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/facilityImage"></Button>
+        android:text="@string/book_this_facility"/>
 
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>
