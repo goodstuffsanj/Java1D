@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 public class LoginPageStaff extends AppCompatActivity {
-    ImageButton imageButtonLoginStaff;
+    Button imageButtonLoginStaff;
     Button buttonStudent;
 
     @Override
@@ -17,7 +17,7 @@ public class LoginPageStaff extends AppCompatActivity {
         setContentView(R.layout.activity_login_page_staff);
 
         imageButtonLoginStaff = findViewById(R.id.imageButtonLoginStaff);
-        buttonStudent = findViewById(R.id.buttonStudent);
+        buttonStudent = findViewById(R.id.student);
 
         imageButtonLoginStaff.setOnClickListener(new View.OnClickListener() {
             @Override
