@@ -32,8 +32,8 @@ public class ProfHomePage extends AppCompatActivity {
         meeting_requests.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ProfHomePage.this, MeetingRequests.class);
-                startActivity(intent);
+                //Intent intent = new Intent(ProfHomePage.this, MeetingRequests.class);
+                //startActivity(intent);
             }
         });
 
