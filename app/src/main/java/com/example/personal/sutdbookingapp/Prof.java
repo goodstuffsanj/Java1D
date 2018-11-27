@@ -95,7 +95,7 @@ public class Prof extends AppCompatActivity {
                 @Override
                 public void onSelect(List<Calendar> calendars) {
                     printdate = calendars.get(0).getTime().toString();
-                    
+
 
 //                    Intent intent = new Intent ( Prof.this, Calendar.class );
 //                    intent.putExtra ( DATE_PICKED, print );
