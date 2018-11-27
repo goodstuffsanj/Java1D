@@ -251,7 +251,7 @@ public class CalendarView extends LinearLayout {
         DateUtils.setMidnight(calendar);
 
         if (mCalendarProperties.getCalendarType() == CalendarView.ONE_DAY_PICKER) {
-            //mCalendarProperties.setSelectedDay(calendar);
+            mCalendarProperties.setSelectedDay(calendar);
             mCalendarPageAdapter.setSelectedDay(new SelectedDay(calendar));
             Log.i("xxx", "setUpCalendarPosition: " + mCalendarProperties.getSelectedDays().size());
         }

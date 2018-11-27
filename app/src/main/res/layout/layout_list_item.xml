@@ -24,13 +24,14 @@
             android:text="James"
             android:layout_toRightOf="@+id/image"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="30dp"
+            android:layout_marginStart="30dp"
             android:textSize="17sp"/>
     </RelativeLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:background="@android:color/darker_gray"
-        android:layout_alignBottom="@+id/list"></View>
+        android:layout_alignBottom="@+id/list" />
 
 </RelativeLayout>
