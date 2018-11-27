@@ -28,7 +28,7 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import static java.util.Calendar.DATE;
-
+// This class is created to create a new intent to book professors
 public class Prof extends AppCompatActivity {
     public final static String PROF_ID = "PROF_ID";
     public final static String IMAGE = "IMAGE";
@@ -39,6 +39,7 @@ public class Prof extends AppCompatActivity {
     TextView textViewProfName;
     CalendarView calendarView;
     Button book;
+
 
 
     @Override
@@ -64,8 +65,7 @@ public class Prof extends AppCompatActivity {
         Calendar nextWeek = Calendar.getInstance();
         nextWeek.add(DATE,6);
 
-
-
+        //Booking date limited to 1 week
         book.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -1,6 +1,7 @@
 package com.example.personal.sutdbookingapp;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -68,8 +69,7 @@ public class TimingsAdapter extends RecyclerView.Adapter<TimingsAdapter.TimingsV
         Boolean enabled = timingsData.getAvailability();
         //if not available for booking
         if (!enabled) {
-            bookButton.setBackgroundColor(0xFFE68F8C);
-            //bookButton.setTextColor(R.color.colorPrimary);
+            bookButton.setBackgroundColor(Color.GRAY);
             bookButton.setEnabled(enabled);
 
         }

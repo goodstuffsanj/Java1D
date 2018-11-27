@@ -81,6 +81,7 @@ public class HomePage extends AppCompatActivity {
         b.delete(james); */
 
         // Query Data -> check Logcat Yesss
+        // index
 
         b.getQueryHandler(new Database.QueryHandler(){
             @Override
@@ -90,7 +91,7 @@ public class HomePage extends AppCompatActivity {
         }).getQuery(NewsDO.class,"Authors",news);
 
         // Get Data -> check Logcat dataReceived
-
+        // hash key
         b.getDataHandler(new Database.DataHandler() {
             @Override
             <T> void postReceivedData(T result) {
