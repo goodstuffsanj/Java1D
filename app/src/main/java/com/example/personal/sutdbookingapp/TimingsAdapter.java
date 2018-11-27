@@ -1,8 +1,11 @@
 package com.example.personal.sutdbookingapp;
 
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.provider.CalendarContract;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -42,6 +45,13 @@ public class TimingsAdapter extends RecyclerView.Adapter<TimingsAdapter.TimingsV
             list = itemView.findViewById(R.id.timing_list);
         }
     }
+    public void addEvent()
+    {
+        ContentValues cv = new ContentValues (  );
+        ContentResolver cr = context.getContentResolver ();
+        
+    }
+
 
     @NonNull
     @Override
@@ -77,6 +87,7 @@ public class TimingsAdapter extends RecyclerView.Adapter<TimingsAdapter.TimingsV
             @Override
             public void onClick(View view) {
                 String info = timingsData.getDate()+ " "  + timingsData.getProf_facil() + " " + timingsData.getTime();
+
                 Toast.makeText(context, "pending request for: " + info, Toast.LENGTH_LONG).show();
             }
         });

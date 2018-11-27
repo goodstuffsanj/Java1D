@@ -7,7 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -27,8 +30,19 @@ public class BookTimings extends AppCompatActivity{
         Intent intent = getIntent();
         String datePicked = intent.getStringExtra(Prof.DATE_PICKED);
 
+        Button book;
+
         dateInfo = findViewById(R.id.date);
         dateInfo.setText(datePicked);
+//        book = findViewById ( R.id.book );
+
+//        book.setOnClickListener ( new View.OnClickListener ( ) {
+//            @Override
+//            public void onClick ( View v ) {
+//                Toast.makeText ( book.getContext (), "Booked", Toast.LENGTH_SHORT ).show ( );
+//            }
+//        } );
+
     }
 
     private void initTimings() {
@@ -61,7 +75,7 @@ public class BookTimings extends AppCompatActivity{
 
     //get Facility or Prof name to display on action bar
     private String getName() {
-        return "hello";
+        return "Confirming your Booking";
     }
 }
 
