@@ -27,7 +27,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".BookProf"
-            android:label="Book Prof"
+            android:label="Book Consultation"
             android:launchMode="singleTop"
             android:parentActivityName=".HomePage"
             android:screenOrientation="portrait">
@@ -52,6 +52,10 @@
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
+        </activity>
+        <activity
+            android:name=".BookTimings"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".HomePage"

@@ -85,7 +85,7 @@ public class Prof extends AppCompatActivity {
 
 
                 //Log.i("calendar", "onClick: " + print);
-                //Toast.makeText(book.getContext(), print, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(bookButton.getContext(), print, Toast.LENGTH_SHORT).show();
             }
 
             private OnSelectDateListener listener = new OnSelectDateListener() {
@@ -93,8 +93,9 @@ public class Prof extends AppCompatActivity {
                 public void onSelect(List<Calendar> calendars) {
                     String date = calendars.get(0).getTime().toString();
                     Toast.makeText(book.getContext(), date, Toast.LENGTH_LONG).show();
-//                    Intent intent = new Intent(book.getContext(), Timings.class);
-//                    intent.putExtra(DATE_PICKED, date);
+                    Intent intent = new Intent(book.getContext(), BookTimings.class);
+                    intent.putExtra(DATE_PICKED, date);
+                    startActivity(intent);
                 }
             };
 

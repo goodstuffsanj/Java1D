@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 28
@@ -47,4 +48,8 @@ dependencies {
     // Styleable Toast
     implementation 'com.muddzdev:styleabletoast:2.0.1'
     implementation project(':MaterialCalendar')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+}
+repositories {
+    mavenCentral()
 }
