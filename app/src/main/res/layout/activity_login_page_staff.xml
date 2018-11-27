@@ -15,6 +15,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
+
         <ImageView
             android:id="@+id/appicon"
             android:layout_width="171dp"
@@ -187,7 +189,19 @@
             app:layout_constraintStart_toEndOf="@+id/student"
             app:layout_constraintTop_toTopOf="@+id/redback"
             app:layout_constraintVertical_bias="0.01999998" />
+
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/sign_in_button_google"
+            android:layout_width="165dp"
+            android:layout_height="17dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/redback" />
     </android.support.constraint.ConstraintLayout>
+
+
 
 </ScrollView>
 

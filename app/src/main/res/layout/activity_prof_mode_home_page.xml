@@ -70,40 +70,50 @@
 
 
             <android.support.v7.widget.CardView
-                android:id="@+id/book_prof"
-                android:layout_width="0dp"
-                android:layout_height="185dp"
+
+                android:id="@+id/meeting_requests"
+                android:layout_width="168dp"
+                android:layout_height="161dp"
                 android:layout_marginStart="23dp"
                 android:layout_marginEnd="21dp"
+
                 android:padding="10dp"
                 app:cardCornerRadius="15dp"
                 app:layout_constraintBottom_toBottomOf="@+id/book_facilities"
                 app:layout_constraintEnd_toStartOf="@+id/book_facilities"
+                app:layout_constraintHorizontal_bias="0.437"
                 app:layout_constraintStart_toStartOf="parent"
+
                 app:layout_constraintTop_toTopOf="@+id/book_facilities">
 
-                <ImageView
 
-                    android:layout_width="263dp"
-                    android:layout_height="255dp"
-                    android:layout_marginLeft="-100dp"
-                    android:layout_marginTop="-50dp"
-                    android:src="@drawable/bp" />
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="-10dp"
+                    android:layout_marginTop="10dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/requests" />
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
                 android:id="@+id/book_facilities"
-                android:layout_width="0dp"
-                android:layout_height="185dp"
-                android:layout_marginTop="120dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginBottom="8dp"
+
+                android:layout_width="173dp"
+                android:layout_height="160dp"
+                android:layout_marginBottom="22dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="10dp"
+
                 android:padding="10dp"
                 app:cardCornerRadius="15dp"
                 app:layout_constraintBottom_toTopOf="@+id/calendar"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/book_prof"
-                app:layout_constraintTop_toTopOf="parent">
+
+                app:layout_constraintTop_toBottomOf="@+id/textView"
+                app:layout_constraintVertical_bias="1.0">
+
 
                 <ImageView
                     android:layout_width="306dp"
@@ -113,6 +123,7 @@
 
                     android:layout_marginBottom="15dp"
                     android:src="@drawable/bf" />
+
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
@@ -159,7 +170,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="5dp"
-                    android:text="Announcement"
+                    android:text="Confirmed upcoming meetings"
                     android:textAppearance="@style/TextAppearance.AppCompat.Title"
                     android:textColor="@color/colorPrimary" />
             </android.support.v7.widget.CardView>
