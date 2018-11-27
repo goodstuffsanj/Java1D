@@ -17,7 +17,7 @@ public class Calendar extends AppCompatActivity {
 
 
         Intent booking_intent = getIntent ();
-        String booking_details = booking_intent.getDataString ();
+        String booking_details = booking_intent.getStringExtra (Prof.DATE_PICKED);
 
 
         add_appointment = findViewById ( R.id.add_appointment );

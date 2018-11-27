@@ -32,8 +32,8 @@ import static java.util.Calendar.DATE;
 public class Prof extends AppCompatActivity {
     public final static String PROF_ID = "PROF_ID";
     public final static String IMAGE = "IMAGE";
+    public static final String DATE_PICKED ="DATE_PICKED" ;
     private final static String DESCRIPTION = "DESCRIPTION";
-    private final static String DATE_PICKED = "DATE_PICKED";
     String printdate;
     CircleImageView imageProf;
     TextView description_about;
@@ -97,9 +97,9 @@ public class Prof extends AppCompatActivity {
                     printdate = calendars.get(0).getTime().toString();
 
 
-//                    Intent intent = new Intent ( Prof.this, Calendar.class );
-//                    intent.putExtra ( DATE_PICKED, print );
-//                    startActivity ( intent );
+                    Intent intent = new Intent ( book.getContext (), Calendar.class );
+                    intent.putExtra ( DATE_PICKED, printdate );
+                    startActivity ( intent );
 
                     Toast.makeText(book.getContext(), printdate, Toast.LENGTH_LONG).show();
                 }
