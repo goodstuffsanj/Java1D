@@ -34,6 +34,7 @@ public class Prof extends AppCompatActivity {
     public final static String IMAGE = "IMAGE";
     private final static String DESCRIPTION = "DESCRIPTION";
     private final static String DATE_PICKED = "DATE_PICKED";
+    String printdate;
     CircleImageView imageProf;
     TextView description_about;
     TextView textViewProfName;
@@ -93,12 +94,14 @@ public class Prof extends AppCompatActivity {
             private OnSelectDateListener listener = new OnSelectDateListener() {
                 @Override
                 public void onSelect(List<Calendar> calendars) {
-                    String print = calendars.get(0).getTime().toString();
-                    Intent intent = new Intent ( Prof.this, Calendar.class );
-                    intent.putExtra ( DATE_PICKED, print );
-                    startActivity ( intent );
+                    printdate = calendars.get(0).getTime().toString();
+                    
 
-                    Toast.makeText(book.getContext(), print, Toast.LENGTH_LONG).show();
+//                    Intent intent = new Intent ( Prof.this, Calendar.class );
+//                    intent.putExtra ( DATE_PICKED, print );
+//                    startActivity ( intent );
+
+                    Toast.makeText(book.getContext(), printdate, Toast.LENGTH_LONG).show();
                 }
             };
 
