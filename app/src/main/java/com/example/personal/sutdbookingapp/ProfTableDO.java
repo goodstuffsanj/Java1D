@@ -16,7 +16,10 @@ import java.util.Set;
 public class ProfTableDO {
     private String _profID;
     private String _profPassword;
+    private String _officeLocation;
     private String _profName;
+    private String _email;
+    private String _desciption;
     private String _f101030;
     private String _f103011;
     private String _f111130;
@@ -115,6 +118,30 @@ public class ProfTableDO {
 
     public void setProfPassword(final String _profPassword) {
         this._profPassword = _profPassword;
+    }
+    @DynamoDBAttribute(attributeName = "OfficeLocation")
+    public String getOfficeLocation() {
+        return _officeLocation;
+    }
+
+    public void setOfficeLocation(final String _officeLocation) {
+        this._profName = _officeLocation;
+    }
+    @DynamoDBAttribute(attributeName = "Email")
+    public String getEmail() {
+        return _email;
+    }
+
+    public void setEmail(final String _email) {
+        this._email = _email;
+    }
+    @DynamoDBAttribute(attributeName = "Desciption")
+    public String getDescription() {
+        return _desciption;
+    }
+
+    public void setDescription(final String _Description) {
+        this._desciption= _desciption;
     }
     @DynamoDBAttribute(attributeName = "ProfName")
     public String getProfName() {

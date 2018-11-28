@@ -95,6 +95,7 @@ public class FacilityTableDO {
     private String _w173018;
     private String _w9930;
     private String _w93010;
+    private String _location;
 
     @DynamoDBHashKey(attributeName = "FacilityName")
     @DynamoDBIndexHashKey(attributeName = "FacilityName", globalSecondaryIndexName = "FacilityName")
@@ -104,6 +105,14 @@ public class FacilityTableDO {
 
     public void setFacilityName(final String _facilityName) {
         this._facilityName = _facilityName;
+    }
+    @DynamoDBAttribute(attributeName = "location")
+    public String getLocation() {
+        return _location;
+    }
+
+    public void setLocation(final String _location) {
+        this._location = _location;
     }
     @DynamoDBAttribute(attributeName = "f10-1030")
     public String getF101030() {
