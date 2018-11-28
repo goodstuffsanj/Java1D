@@ -50,9 +50,9 @@ public class HomePage extends AppCompatActivity {
         ida = new StudentTableDO().getUserId();
 
 //        createNews();
-        queryNews();
+//        queryNews();
 //        readNews();
-        updateNews();
+//        updateNews();
 //        deleteNews();
 
         book_facilities = (CardView) findViewById(R.id.book_facilities);
@@ -82,154 +82,156 @@ public class HomePage extends AppCompatActivity {
         overridePendingTransition(0, 0);
     }
 
-    public void createNews() {
-        final StudentTableDO newsItem = new StudentTableDO();
 
-        newsItem.setUserId("2333");
-        newsItem.setName("six god");
-        newsItem.setPassword("123");
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                dynamoDBMapper.save(newsItem);
-                Log.i("DB", "new Item is created");
-                // Item saved
-            }
-        }).start();
-    }
-
-    public void readNews() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    StudentTableDO newsItem1 = dynamoDBMapper.load(
-                            StudentTableDO.class,
-                            "2333",
-                            "123");
-
-                    StudentTableDO newsItem2 = dynamoDBMapper.load(
-                            StudentTableDO.class,
-                            "where is the name",
-                            "testtest");
-                    Log.i(tag, "read item1: " + String.valueOf(newsItem1.toString()));
-                    Log.i(tag, "read item2: " + newsItem2.toString());
-                } catch (NullPointerException nullpointer_ex) {
-                    Log.i(tag, "cannot can the item" );
-                }
-            }
-
-        }).start();
-    }
-
-    private String userId = "bugaosuni";
-    private String password = "update and delete";
-
-    public void updateNews() {
-        final StudentTableDO newsItem = new StudentTableDO();
-
-        newsItem.setUserId(userId);
-        newsItem.setPassword(password);
-        newsItem.setName("call me minion");
-        deleteNews();
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-
-                dynamoDBMapper.save(newsItem);
-                Log.i(tag, "item is updated yaho~~");
-
-                // Item updated
-            }
-        }).start();
-    }
-
-    public void deleteNews() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-
-                StudentTableDO newsItem = new StudentTableDO();
-
-                newsItem.setUserId(userId);    //partition key
-
-                newsItem.setPassword("testest");  //range (sort) key
-
-                dynamoDBMapper.delete(newsItem);
-                Log.i(tag, "deleted");
-                // Item deleted
-            }
-        }).start();
-    }
-
-    public void queryNews() {
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Log.i(tag, "start to query******");
-                StudentTableDO news = new StudentTableDO();
-                news.setName("call me minion");
-
-                Condition rangeKeyCondition = new Condition()
-                        .withComparisonOperator(ComparisonOperator.BEGINS_WITH)
-                        .withAttributeValueList(new AttributeValue().withS(""));
-
+//    public void createNews() {
+//        final StudentTableDO newsItem = new StudentTableDO();
+//
+//        newsItem.setUserId("2333");
+//        newsItem.setName("six god");
+//        newsItem.setPassword("123");
+//
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                dynamoDBMapper.save(newsItem);
+//                Log.i("DB", "new Item is created");
+//                // Item saved
+//            }
+//        }).start();
+//    }
+//
+//    public void readNews() {
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                try {
+//                    StudentTableDO newsItem1 = dynamoDBMapper.load(
+//                            StudentTableDO.class,
+//                            "2333",
+//                            "123");
+//
+//                    StudentTableDO newsItem2 = dynamoDBMapper.load(
+//                            StudentTableDO.class,
+//                            "where is the name",
+//                            "testtest");
+//                    Log.i(tag, "read item1: " + String.valueOf(newsItem1.toString()));
+//                    Log.i(tag, "read item2: " + newsItem2.toString());
+//                } catch (NullPointerException nullpointer_ex) {
+//                    Log.i(tag, "cannot can the item" );
+//                }
+//            }
+//
+//        }).start();
+//    }
+//
+//    private String userId = "bugaosuni";
+//    private String password = "update and delete";
+//
+//    public void updateNews() {
+//        final StudentTableDO newsItem = new StudentTableDO();
+//
+//        newsItem.setUserId(userId);
+//        newsItem.setPassword(password);
+//        newsItem.setName("call me minion");
+//        deleteNews();
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//
+//                dynamoDBMapper.save(newsItem);
+//                Log.i(tag, "item is updated yaho~~");
+//
+//                // Item updated
+//            }
+//        }).start();
+//    }
+//
+//    public void deleteNews() {
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//
+//                StudentTableDO newsItem = new StudentTableDO();
+//
+//                newsItem.setUserId(userId);    //partition key
+//
+//                newsItem.setPassword("testest");  //range (sort) key
+//
+//                dynamoDBMapper.delete(newsItem);
+//                Log.i(tag, "deleted");
+//                // Item deleted
+//            }
+//        }).start();
+//    }
+//
+//    public void queryNews() {
+//
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                Log.i(tag, "start to query******");
+//                StudentTableDO news = new StudentTableDO();
+//                news.setName("call me minion");
+//
 //                Condition rangeKeyCondition = new Condition()
 //                        .withComparisonOperator(ComparisonOperator.BEGINS_WITH)
-//                        .withAttributeValueList(new AttributeValue().withS("Trial"));
+//                        .withAttributeValueList(new AttributeValue().withS(""));
 //
-//                DynamoDBQueryExpression queryExpression = new DynamoDBQueryExpression()
-//                        .withHashKeyValues(news)
-//                        .withRangeKeyCondition("password", rangeKeyCondition)
-//                        .withConsistentRead(false);
-
-                DynamoDBQueryExpression<StudentTableDO> queryExpression = new DynamoDBQueryExpression<>();
-                queryExpression.setHashKeyValues(news);
-                queryExpression.setIndexName("Names");
-                queryExpression.setConsistentRead(false);
-
-                PaginatedList<StudentTableDO> result = dynamoDBMapper.query(StudentTableDO.class, queryExpression);
-
-                Gson gson = new Gson();
-                StringBuilder stringBuilder = new StringBuilder();
-
-                // Loop through query results
-                for (int i = 0; i < result.size(); i++) {
-                    String jsonFormOfItem = gson.toJson(result.get(i));
-                    stringBuilder.append(jsonFormOfItem + "\n\n");
-                }
-
-                // Add your code here to deal with the data result
-                Log.i(tag, stringBuilder.toString());
-
-//                NewsDO news2 = new NewsDO();
-//                news2.setUserId("123");
-//                //news2.setArticleId("Article1");
+////                Condition rangeKeyCondition = new Condition()
+////                        .withComparisonOperator(ComparisonOperator.BEGINS_WITH)
+////                        .withAttributeValueList(new AttributeValue().withS("Trial"));
+////
+////                DynamoDBQueryExpression queryExpression = new DynamoDBQueryExpression()
+////                        .withHashKeyValues(news)
+////                        .withRangeKeyCondition("password", rangeKeyCondition)
+////                        .withConsistentRead(false);
 //
-//                DynamoDBQueryExpression<NewsDO> queryExpression2 = new DynamoDBQueryExpression<NewsDO>()
-//                        .withHashKeyValues(news2)
-//                        .withConsistentRead(false);
+//                DynamoDBQueryExpression<StudentTableDO> queryExpression = new DynamoDBQueryExpression<>();
+//                queryExpression.setHashKeyValues(news);
+//                queryExpression.setIndexName("Names");
+//                queryExpression.setConsistentRead(false);
 //
-//                PaginatedList<NewsDO> result2 = dynamoDBMapper.query(NewsDO.class, queryExpression2);
+//                PaginatedList<StudentTableDO> result = dynamoDBMapper.query(StudentTableDO.class, queryExpression);
 //
-//                Gson gson2 = new Gson();
-//                StringBuilder stringBuilder2 = new StringBuilder();
+//                Gson gson = new Gson();
+//                StringBuilder stringBuilder = new StringBuilder();
 //
 //                // Loop through query results
-//                for (int i = 0; i < result2.size(); i++) {
-//                    String jsonFormOfItem = gson2.toJson(result2.get(i));
-//                    stringBuilder2.append(jsonFormOfItem + "\n\n");
+//                for (int i = 0; i < result.size(); i++) {
+//                    String jsonFormOfItem = gson.toJson(result.get(i));
+//                    stringBuilder.append(jsonFormOfItem + "\n\n");
 //                }
 //
 //                // Add your code here to deal with the data result
-//                Log.d("Query result: ", stringBuilder2.toString());
-
-                if (result.isEmpty()) {
-                    // There were no items matching your query.
-                }
-            }
-        }).start();
-    }
+//                Log.i(tag, stringBuilder.toString());
+//
+////                NewsDO news2 = new NewsDO();
+////                news2.setUserId("123");
+////                //news2.setArticleId("Article1");
+////
+////                DynamoDBQueryExpression<NewsDO> queryExpression2 = new DynamoDBQueryExpression<NewsDO>()
+////                        .withHashKeyValues(news2)
+////                        .withConsistentRead(false);
+////
+////                PaginatedList<NewsDO> result2 = dynamoDBMapper.query(NewsDO.class, queryExpression2);
+////
+////                Gson gson2 = new Gson();
+////                StringBuilder stringBuilder2 = new StringBuilder();
+////
+////                // Loop through query results
+////                for (int i = 0; i < result2.size(); i++) {
+////                    String jsonFormOfItem = gson2.toJson(result2.get(i));
+////                    stringBuilder2.append(jsonFormOfItem + "\n\n");
+////                }
+////
+////                // Add your code here to deal with the data result
+////                Log.d("Query result: ", stringBuilder2.toString());
+//
+//                if (result.isEmpty()) {
+//                    // There were no items matching your query.
+//                }
+//            }
+//        }).start();
+//    }
 }
