@@ -12,6 +12,7 @@
     <color name="primary_dark_material_dark">#af1818</color>
     <color name="background_material_dark">#ffffff</color>
     <color name="ripple_red">#e97e7e</color>
+    <color name="dark">#242323</color>
 
 
 </resources>

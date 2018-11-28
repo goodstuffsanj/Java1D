@@ -2,15 +2,20 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollLogin"
+    style="@android:style/Widget.ScrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginBottom="-100dp"
+    android:orientation="vertical"
+    android:scrollbars="none"
     tools:context=".LoginPage"
-    android:id="@+id/scrollLogin"
-    android:scrollbars="none">
+    >
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            >
 
             <ImageView
                 android:id="@+id/appicon"
@@ -39,6 +44,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_marginTop="45dp"
                 android:layout_marginEnd="176dp"
+                android:layout_marginBottom="24dp"
                 android:src="@drawable/loginred"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -61,25 +67,27 @@
             <RelativeLayout
                 android:id="@+id/relativeLayout2"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="210dp"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="32dp"
-                android:layout_marginEnd="46dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+
+                android:layout_marginTop="300dp"
+                android:layout_marginEnd="64dp"
+                app:layout_constraintBottom_toTopOf="@+id/sign_in_button"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toEndOf="@+id/poplogin"
-                app:layout_constraintTop_toBottomOf="@+id/poplogin"
-                app:layout_constraintVertical_bias="1.0">
+                app:layout_constraintTop_toTopOf="@+id/buttonStaff"
+                app:layout_constraintVertical_bias="0.52">
 
                 <ImageView
                     android:id="@+id/usericon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
                     android:layout_marginStart="1dp"
                     android:layout_marginLeft="1dp"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="20dp"
                     android:src="@drawable/ic_person_black_24dp"
                     app:layout_constraintStart_toStartOf="@+id/username"
                     app:layout_constraintTop_toTopOf="@+id/username" />
@@ -89,8 +97,8 @@
                     android:layout_width="236dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:layout_marginLeft="0dp"
-                    android:layout_marginTop="21dp"
+                    android:layout_marginLeft="-31dp"
+                    android:layout_marginTop="5dp"
                     android:layout_toRightOf="@id/usericon"
                     android:hint="enter your ID"
                     android:lines="1"
@@ -106,7 +114,7 @@
                     android:layout_alignBottom="@+id/usericon"
                     android:layout_marginStart="1dp"
                     android:layout_marginLeft="1dp"
-                    android:layout_marginBottom="-79dp"
+                    android:layout_marginBottom="-84dp"
                     android:src="@drawable/ic_lock_black_24dp" />
 
                 <EditText
@@ -114,8 +122,8 @@
                     android:layout_width="236dp"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/username"
-                    android:layout_marginLeft="0dp"
-                    android:layout_marginTop="32dp"
+                    android:layout_marginLeft="-11dp"
+                    android:layout_marginTop="44dp"
                     android:layout_marginBottom="8dp"
                     android:layout_toRightOf="@+id/passwordicon"
                     android:hint="enter your password"
@@ -130,11 +138,10 @@
                     android:id="@+id/imageButtonLoginStudent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/password"
                     android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginStart="76dp"
-                    android:layout_marginTop="193dp"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginStart="84dp"
+                    android:layout_marginBottom="-71dp"
                     android:background="@color/red"
                     android:bottomLeftRadius="30dp"
                     android:bottomRightRadius="30dp"
@@ -174,7 +181,6 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
                 android:background="?android:attr/selectableItemBackground"
                 android:fontFamily="@font/skia"
                 android:text="STAFF"
@@ -185,16 +191,17 @@
                 app:layout_constraintHorizontal_bias="0.879"
                 app:layout_constraintStart_toEndOf="@+id/student"
                 app:layout_constraintTop_toTopOf="@+id/redback"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintVertical_bias="0.110000014" />
 
             <com.google.android.gms.common.SignInButton
                 android:id="@+id/sign_in_button"
-                android:layout_width="165dp"
-                android:layout_height="17dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/redback" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="@+id/relativeLayout2"
+                app:layout_constraintStart_toStartOf="@+id/relativeLayout2"
+                app:layout_constraintTop_toBottomOf="@+id/relativeLayout2" />
 
 
         </android.support.constraint.ConstraintLayout>
