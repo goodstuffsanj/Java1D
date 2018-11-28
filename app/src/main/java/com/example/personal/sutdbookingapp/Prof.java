@@ -28,17 +28,18 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import static java.util.Calendar.DATE;
-
+// This class is created to create a new intent to book professors
 public class Prof extends AppCompatActivity {
     public final static String PROF_ID = "PROF_ID";
     public final static String IMAGE = "IMAGE";
-    private final static String DESCRIPTION = "DESCRIPTION";
-    private final static String DATE_PICKED = "DATE_PICKED";
+    public final static String DESCRIPTION = "DESCRIPTION";
+    public final static String DATE_PICKED = "DATE_PICKED";
     CircleImageView imageProf;
     TextView description_about;
     TextView textViewProfName;
     CalendarView calendarView;
     Button book;
+
 
 
     @Override
@@ -52,8 +53,8 @@ public class Prof extends AppCompatActivity {
         setTitle("BookProf");
 
         imageProf = findViewById(R.id.imageProf);
-        description_about = (TextView) findViewById(R.id.description_about);
-        book = (Button) findViewById(R.id.bookConsult);
+        description_about = findViewById(R.id.description_about);
+        book = findViewById(R.id.bookConsult);
         textViewProfName = findViewById(R.id.textViewProfName);
 
         textViewProfName.setText(name);
@@ -64,8 +65,7 @@ public class Prof extends AppCompatActivity {
         Calendar nextWeek = Calendar.getInstance();
         nextWeek.add(DATE,6);
 
-
-
+        //Booking date limited to 1 week
         book.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,27 +74,28 @@ public class Prof extends AppCompatActivity {
                         .maximumDate(nextWeek) // Maximum available date
                         .headerColor(R.color.red) // Color of the dialog header
                         .selectionColor(R.color.red) // Color of the selection circle
-                        .pickerType(CalendarView.MANY_DAYS_PICKER)
-                        .todayLabelColor(R.color.red);
+                        .todayLabelColor(R.color.red)
+                        .pickerType(CalendarView.ONE_DAY_PICKER);
+
 
                 DatePicker datePicker = builder.build();
                 datePicker.show();
-
-
-
 
                 //String print = calendarView.getSelectedDates().get(0).getTime().toString();
 
 
                 //Log.i("calendar", "onClick: " + print);
-                //Toast.makeText(book.getContext(), print, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(bookButton.getContext(), print, Toast.LENGTH_SHORT).show();
             }
 
             private OnSelectDateListener listener = new OnSelectDateListener() {
                 @Override
                 public void onSelect(List<Calendar> calendars) {
-                    String print = calendars.get(0).getTime().toString();
-                    Toast.makeText(book.getContext(), print, Toast.LENGTH_LONG).show();
+                    String date = calendars.get(0).getTime().toString();
+                    Toast.makeText(book.getContext(), date, Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(book.getContext(), BookTimings.class);
+                    intent.putExtra(DATE_PICKED, date);
+                    startActivity(intent);
                 }
             };
 

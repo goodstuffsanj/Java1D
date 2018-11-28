@@ -4,6 +4,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_CALENDAR" />
+    <uses-permission android:name="android.permission.WRITE_CALENDAR" />
 
     <application
         android:allowBackup="true"
@@ -27,7 +29,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".BookProf"
-            android:label="Book Prof"
+            android:label="Book Consultation"
             android:launchMode="singleTop"
             android:parentActivityName=".HomePage"
             android:screenOrientation="portrait">
@@ -54,6 +56,10 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity
+            android:name=".BookTimings"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
             android:name=".HomePage"
             android:screenOrientation="portrait" />
         <activity
@@ -62,6 +68,10 @@
         <activity
             android:name=".ProfHomePage"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ProfModeRequestsPage"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".ProfHomePage"/>
         <activity
             android:name=".Prof"
             android:parentActivityName=".BookProf"
@@ -76,6 +86,9 @@
         <activity android:name=".Bookings"
             android:screenOrientation="portrait"
             android:parentActivityName=".HomePage"></activity>
+        <activity android:name=".Calendar"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".Prof"></activity>
     </application>
 
 </manifest>
