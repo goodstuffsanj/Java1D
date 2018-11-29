@@ -1,5 +1,6 @@
 package com.example.personal.sutdbookingapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -19,12 +20,15 @@ public class BookTimings extends AppCompatActivity{
     private TextView dateInfo;
     private TimingsAdapter timingsAdapter;
     private static final String TAG = "XBookTimings";
+    public static Context context;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bookable_timings);
+        BookTimings.context = getApplicationContext ();
         setTitle(getName());
+
         initTimings();
 
         Intent intent = getIntent();
@@ -72,7 +76,10 @@ public class BookTimings extends AppCompatActivity{
         recyclerView.setAdapter(timingsAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
-
+    public static Context  getAppContext()
+    {
+        return BookTimings.context;
+    }
     //get Facility or Prof name to display on action bar
     private String getName() {
         return "Confirming your Booking";

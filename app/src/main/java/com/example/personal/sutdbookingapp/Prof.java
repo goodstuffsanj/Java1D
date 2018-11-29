@@ -65,6 +65,9 @@ public class Prof extends AppCompatActivity {
         Calendar nextWeek = Calendar.getInstance();
         nextWeek.add(DATE,6);
 
+
+
+
         //Booking date limited to 1 week
         book.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,6 +1,10 @@
 package com.example.personal.sutdbookingapp;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,6 +25,7 @@ public class LoginPage extends AppCompatActivity {
     Button buttonStaff;
 //    final static int RC_SIGN_IN = 100;
     private static final String TAG = "Login Page";
+    public static Context context;
 
 //    private void updateUI ( GoogleSignInAccount user ) {
 //        if (user != null) {
@@ -58,10 +63,31 @@ public class LoginPage extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        final int RC_SIGN_IN = 0;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_page);
         imageButtonLoginStudent = findViewById(R.id.imageButtonLoginStudent);
         buttonStaff = findViewById(R.id.buttonStaff);
+        LoginPage.context = getApplicationContext ();
+        com.google.android.gms.common.SignInButton signInButton = findViewById ( R.id.sign_in_button );
+
+
+
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder ( GoogleSignInOptions.DEFAULT_SIGN_IN )
+                .requestEmail ( )
+                .build ( );
+        final GoogleSignInClient mGoogleSignInClient = GoogleSignIn.getClient ( this, gso );
+
+        signInButton = findViewById ( R.id.sign_in_button );
+
+        signInButton.setOnClickListener ( new View.OnClickListener ( ) {
+            @Override
+            public void onClick ( View v ) {
+                Intent signInIntent = mGoogleSignInClient.getSignInIntent ( );
+                startActivityForResult ( signInIntent, RC_SIGN_IN );
+
+            }
+        } );
 //
 
         imageButtonLoginStudent.setOnClickListener(new View.OnClickListener() {
@@ -83,5 +109,18 @@ public class LoginPage extends AppCompatActivity {
 
 
 
+    }
+
+    @Override
+    protected void onStart () {
+        super.onStart ( );
+        if (ActivityCompat.checkSelfPermission(LoginPage.this, Manifest.permission.WRITE_CALENDAR) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_CALENDAR}, 0);
+        }
+
+    }
+    public static Context getAppContext()
+    {
+        return LoginPage.context;
     }
 }
