@@ -38,7 +38,7 @@ public class HomePage extends AppCompatActivity {
     private ScrollView scrollHome;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle mToggle;
-
+    public String TAG = "DB";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,22 +52,21 @@ public class HomePage extends AppCompatActivity {
         drawerLayout.addDrawerListener(mToggle);
         mToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+// ************ database query ************ //
+        Database test = new Database(HomePage.this);
+        StudentTableDO studentTableDO = new StudentTableDO();
 
-        Database b = new Database(HomePage.this);
-
-        NewsDO news = new NewsDO();
-        news.setAuthor("James");
-
-        StudentTableDO james= new StudentTableDO();
+        studentTableDO.setUserId("222");
+        studentTableDO.setName("best student");
+        studentTableDO.setPassword("2333666");
 
         // Create Data
-
-        james.setName("James Andrew Pohadi");
-        james.setUserId("1002899");
-        james.setPassword("secret");
-        b.create(james);
+        Log.i(TAG,"item is creating");
+        test.create(studentTableDO);
+        Log.i(TAG,"item is creating!!! yay!!!!!!!!!");
 
         // Update Data
+        test.update(studentTableDO);
 
         /*james.setName("James Andrew Pohadi");
         james.setUserId("1002899");
@@ -76,28 +75,28 @@ public class HomePage extends AppCompatActivity {
 
         // Delete Data
 
-        /*james.setUserId("1002899");
-        james.setPassword("secret");
-        b.delete(james); */
+        studentTableDO.setUserId("1002899");
+        studentTableDO.setPassword("secret");
+        test.delete(studentTableDO);
 
         // Query Data -> check Logcat Yesss
         // index
 
-        b.getQueryHandler(new Database.QueryHandler(){
-            @Override
-            <T> void postQuery(PaginatedList<T> result) {
-                Log.d("Yesss",result.toString());
-            }
-        }).getQuery(NewsDO.class,"Authors",news);
-
-        // Get Data -> check Logcat dataReceived
-        // hash key
-        b.getDataHandler(new Database.DataHandler() {
-            @Override
-            <T> void postReceivedData(T result) {
-                Log.d("dataReceived",result.toString());
-            }
-        }).getData(NewsDO.class,"123","Article1");
+//        test.getQueryHandler(new Database.QueryHandler(){
+//            @Override
+//            <T> void postQuery(PaginatedList<T> result) {
+//                Log.d("Yesss",result.toString());
+//            }
+//        }).getQuery(ProfTableDO.class,"ProfID",profTableDO);
+//
+//        // Get Data -> check Logcat dataReceived
+//        // hash key
+//        test.getDataHandler(new Database.DataHandler() {
+//            @Override
+//            <T> void postReceivedData(T result) {
+//                Log.d("dataReceived",result.toString());
+//            }
+//        }).getData(ProfTableDO.class,"222","2333666");
 
         Calendar calendar = Calendar.getInstance();
         calendar.set(2018,10,28);
