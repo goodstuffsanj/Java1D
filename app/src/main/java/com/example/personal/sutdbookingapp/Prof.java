@@ -108,11 +108,11 @@ public class Prof extends AppCompatActivity {
                 DatePicker datePicker = builder.build();
                 datePicker.show();
 
-                //String print = calendarView.getSelectedDates().get(0).getTime().toString();
+                String print = calendarView.getSelectedDates().get(0).getTime().toString();
 
 
-                //Log.i("calendar", "onClick: " + print);
-                //Toast.makeText(bookButton.getContext(), print, Toast.LENGTH_SHORT).show();
+                Log.i("calendar", "onClick: " + print);
+                Toast.makeText(book.getContext(), print, Toast.LENGTH_SHORT).show();
             }
 
             private OnSelectDateListener listener = new OnSelectDateListener() {
