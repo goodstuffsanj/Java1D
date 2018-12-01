@@ -13,6 +13,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.joda.time.LocalDateTime;
+
 import java.util.ArrayList;
 
 //Recycler view for timings_list
@@ -55,12 +57,33 @@ public class TimingsAdapter extends RecyclerView.Adapter<TimingsAdapter.TimingsV
     @Override
     public void onBindViewHolder(TimingsAdapter.TimingsViewHolder holder, int position) {
         TimingsData timingsData = timeDataList.get(position);
-
-        holder.time.setText(timingsData.getTime());
+        setTiming(holder, timingsData);
         setButton(holder, timingsData);
 
 
     }
+
+    private void setTiming(TimingsViewHolder viewHolder, TimingsData timingsData) {
+        TextView timeSlot = viewHolder.time;
+        LocalDateTime time = timingsData.getTime();
+        String text = time.toString("HH:mm") + " - " + time.plusMinutes(30).toString("HH:mm");
+//        if (strings[1] == "30") {
+//            int hour = Integer.valueOf(strings[0]);
+//            String nextHour;
+//            if (hour < 10) {
+//                nextHour = "0" + hour;
+//            }
+//            else {
+//                nextHour = String.valueOf(hour + 1);
+//            }
+//            text = " - " + nextHour + ":00";
+//        }
+//        else {
+//            text = " - " + strings[0] + ":30";
+//        }
+        timeSlot.setText(text);
+    }
+
 
 
     //setup button
@@ -76,7 +99,7 @@ public class TimingsAdapter extends RecyclerView.Adapter<TimingsAdapter.TimingsV
         bookButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String info = timingsData.getDate()+ " "  + timingsData.getProf_facil() + " " + timingsData.getTime();
+                String info = timingsData.getDate()+ " "  + timingsData.getName() + " " + timingsData.getTime();
                 Toast.makeText(context, "pending request for: " + info, Toast.LENGTH_LONG).show();
             }
         });

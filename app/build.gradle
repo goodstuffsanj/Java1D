@@ -47,10 +47,12 @@ dependencies {
     implementation 'com.amazonaws:aws-android-sdk-ddb-mapper:2.7.+'
     // Styleable Toast
     implementation 'com.muddzdev:styleabletoast:2.0.1'
-
+    // Calendar
     implementation project(':MaterialCalendar')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.google.android.gms:play-services-auth:15.0.1'
+    // Dates
+    implementation 'joda-time:joda-time:2.9.4'
 
     //    implementation 'com.applandeo:material-calendar-view:1.5.0'
     //    implementation 'com.google.api-client:google-api-client:1.23.0'

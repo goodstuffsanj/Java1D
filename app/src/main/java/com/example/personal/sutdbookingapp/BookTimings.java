@@ -8,47 +8,76 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBMapper;
+import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.PaginatedList;
+
+import java.text.SimpleDateFormat;
+import org.joda.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
 
 public class BookTimings extends AppCompatActivity{
     private ArrayList<TimingsData> timings = new ArrayList<>();
     private TextView dateInfo;
     private TimingsAdapter timingsAdapter;
     private static final String TAG = "XBookTimings";
+    private int startTime;
+    private int endTime;
+    private Date date;
+    private LocalDateTime datePicked;
+    private String name;
+    private ArrayList<String> blockedTimings;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bookable_timings);
+        startTime = 9;  //set booking time range
+        endTime = 18;
+
+        Intent intent = getIntent();
+
+        if (intent.getExtras().getBoolean("PROF")) {
+            date = (Date) intent.getSerializableExtra(Prof.DATE_PICKED);
+            name = intent.getStringExtra(Prof.NAME);
+            blockedTimings = intent.getStringArrayListExtra(Prof.BLOCKED_TIMINGS);
+        }
+        else{
+            //set up facil
+            date = (Date) intent.getSerializableExtra(Prof.DATE_PICKED);
+        }
+
+        //convert Date to joda-date
+        datePicked = new LocalDateTime(date);
+        dateInfo = findViewById(R.id.date);
+        dateInfo.setText(datePicked.toString("E dd MMM yyyy"));
         setTitle(getName());
         initTimings();
 
-        Intent intent = getIntent();
-        String datePicked = intent.getStringExtra(Prof.DATE_PICKED);
 
-        dateInfo = findViewById(R.id.date);
-        dateInfo.setText(datePicked);
     }
 
+
+    //create timings
     private void initTimings() {
-        for (int i=9; i<19; i++) {
-            TimingsData timingsData = new TimingsData();
-            TimingsData timingsData1 =new TimingsData();
-            if (String.valueOf(i).length() == 1) {
-                timingsData.setTime("0" + i + ":00");
-                timingsData1.setTime("0" + i + ":30");
-                Log.i(TAG, "initTimings: " + timingsData1.getTime());
-            }
-            else {
-                timingsData.setTime(i + ":00");
-                timingsData1.setTime(i + ":30");
-            }
-            timingsData.setAvailability(true);
-            timingsData1.setAvailability(false);
+        for (int i = startTime; i < endTime; i++) {
+            LocalDateTime time = new LocalDateTime(datePicked.getYear(), datePicked.getMonthOfYear(), datePicked.getDayOfMonth(), i, 0);
+            LocalDateTime time1 = new LocalDateTime(datePicked.getYear(), datePicked.getMonthOfYear(), datePicked.getDayOfMonth(), i, 30);
+            Log.i(TAG, "initTimings: " + time.toString("HH:mm"));
+            TimingsData timingsData = new TimingsData()
+                    .setTime(time)
+                    .setAvailability(getAvailability(time));
+            TimingsData timingsData1 =new TimingsData()
+                    .setTime(time1)
+                    .setAvailability(getAvailability(time1));
             timings.add(timingsData);
             timings.add(timingsData1);
         }
+
         initRecyclerView();
     }
 
@@ -61,8 +90,18 @@ public class BookTimings extends AppCompatActivity{
 
     //get Facility or Prof name to display on action bar
     private String getName() {
-        return "hello";
+        return name;
     }
+
+    private Boolean getAvailability(LocalDateTime timingGiven) {
+        for (int i = 0; i < blockedTimings.size(); i ++) {
+            if (timingGiven.toString().equals(blockedTimings.get(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 }
 
 
