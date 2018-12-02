@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.Locale;
 
 import static android.provider.CalendarContract.*;
@@ -131,6 +132,7 @@ public class TimingsAdapter extends RecyclerView.Adapter<TimingsAdapter.TimingsV
         bookButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 String info = timingsData.getDate()+ " "  + timingsData.getProf_facil() + " " + timingsData.getTime();
                 //addEvent ("Booking with Professor","For Information System","SUTD", Calendar.getInstance ().getTimeInMillis (), Calendar.getInstance ().getTimeInMillis ()*60*60*1000,1, "Singapore" );
                 //Toast.makeText(context, "pending request for: " + info, Toast.LENGTH_LONG).show();
