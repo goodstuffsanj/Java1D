@@ -11,7 +11,6 @@ import org.joda.time.LocalDateTime;
 public class TimingsData {
     private LocalDateTime time;
     private String name;
-    private LocalDateTime date;
     private Boolean availability;
 
 //    public TimingsData(String time, Boolean available) {
@@ -23,19 +22,20 @@ public class TimingsData {
         return name;
     }
 
-    public LocalDateTime getDate() {
-        return date;
+    public LocalDateTime getTime() {
+       return time;
     }
 
-   public LocalDateTime getTime() {
-       return time;
-   }
-
-   public boolean getAvailability() {
+    public boolean getAvailability() {
         return availability;
    }
 
-   public TimingsData setTime(LocalDateTime time) {
+    public TimingsData setName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public TimingsData setTime(LocalDateTime time) {
         this.time = time;
         return this;
     }

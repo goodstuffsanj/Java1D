@@ -69,9 +69,11 @@ public class BookTimings extends AppCompatActivity{
             LocalDateTime time1 = new LocalDateTime(datePicked.getYear(), datePicked.getMonthOfYear(), datePicked.getDayOfMonth(), i, 30);
             Log.i(TAG, "initTimings: " + time.toString("HH:mm"));
             TimingsData timingsData = new TimingsData()
+                    .setName(name)
                     .setTime(time)
                     .setAvailability(getAvailability(time));
             TimingsData timingsData1 =new TimingsData()
+                    .setName(name)
                     .setTime(time1)
                     .setAvailability(getAvailability(time1));
             timings.add(timingsData);
