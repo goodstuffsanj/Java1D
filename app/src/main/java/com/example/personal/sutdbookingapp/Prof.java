@@ -116,7 +116,7 @@ public class Prof extends AppCompatActivity {
                 public void onSelect(List<Calendar> calendars) {
                     Intent intent = new Intent(book.getContext(), BookTimings.class);
                     intent.putExtra(DATE_PICKED, calendars.get(0).getTime ());
-                    intent.putExtra ( TIME, calendars.get ( 1 ).getTimeInMillis () );
+                    intent.putExtra ( TIME, calendars.get ( 0 ).getTimeInMillis () );
                     intent.putExtra(PROF, true);
                     intent.putExtra(NAME, name);
                     intent.putExtra(BLOCKED_TIMINGS, blockedTimings);
