@@ -67,7 +67,6 @@ public class BookTimings extends AppCompatActivity{
         for (int i = startTime; i < endTime; i++) {
             LocalDateTime time = new LocalDateTime(datePicked.getYear(), datePicked.getMonthOfYear(), datePicked.getDayOfMonth(), i, 0);
             LocalDateTime time1 = new LocalDateTime(datePicked.getYear(), datePicked.getMonthOfYear(), datePicked.getDayOfMonth(), i, 30);
-            Log.i(TAG, "initTimings: " + time.toString("HH:mm"));
             TimingsData timingsData = new TimingsData()
                     .setName(name)
                     .setTime(time)
@@ -98,6 +97,7 @@ public class BookTimings extends AppCompatActivity{
     private Boolean getAvailability(LocalDateTime timingGiven) {
         for (int i = 0; i < blockedTimings.size(); i ++) {
             if (timingGiven.toString().equals(blockedTimings.get(i))) {
+                Log.i(TAG, "getAvailability: " + timingGiven.toString() + " " + blockedTimings.get(i));
                 return false;
             }
         }

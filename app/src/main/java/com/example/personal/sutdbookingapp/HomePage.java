@@ -76,6 +76,8 @@ public class HomePage extends AppCompatActivity {
 //        ArrayList<String> blockedTimings = new ArrayList<>();
 //        blockedTimings.add(new LocalDateTime(2018, 12, 4, 17, 0 ).toString());
 //        blockedTimings.add(new LocalDateTime(2018, 12, 5, 16, 0 ).toString());
+//        List<String> pendingTime = new ArrayList<>();
+//        List<String> pendingMsg = new ArrayList<>();
 //
 //        for (int i = 0; i < 300; i ++) {
 //            ProfTableDO prof = new ProfTableDO();
@@ -89,9 +91,13 @@ public class HomePage extends AppCompatActivity {
 //            prof.setProfContact("+65 69876543");
 //            prof.setProfDescription("I am a passionate professor. I studied x in university XYZ and I have been doing research about Y for K years.");
 //            prof.setProfPillar("ISTD");
+//            prof.setProfPending(pendingTime);
+//            prof.setProfMessage(pendingMsg);
 //
 //            b.update(prof);
 //        }
+
+
 
         // Update Data
 

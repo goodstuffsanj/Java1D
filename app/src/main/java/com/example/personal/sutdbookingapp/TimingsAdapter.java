@@ -1,10 +1,12 @@
 package com.example.personal.sutdbookingapp;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.Notification;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.support.annotation.NonNull;
@@ -35,6 +37,9 @@ public class TimingsAdapter extends RecyclerView.Adapter<TimingsAdapter.TimingsV
     private ArrayList<TimingsData> timeDataList;
     private Context context;
     private List<String> blockedTimings;
+    public final static String NAME = "NAME";
+    public final static String TIME = "TIME";
+    public final static String IS_PROF = "IS_PROF";
 
     public TimingsAdapter (Context context, ArrayList<TimingsData> timeDataList) {
         this.timeDataList = timeDataList;
@@ -77,21 +82,8 @@ public class TimingsAdapter extends RecyclerView.Adapter<TimingsAdapter.TimingsV
     private void setTiming(TimingsViewHolder viewHolder, TimingsData timingsData) {
         TextView timeSlot = viewHolder.time;
         LocalDateTime time = timingsData.getTime();
+        //LocalDateTime time1 = time.plusMinutes(30);
         String text = time.toString("HH:mm") + " - " + time.plusMinutes(30).toString("HH:mm");
-//        if (strings[1] == "30") {
-//            int hour = Integer.valueOf(strings[0]);
-//            String nextHour;
-//            if (hour < 10) {
-//                nextHour = "0" + hour;
-//            }
-//            else {
-//                nextHour = String.valueOf(hour + 1);
-//            }
-//            text = " - " + nextHour + ":00";
-//        }
-//        else {
-//            text = " - " + strings[0] + ":30";
-//        }
         timeSlot.setText(text);
     }
 
@@ -103,6 +95,7 @@ public class TimingsAdapter extends RecyclerView.Adapter<TimingsAdapter.TimingsV
         Boolean enabled = timingsData.getAvailability();
         //if not available for booking
         if (!enabled) {
+            Log.i(TAG, "setButton: " + timingsData.getTime());
             bookButton.setBackgroundColor(Color.GRAY);
             bookButton.setEnabled(enabled);
 
@@ -110,54 +103,13 @@ public class TimingsAdapter extends RecyclerView.Adapter<TimingsAdapter.TimingsV
         bookButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //create dialog to confirm on show
-                AlertDialog.Builder builder = new AlertDialog.Builder(bookButton.getContext(), R.style.Theme_AppCompat_Light_Dialog);
 
-                String text = "Confirm booking for "
-                        + timingsData.getTime().toString("dd MMM yyyy '('E')'")
-                        + " at "
-                        + timingsData.getTime().toString("h:mm a")
-                        + " with "
-                        + timingsData.getName()
-                        + "?";
-                builder.setTitle("Confirm")
-                        .setMessage(text)
-                        .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                //
-                                dialog.cancel();
-                            }
-                        })
-                        .setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Toast.makeText(bookButton.getContext(), "Confirmed booking", Toast.LENGTH_SHORT).show();
-
-                                //update database
-                                Database b = new Database(bookButton.getContext());
-                                ProfTableDO prof = new ProfTableDO();
-                                prof.setProfName(timingsData.getName());
-                                b.getDataHandler(new Database.DataHandler() {
-                                    @Override
-                                    <T> void postReceivedData(T result) {
-                                        ProfTableDO prof = (ProfTableDO) result;
-                                        blockedTimings = prof.getProfBlockedTimings();
-                                        blockedTimings.add(timingsData.getTime().toString());
-                                    }
-                                });
-                                prof.setProfBlockedTimings(blockedTimings);
-
-                                b.update(prof);
-                            }
-                        })
-                        .create()
-                        .show();
-                Log.i(TAG, "onClick: " + "Confirm booking for "
-                        + timingsData.getTime().toString("dd MMM yyyy '('E')'")
-                        + " with "
-                        + timingsData.getName()
-                        + "?");
+                Intent intent = new Intent(bookButton.getContext(), ProfMessage.class);
+                intent.putExtra(NAME, timingsData.getName());
+                intent.putExtra(TIME, timingsData.getTime().toString());
+                Log.i(TAG, "onClick: " + timingsData.getTime().toString());
+                intent.putExtra(IS_PROF, true);
+                context.startActivity(intent);
             }
         });
 
