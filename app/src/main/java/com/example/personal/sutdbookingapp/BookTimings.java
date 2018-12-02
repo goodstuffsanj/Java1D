@@ -33,13 +33,14 @@ public class BookTimings extends AppCompatActivity{
 
         Intent intent = getIntent();
         String datePicked = intent.getStringExtra(Prof.DATE_PICKED);
-
+        String time = intent.getStringExtra ( Prof.TIME_EACH );
+        Toast.makeText ( this, time,Toast.LENGTH_SHORT ).show ();
         Button book;
 
         dateInfo = findViewById(R.id.date);
         dateInfo.setText(datePicked);
 //        book = findViewById ( R.id.book );
-
+//
 //        book.setOnClickListener ( new View.OnClickListener ( ) {
 //            @Override
 //            public void onClick ( View v ) {

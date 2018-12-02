@@ -34,6 +34,7 @@ public class Prof extends AppCompatActivity {
     public final static String IMAGE = "IMAGE";
     public final static String DESCRIPTION = "DESCRIPTION";
     public final static String DATE_PICKED = "DATE_PICKED";
+    public final static String TIME_EACH = "TIME_EACH";
     CircleImageView imageProf;
     TextView description_about;
     TextView textViewProfName;
@@ -81,6 +82,8 @@ public class Prof extends AppCompatActivity {
                         .pickerType(CalendarView.ONE_DAY_PICKER);
 
 
+
+
                 DatePicker datePicker = builder.build();
                 datePicker.show();
 
@@ -95,9 +98,11 @@ public class Prof extends AppCompatActivity {
                 @Override
                 public void onSelect(List<Calendar> calendars) {
                     String date = calendars.get(0).getTime().toString();
+                    String time = String.valueOf ( calendars.get(0).getTimeInMillis () );
                     Toast.makeText(book.getContext(), date, Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(book.getContext(), BookTimings.class);
                     intent.putExtra(DATE_PICKED, date);
+                    intent.putExtra ( TIME_EACH,  time);
                     startActivity(intent);
                 }
             };
