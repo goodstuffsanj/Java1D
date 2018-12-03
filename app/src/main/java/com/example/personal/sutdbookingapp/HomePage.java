@@ -65,6 +65,7 @@ public class HomePage extends AppCompatActivity {
         studentTableDO.setUserId("222");
         studentTableDO.setName("best student");
         studentTableDO.setPassword("2333666");
+        Log.i(TAG, "get password"+studentTableDO.getPassword());
 
         // ***************************************************** Create Data
         Log.i(TAG,"item is creating");
@@ -125,7 +126,10 @@ public class HomePage extends AppCompatActivity {
         test.getDataHandler(new Database.DataHandler() {
             @Override
             <T> void postReceivedData(T result) {
-                Log.i("DB_dataReceived: ",result.toString());
+                StudentTableDO a = (StudentTableDO) result;
+                Log.i("DB_dataReceived ", ((StudentTableDO) result).getPassword());
+            }
+        }).getData(StudentTableDO.class,"222");
 /*
                 //Log.d("Yesss",);
 //                Iterator<T> iter = result.iterator();
@@ -145,8 +149,7 @@ public class HomePage extends AppCompatActivity {
                 Log.d("dataReceived",a.getContent());
 
 */
-            }
-        }).getData(StudentTableDO.class,"222","2333666");
+
 
 //////////////////////////////////////////////////////////////////////////////////
 
