@@ -1,32 +1,22 @@
 package com.example.personal.sutdbookingapp;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.app.Notification;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.support.annotation.NonNull;
-import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.joda.time.LocalDateTime;
-import org.joda.time.format.DateTimeFormatter;
-import org.joda.time.format.DateTimeFormatterBuilder;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 //Recycler view for timings_list
@@ -82,12 +72,10 @@ public class TimingsAdapter extends RecyclerView.Adapter<TimingsAdapter.TimingsV
     private void setTiming(TimingsViewHolder viewHolder, TimingsData timingsData) {
         TextView timeSlot = viewHolder.time;
         LocalDateTime time = timingsData.getTime();
-        //LocalDateTime time1 = time.plusMinutes(30);
-        String text = time.toString("HH:mm") + " - " + time.plusMinutes(30).toString("HH:mm");
+        LocalDateTime time1 = new LocalDateTime(timingsData.getTime().getYear(), timingsData.getTime().getMonthOfYear(), timingsData.getTime().getDayOfMonth(), timingsData.getTime().getHourOfDay(), timingsData.getTime().getMinuteOfHour());
+        String text = time.toString("HH:mm - ") + time1.toString("HH:mm");
         timeSlot.setText(text);
     }
-
-
 
     //setup button
     private void setButton(TimingsViewHolder viewHolder, TimingsData timingsData) {
@@ -96,15 +84,16 @@ public class TimingsAdapter extends RecyclerView.Adapter<TimingsAdapter.TimingsV
         //if not available for booking
         if (!enabled) {
             Log.i(TAG, "setButton: " + timingsData.getTime());
-            bookButton.setBackgroundColor(Color.GRAY);
+            bookButton.setBackgroundColor(bookButton.getContext().getResources().getColor(R.color.colorPrimary));
             bookButton.setEnabled(enabled);
-
+        }
+        else {
+            bookButton.setBackgroundColor(bookButton.getContext().getResources().getColor(R.color.colorPrimaryDark));
         }
         bookButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Intent intent = new Intent(bookButton.getContext(), ProfMessage.class);
+                Intent intent = new Intent(bookButton.getContext(), ConfirmBooking.class);
                 intent.putExtra(NAME, timingsData.getName());
                 intent.putExtra(TIME, timingsData.getTime().toString());
                 Log.i(TAG, "onClick: " + timingsData.getTime().toString());

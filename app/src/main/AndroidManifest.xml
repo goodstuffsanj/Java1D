@@ -90,7 +90,7 @@
             android:screenOrientation="portrait"
             android:parentActivityName=".Prof"></activity>
         <activity
-            android:name=".ProfMessage"
+            android:name=".ConfirmBooking"
             android:screenOrientation="portrait"
             android:parentActivityName=".BookTimings"></activity>
     </application>

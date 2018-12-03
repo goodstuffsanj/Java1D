@@ -97,7 +97,6 @@ public class BookTimings extends AppCompatActivity{
     private Boolean getAvailability(LocalDateTime timingGiven) {
         for (int i = 0; i < blockedTimings.size(); i ++) {
             if (timingGiven.toString().equals(blockedTimings.get(i))) {
-                Log.i(TAG, "getAvailability: " + timingGiven.toString() + " " + blockedTimings.get(i));
                 return false;
             }
         }

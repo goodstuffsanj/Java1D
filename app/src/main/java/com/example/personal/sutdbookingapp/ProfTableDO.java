@@ -21,10 +21,8 @@ public class ProfTableDO {
     private String _profDescription;
     private String _profEmail;
     private String _profImage;
-    private List<String> _profMessage;
     private String _profOffice;
     private String _profPassword;
-    private List<String> _profPending;
     private String _profPillar;
 
     @DynamoDBHashKey(attributeName = "ProfName")
@@ -84,14 +82,6 @@ public class ProfTableDO {
     public void setProfImage(final String _profImage) {
         this._profImage = _profImage;
     }
-    @DynamoDBAttribute(attributeName = "ProfMessage")
-    public List<String> getProfMessage() {
-        return _profMessage;
-    }
-
-    public void setProfMessage(final List<String> _profMessage) {
-        this._profMessage = _profMessage;
-    }
     @DynamoDBAttribute(attributeName = "ProfOffice")
     public String getProfOffice() {
         return _profOffice;
@@ -107,14 +97,6 @@ public class ProfTableDO {
 
     public void setProfPassword(final String _profPassword) {
         this._profPassword = _profPassword;
-    }
-    @DynamoDBAttribute(attributeName = "ProfPending")
-    public List<String> getProfPending() {
-        return _profPending;
-    }
-
-    public void setProfPending(final List<String> _profPending) {
-        this._profPending = _profPending;
     }
     @DynamoDBIndexHashKey(attributeName = "ProfPillar", globalSecondaryIndexName = "ProfPillar")
     public String getProfPillar() {
