@@ -1,19 +1,23 @@
 package com.example.personal.sutdbookingapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import org.joda.time.LocalDateTime;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 //Recycler view for timings_list
 public class TimingsAdapter extends RecyclerView.Adapter<TimingsAdapter.TimingsViewHolder> {
@@ -22,6 +26,10 @@ public class TimingsAdapter extends RecyclerView.Adapter<TimingsAdapter.TimingsV
 
     private ArrayList<TimingsData> timeDataList;
     private Context context;
+    private List<String> blockedTimings;
+    public final static String NAME = "NAME";
+    public final static String TIME = "TIME";
+    public final static String IS_PROF = "IS_PROF";
 
     public TimingsAdapter (Context context, ArrayList<TimingsData> timeDataList) {
         this.timeDataList = timeDataList;
@@ -55,13 +63,19 @@ public class TimingsAdapter extends RecyclerView.Adapter<TimingsAdapter.TimingsV
     @Override
     public void onBindViewHolder(TimingsAdapter.TimingsViewHolder holder, int position) {
         TimingsData timingsData = timeDataList.get(position);
-
-        holder.time.setText(timingsData.getTime());
+        setTiming(holder, timingsData);
         setButton(holder, timingsData);
 
 
     }
 
+    private void setTiming(TimingsViewHolder viewHolder, TimingsData timingsData) {
+        TextView timeSlot = viewHolder.time;
+        LocalDateTime time = timingsData.getTime();
+        LocalDateTime time1 = new LocalDateTime(timingsData.getTime().getYear(), timingsData.getTime().getMonthOfYear(), timingsData.getTime().getDayOfMonth(), timingsData.getTime().getHourOfDay(), timingsData.getTime().getMinuteOfHour());
+        String text = time.toString("HH:mm - ") + time1.toString("HH:mm");
+        timeSlot.setText(text);
+    }
 
     //setup button
     private void setButton(TimingsViewHolder viewHolder, TimingsData timingsData) {
@@ -69,15 +83,22 @@ public class TimingsAdapter extends RecyclerView.Adapter<TimingsAdapter.TimingsV
         Boolean enabled = timingsData.getAvailability();
         //if not available for booking
         if (!enabled) {
-            bookButton.setBackgroundColor(Color.GRAY);
+            Log.i(TAG, "setButton: " + timingsData.getTime());
+            bookButton.setBackgroundColor(bookButton.getContext().getResources().getColor(R.color.colorPrimary));
             bookButton.setEnabled(enabled);
-
+        }
+        else {
+            bookButton.setBackgroundColor(bookButton.getContext().getResources().getColor(R.color.colorPrimaryDark));
         }
         bookButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String info = timingsData.getDate()+ " "  + timingsData.getProf_facil() + " " + timingsData.getTime();
-                Toast.makeText(context, "pending request for: " + info, Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(bookButton.getContext(), ConfirmBooking.class);
+                intent.putExtra(NAME, timingsData.getName());
+                intent.putExtra(TIME, timingsData.getTime().toString());
+                Log.i(TAG, "onClick: " + timingsData.getTime().toString());
+                intent.putExtra(IS_PROF, true);
+                context.startActivity(intent);
             }
         });
 

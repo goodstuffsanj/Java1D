@@ -89,6 +89,10 @@
         <activity android:name=".Calendar"
             android:screenOrientation="portrait"
             android:parentActivityName=".Prof"></activity>
+        <activity
+            android:name=".ConfirmBooking"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".BookTimings"></activity>
     </application>
 
 </manifest>

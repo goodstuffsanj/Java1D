@@ -1,6 +1,8 @@
 package com.example.personal.sutdbookingapp;
 
 import android.content.Context;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 
 import com.amazonaws.auth.AWSCredentialsProvider;
@@ -8,8 +10,20 @@ import com.amazonaws.mobile.client.AWSMobileClient;
 import com.amazonaws.mobile.config.AWSConfiguration;
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBMapper;
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBQueryExpression;
+import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBScanExpression;
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.PaginatedList;
+import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.PaginatedScanList;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
+import com.amazonaws.services.dynamodbv2.model.AttributeValue;
+import com.amazonaws.services.dynamodbv2.model.ComparisonOperator;
+import com.amazonaws.services.dynamodbv2.model.Condition;
+import com.amazonaws.services.dynamodbv2.model.ScanRequest;
+import com.amazonaws.services.dynamodbv2.model.ScanResult;
+import com.google.gson.Gson;
+
+import java.util.List;
+import java.util.Map;
+
 
 public class Database {
     static DynamoDBMapper dynamoDBMapper;
@@ -67,6 +81,8 @@ public class Database {
         return dataHandler;
     }
 
+    public static DataHandlerAll getDataHandlerAll (DataHandlerAll dataHandlerAll) {return dataHandlerAll;}
+
     public static abstract class QueryHandler {
         abstract <T extends Object> void postQuery(PaginatedList<T> result);
 
@@ -98,6 +114,45 @@ public class Database {
                 }
             }).start();
         }
+
+        //for no sort key
+        public <T extends Object> void getData(Class<T> dbClass, Object hashKey) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    T result = dynamoDBMapper.load(dbClass, hashKey);
+                    postReceivedData(result);
+                }
+            }).start();
+        }
     }
 
+    //class that handles getting all table items
+    public static abstract class DataHandlerAll {
+        abstract <T extends Object> void postQueryAll(PaginatedList<T> result);
+
+        //how to present results e.g. on TextView
+        abstract void showOnUI(Handler handler);
+
+        //gets all table items
+        public <T extends Object> void getAll(Class<T> dbClass) {
+            new Thread(new Runnable() {
+
+                //to update UI
+                Handler mHandler = new Handler(Looper.getMainLooper());
+
+                @Override
+                public void run() {
+                    PaginatedScanList<T> result = dynamoDBMapper.scan(dbClass, new DynamoDBScanExpression());
+                    postQueryAll(result);
+                    showOnUI(mHandler);
+                }
+            }).start();
+        }
+    }
+
+
 }
+
+
+

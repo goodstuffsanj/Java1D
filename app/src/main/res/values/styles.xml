@@ -37,6 +37,4 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">fill_parent</item>
     </style>
-
-
 </resources>

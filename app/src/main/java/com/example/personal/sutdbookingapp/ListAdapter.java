@@ -25,10 +25,13 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
     private ArrayList<Bookable> bookables = new ArrayList<>();
     private ArrayList<Bookable> copies = new ArrayList<>();
     private Context context;
-    public final static String FACIL_ID = "FACIL_ID";
-    public final static String PROF_ID = "PROF_ID";
+    public final static String NAME = "NAME";
     public final static String IMAGE = "IMAGE";
-    private final static String DESCRIPTION = "DESCRIPTION";
+    public final static String LOCATION = "LOCATION";
+    public final static String EMAIL = "EMAIL";
+    public final static String CONTACT ="CONTACT";
+    public final static String DESCRIPTION = "DESCRIPTION";
+    public final static String BLOCKED_TIMINGS = "BLOCKED_TIMINGS";
 
     public ListAdapter(ArrayList<Bookable> bookables, Context context) {
         this.bookables = bookables;
@@ -57,16 +60,18 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
                 Log.d(TAG, "onclick: clicked on: "+ bookable.getName());
                 if (context.getClass()==BookFacilities.class) {
                     Intent intent = new Intent(context, Facility.class);
-                    intent.putExtra(FACIL_ID, bookable.getName());
-                    intent.putExtra(IMAGE, bookable.getImage());
-                    intent.putExtra(DESCRIPTION, bookable.getDescription());
+                    intent.putExtra(NAME, bookable.getName());
                     context.startActivity(intent);
                 }
                 else if (context.getClass()==BookProf.class) {
                     Intent intent = new Intent(context, Prof.class);
-                    intent.putExtra(PROF_ID, bookable.getName());
+                    intent.putExtra(NAME, bookable.getName());
                     intent.putExtra(IMAGE, bookable.getImage());
+                    intent.putExtra(LOCATION, bookable.getLocation());
+                    intent.putExtra(EMAIL, bookable.getEmail());
+                    intent.putExtra(CONTACT, bookable.getContact());
                     intent.putExtra(DESCRIPTION, bookable.getDescription());
+                    intent.putExtra(BLOCKED_TIMINGS, (ArrayList) bookable.getBlockedTimings());
                     context.startActivity(intent);
                 }
             }

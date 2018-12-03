@@ -1,28 +1,51 @@
 package com.example.personal.sutdbookingapp;
 
+import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.inputmethod.EditorInfo;
 
+import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.PaginatedList;
+
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.List;
 
 public class BookProf extends AppCompatActivity {
 
     private static final String TAG = "BookProf";
     private ArrayList<Bookable> profs = new ArrayList<>();
     private ListAdapter listAdapter;
+    private String name;
+    private String image;
+    private String location;
+    private String email;
+    private String contact;
+    private List<String> blockedTimings;
+    private String desc;
+    private String calendar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_prof);
-        initImage();
+        getData();
+
     }
 
     @Override
@@ -37,22 +60,61 @@ public class BookProf extends AppCompatActivity {
         overridePendingTransition(0, 0);
     }
 
-    private void initImage() {
-        for (int i=0; i<300; i++) {
-            Bookable prof = new Bookable();
-            prof.setName("Professor "+i);
-            prof.setImage("https://www.biography.com/.image/t_share/MTE5NDg0MDU0OTU2OTAxOTAz/albert-einstein-9285408-1-402.jpg");
-            prof.setDescription("I am a passionate professor. I studied x in university XYZ and I have been doing research about Y for K years.");
-            profs.add(prof);
-        }
-        initRecyclerView();
+
+    //get list of profs to show
+    private void getData() {
+        Database b = new Database(BookProf.this);
+        b.getDataHandlerAll(new Database.DataHandlerAll() {
+            @Override
+            <T> void postQueryAll(PaginatedList<T> result) {
+                for (int i = 0; i < result.size(); i ++) {
+                    ProfTableDO prof = (ProfTableDO) result.get(i);
+                    name = prof.getProfName();
+                    image = prof.getProfImage();
+                    location = prof.getProfOffice();
+                    email = prof.getProfEmail();
+                    contact = prof.getProfContact();
+                    desc = prof.getProfDescription();
+                    blockedTimings = prof.getProfBlockedTimings();
+
+                    Bookable profInfo = new Bookable();
+                    profInfo.setName(name);
+                    profInfo.setImage(image);
+                    profInfo.setLocation(location);
+                    profInfo.setEmail(email);
+                    profInfo.setContact(contact);
+                    profInfo.setDescription(desc);
+                    profInfo.setBlockedTimings(blockedTimings);
+                    profs.add(profInfo);
+                    Log.i(TAG, "postQueryAll: done");
+                    Log.i(TAG, "postQueryAll: " + profs.size());
+                }
+            }
+
+            @Override
+            void showOnUI(Handler handler) {
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        initRecyclerView();
+                    }
+                });
+            }
+        }).getAll(ProfTableDO.class);
     }
 
-    private void initRecyclerView() {
+    public void initRecyclerView() {
         RecyclerView recyclerView= findViewById(R.id.recycler_view);
+        Collections.sort(profs, new Comparator<Bookable>() {
+            @Override
+            public int compare(Bookable o1, Bookable o2) {
+                return o1.getName().compareTo(o2.getName());
+            }
+        });
         listAdapter = new ListAdapter(profs, this);
         recyclerView.setAdapter(listAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        Log.i(TAG, "initRecyclerView: " + profs.size());
     }
 
     @Override

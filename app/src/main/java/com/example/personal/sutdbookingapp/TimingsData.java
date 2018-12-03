@@ -4,11 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import org.joda.time.LocalDateTime;
+
 
 //get available timings_list for booking
 public class TimingsData {
-    private String time;
-    private String prof_facil;
+    private LocalDateTime time;
+    private String name;
     private Boolean availability;
 
 //    public TimingsData(String time, Boolean available) {
@@ -16,30 +18,31 @@ public class TimingsData {
 //        this.availability = available;
 //    }
 
-    private String date;
-
-    public String getProf_facil() {
-        return prof_facil;
+    public String getName() {
+        return name;
     }
 
-    public String getDate() {
-        return date;
-    }
-
-   public String getTime() {
+    public LocalDateTime getTime() {
        return time;
-   }
+    }
 
-   public boolean getAvailability() {
+    public boolean getAvailability() {
         return availability;
    }
 
-   public void setTime(String time) {
-        this.time = time;
+    public TimingsData setName(String name) {
+        this.name = name;
+        return this;
     }
 
-    public void setAvailability(Boolean availability) {
+    public TimingsData setTime(LocalDateTime time) {
+        this.time = time;
+        return this;
+    }
+
+    public TimingsData setAvailability(Boolean availability) {
         this.availability = availability;
+        return this;
     }
 
 

@@ -15,8 +15,8 @@ import java.util.Set;
 
 public class BookingInstanceTableDO {
     private String _bookingID;
-    private String _date;
-    private String _profID;
+    private String _message;
+    private String _name;
     private String _status;
     private String _studentID;
     private String _timing;
@@ -30,21 +30,21 @@ public class BookingInstanceTableDO {
     public void setBookingID(final String _bookingID) {
         this._bookingID = _bookingID;
     }
-    @DynamoDBAttribute(attributeName = "Date")
-    public String getDate() {
-        return _date;
+    @DynamoDBAttribute(attributeName = "Message")
+    public String getMessage() {
+        return _message;
     }
 
-    public void setDate(final String _date) {
-        this._date = _date;
+    public void setMessage(final String _message) {
+        this._message = _message;
     }
-    @DynamoDBAttribute(attributeName = "ProfID")
-    public String getProfID() {
-        return _profID;
+    @DynamoDBAttribute(attributeName = "Name")
+    public String getName() {
+        return _name;
     }
 
-    public void setProfID(final String _profID) {
-        this._profID = _profID;
+    public void setName(final String _name) {
+        this._name = _name;
     }
     @DynamoDBAttribute(attributeName = "Status")
     public String getStatus() {
@@ -54,7 +54,7 @@ public class BookingInstanceTableDO {
     public void setStatus(final String _status) {
         this._status = _status;
     }
-    @DynamoDBAttribute(attributeName = "studentID")
+    @DynamoDBAttribute(attributeName = "StudentID")
     public String getStudentID() {
         return _studentID;
     }
@@ -62,7 +62,7 @@ public class BookingInstanceTableDO {
     public void setStudentID(final String _studentID) {
         this._studentID = _studentID;
     }
-    @DynamoDBAttribute(attributeName = "timing")
+    @DynamoDBAttribute(attributeName = "Timing")
     public String getTiming() {
         return _timing;
     }
