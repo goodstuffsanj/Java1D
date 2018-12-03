@@ -52,51 +52,54 @@ public class HomePage extends AppCompatActivity {
         drawerLayout.addDrawerListener(mToggle);
         mToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-// ************ database query ************ //
+
+        // ***************************************************** database query
         Database test = new Database(HomePage.this);
         StudentTableDO studentTableDO = new StudentTableDO();
+        StudentTableDO studentTableDO1 = new StudentTableDO();
 
         studentTableDO.setUserId("222");
         studentTableDO.setName("best student");
         studentTableDO.setPassword("2333666");
 
-        // Create Data
+        // ***************************************************** Create Data
         Log.i(TAG,"item is creating");
         test.create(studentTableDO);
         Log.i(TAG,"item is creating!!! yay!!!!!!!!!");
 
-        // Update Data
-        test.update(studentTableDO);
+        // ***************************************************** Update Data
+//        test.update(studentTableDO);
 
         /*james.setName("James Andrew Pohadi");
         james.setUserId("1002899");
         james.setPassword("secret");
         b.update(james); */
 
-        // Delete Data
+        // ***************************************************** Delete Data
 
-        studentTableDO.setUserId("1002899");
-        studentTableDO.setPassword("secret");
-        test.delete(studentTableDO);
+//        studentTableDO1.setUserId("ss");
+//        studentTableDO1.setPassword("ss");
+//        test.delete(studentTableDO1);
 
-        // Query Data -> check Logcat Yesss
+         //Query Data -> check Logcat Yesss
         // index
-
-//        test.getQueryHandler(new Database.QueryHandler(){
-//            @Override
-//            <T> void postQuery(PaginatedList<T> result) {
-//                Log.d("Yesss",result.toString());
-//            }
-//        }).getQuery(ProfTableDO.class,"ProfID",profTableDO);
+        test.getQueryHandler(new Database.QueryHandler(){
+            @Override
+            <T> void postQuery(PaginatedList<T> result) {
+                Log.i(TAG,"this is the result" + result.toString());
+            }
+        }).getQuery(StudentTableDO.class,"Names",studentTableDO);
 //
-//        // Get Data -> check Logcat dataReceived
-//        // hash key
-//        test.getDataHandler(new Database.DataHandler() {
-//            @Override
-//            <T> void postReceivedData(T result) {
-//                Log.d("dataReceived",result.toString());
-//            }
-//        }).getData(ProfTableDO.class,"222","2333666");
+        // Get Data -> check Logcat dataReceived
+        // hash key
+        test.getDataHandler(new Database.DataHandler() {
+            @Override
+            <T> void postReceivedData(T result) {
+                Log.i("DB_dataReceived: ",result.toString());
+            }
+        }).getData(StudentTableDO.class,"222","2333666");
+
+//////////////////////////////////////////////////////////////////////////////////
 
         Calendar calendar = Calendar.getInstance();
         calendar.set(2018,10,28);

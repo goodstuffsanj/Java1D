@@ -74,6 +74,7 @@ public class Database {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
+                    Log.i("DB", "query is calling");
                     DynamoDBQueryExpression<T> queryExpression = new DynamoDBQueryExpression<>();
                     queryExpression.setHashKeyValues(o);
                     queryExpression.setIndexName(index);
