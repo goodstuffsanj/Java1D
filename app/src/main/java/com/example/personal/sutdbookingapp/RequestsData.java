@@ -1,6 +1,7 @@
 package com.example.personal.sutdbookingapp;
 
-import java.util.Date;
+
+import org.joda.time.LocalDateTime;
 
 /**
  * Created by sanjayshankar on 24/11/18.
@@ -9,36 +10,50 @@ import java.util.Date;
 public class RequestsData {
 
     private String senderName;
-    private String date;
+    private LocalDateTime time;
     private String reason;
-
-    public void setSenderName(String senderName) {
-        this.senderName = senderName;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public void setReason(String reason) {
-        this.reason = reason;
-    }
+    private String bookingID;
 
     public String getSenderName() {
         return senderName;
     }
 
-    public String getDate() {
-        return date;
+    public RequestsData setSenderName(String senderName) {
+        this.senderName = senderName;
+        return this;
+    }
+
+    public LocalDateTime getTime() {
+        return time;
+    }
+
+    public RequestsData setTime(LocalDateTime time) {
+        this.time = time;
+        return this;
     }
 
     public String getReason() {
         return reason;
     }
 
-    RequestsData(String senderName, String date, String reason) {
+    public RequestsData setReason(String reason) {
+        this.reason = reason;
+        return this;
+    }
+
+    public String getBookingID() {
+        return bookingID;
+    }
+
+    public RequestsData setBookingID(String bookingID) {
+        this.bookingID = bookingID;
+        return this;
+    }
+
+    RequestsData(String bookingID, String senderName, LocalDateTime time, String reason) {
+        this.bookingID = bookingID;
         this.senderName = senderName;
-        this.date = date;
+        this.time = time;
         this.reason = reason;
     }
 

@@ -66,9 +66,9 @@ public class HomePage extends AppCompatActivity {
 
         // Create Data
 
-        james.setName("James Andrew Pohadi");
-        james.setUserId("1002899");
-        james.setPassword("secret");
+        james.setStudentName("James Andrew Pohadi");
+        james.setStudentID("1002899");
+        james.setStudentPassword("secret");
         b.create(james);
 
 

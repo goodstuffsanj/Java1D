@@ -83,7 +83,6 @@ public class TimingsAdapter extends RecyclerView.Adapter<TimingsAdapter.TimingsV
         Boolean enabled = timingsData.getAvailability();
         //if not available for booking
         if (!enabled) {
-            Log.i(TAG, "setButton: " + timingsData.getTime());
             bookButton.setBackgroundColor(bookButton.getContext().getResources().getColor(R.color.colorPrimary));
             bookButton.setEnabled(enabled);
         }
@@ -96,7 +95,6 @@ public class TimingsAdapter extends RecyclerView.Adapter<TimingsAdapter.TimingsV
                 Intent intent = new Intent(bookButton.getContext(), ConfirmBooking.class);
                 intent.putExtra(NAME, timingsData.getName());
                 intent.putExtra(TIME, timingsData.getTime().toString());
-                Log.i(TAG, "onClick: " + timingsData.getTime().toString());
                 intent.putExtra(IS_PROF, true);
                 context.startActivity(intent);
             }

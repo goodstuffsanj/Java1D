@@ -46,7 +46,6 @@ public class Prof extends AppCompatActivity {
     private String contact;
     private ArrayList<String> blockedTimings;
     private String desc;
-    private String calendar;
     CircleImageView imageProf;
     TextView textViewProfName;
     TextView textViewLocation;
@@ -114,6 +113,7 @@ public class Prof extends AppCompatActivity {
             private OnSelectDateListener listener = new OnSelectDateListener() {
                 @Override
                 public void onSelect(List<Calendar> calendars) {
+                    Toast.makeText(book.getContext(), calendars.get(0).getTime().toString(), Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(book.getContext(), BookTimings.class);
                     intent.putExtra(DATE_PICKED, calendars.get(0).getTime ());
                     intent.putExtra ( TIME, calendars.get ( 0 ).getTimeInMillis () );

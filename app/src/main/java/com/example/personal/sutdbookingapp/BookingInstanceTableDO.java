@@ -18,7 +18,7 @@ public class BookingInstanceTableDO {
     private String _message;
     private String _name;
     private String _status;
-    private String _studentID;
+    private String _studentName;
     private String _timing;
 
     @DynamoDBHashKey(attributeName = "BookingID")
@@ -54,13 +54,13 @@ public class BookingInstanceTableDO {
     public void setStatus(final String _status) {
         this._status = _status;
     }
-    @DynamoDBAttribute(attributeName = "StudentID")
-    public String getStudentID() {
-        return _studentID;
+    @DynamoDBAttribute(attributeName = "StudentName")
+    public String getStudentName() {
+        return _studentName;
     }
 
-    public void setStudentID(final String _studentID) {
-        this._studentID = _studentID;
+    public void setStudentName(final String _studentName) {
+        this._studentName = _studentName;
     }
     @DynamoDBAttribute(attributeName = "Timing")
     public String getTiming() {

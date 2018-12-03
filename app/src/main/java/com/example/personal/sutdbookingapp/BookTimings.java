@@ -21,6 +21,8 @@ import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBMapper;
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.PaginatedList;
 
 import java.text.SimpleDateFormat;
+
+import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDateTime;
 
 import java.util.ArrayList;
@@ -56,27 +58,6 @@ public class BookTimings extends AppCompatActivity{
             time = (Long) intent.getSerializableExtra ( Prof.TIME );
             name = intent.getStringExtra(Prof.NAME);
             blockedTimings = intent.getStringArrayListExtra(Prof.BLOCKED_TIMINGS);
-            ContentResolver cr = BookTimings.this.getContentResolver ( );
-            ContentValues cv = new ContentValues ( );
-            cv.put ( CalendarContract.Events.TITLE, "Booking With "  + name);
-            cv.put ( CalendarContract.Events.DESCRIPTION, "getDescription" );
-            cv.put ( CalendarContract.Events.EVENT_LOCATION, "getLocation" );
-            cv.put ( CalendarContract.Events.DTSTART, Calendar.getInstance ().getTimeInMillis ());
-            cv.put ( CalendarContract.Events.DTEND,  Calendar.getInstance ().getTimeInMillis ());
-            cv.put ( CalendarContract.Events.CALENDAR_ID, 1 );
-            cv.put ( CalendarContract.Events.EVENT_TIMEZONE, "Singapore" );
-            if (ActivityCompat.checkSelfPermission ( BookTimings.this, Manifest.permission.WRITE_CALENDAR ) != PackageManager.PERMISSION_GRANTED) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
-                return;
-            }
-            Uri uri = cr.insert ( CalendarContract.Events.CONTENT_URI, cv );
-            Toast.makeText ( this,String.valueOf ( time ), Toast.LENGTH_SHORT ).show ();
         }
         else{
             //set up facil
@@ -84,8 +65,8 @@ public class BookTimings extends AppCompatActivity{
         }
 
         //convert Date to joda-date
-        datePicked = new LocalDateTime(date);
-        dateInfo = findViewById(R.id.date);
+        datePicked = new LocalDateTime(date, DateTimeZone.forID("+08:00"));
+        dateInfo = findViewById(R.id.time);
         dateInfo.setText(datePicked.toString("E dd MMM yyyy"));
         setTitle(getName());
         initTimings();

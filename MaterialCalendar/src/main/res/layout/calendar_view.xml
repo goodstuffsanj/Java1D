@@ -6,7 +6,7 @@
     android:background="@android:color/white"
     android:orientation="vertical">
 
-    <!-- date toolbar -->
+    <!-- time toolbar -->
     <android.support.constraint.ConstraintLayout
         android:id="@+id/calendarHeader"
         android:layout_width="match_parent"
