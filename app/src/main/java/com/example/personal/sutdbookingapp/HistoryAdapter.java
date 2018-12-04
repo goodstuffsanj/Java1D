@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import org.joda.time.LocalDateTime;
+
 import java.util.ArrayList;
 
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder>{
@@ -57,6 +59,9 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
         HistoryData historyData = historylist.get(position);
 
         holder.bookingTime.setText(historyData.getTime());
+        LocalDateTime startTime = new LocalDateTime(historyData.getTime());
+        String timeSlot = startTime.toString("E, d MMM yyyy, h:mm a - ") + startTime.plusMinutes(30).toString("h:mm a");
+        holder.bookingTime.setText(timeSlot);
         holder.bookingStatus.setText(historyData.getStatus());
         holder.bookingHistory.setText(historyData.getBookingHistory());
 

@@ -105,6 +105,11 @@ public class HomePage extends AppCompatActivity {
         james.setStudentPassword("secret");
         b.create(james);
 
+        //test student account:
+//        StudentID: 11111111
+//        StudentName = test
+//        StudentPassword = xyz
+
 
         //creating database for prof
 //        ArrayList<String> blockedTimings = new ArrayList<>();

@@ -20,12 +20,14 @@ import android.view.ViewGroup;
 public class Upcoming extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String TIME = "TIME";
+    private static final String STATUS = "STATUS";
+    private static final String IS_PROF = "IS_PROF";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private String mTime;
+    private String mStatus;
+    private Boolean mIsProf;
 
     private OnFragmentInteractionListener mListener;
 
@@ -37,16 +39,18 @@ public class Upcoming extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
+     * @param timing get timing of booking
+     * @param status get status of booking
+     * @param isProf check if booking is prof (not facility)
      * @return A new instance of fragment Upcoming.
      */
     // TODO: Rename and change types and number of parameters
-    public static Upcoming newInstance(String param1, String param2) {
+    public static Upcoming newInstance(String timing, String status, Boolean isProf) {
         Upcoming fragment = new Upcoming();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putString(TIME, timing);
+        args.putString(STATUS, status);
+        args.putBoolean(IS_PROF, isProf);
         fragment.setArguments(args);
         return fragment;
     }
@@ -55,8 +59,9 @@ public class Upcoming extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            mTime = getArguments().getString(TIME);
+            mStatus = getArguments().getString(STATUS);
+            mIsProf = getArguments().getBoolean(IS_PROF);
         }
     }
 
