@@ -1,13 +1,8 @@
 package com.example.personal.sutdbookingapp;
 
-import android.app.DatePickerDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -15,18 +10,12 @@ import android.widget.Toast;
 
 import com.applandeo.materialcalendarview.CalendarView;
 import com.applandeo.materialcalendarview.DatePicker;
-import com.applandeo.materialcalendarview.EventDay;
 import com.applandeo.materialcalendarview.builders.DatePickerBuilder;
-import com.applandeo.materialcalendarview.listeners.OnDayClickListener;
 import com.applandeo.materialcalendarview.listeners.OnSelectDateListener;
 import com.bumptech.glide.Glide;
 
-import org.w3c.dom.Text;
-
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -51,7 +40,7 @@ public class Prof extends AppCompatActivity {
     TextView textViewLocation;
     TextView textViewEmail;
     TextView textViewPhone;
-    TextView description_about;
+    TextView textViewDescription;
     CalendarView calendarView;
     Button book;
 
@@ -78,7 +67,7 @@ public class Prof extends AppCompatActivity {
         textViewLocation = findViewById(R.id.description_office);
         textViewEmail = findViewById(R.id.description_email);
         textViewPhone = findViewById(R.id.description_contact);
-        description_about = findViewById(R.id.description_about);
+        textViewDescription = findViewById(R.id.description_about);
         book = findViewById(R.id.bookConsult);
 
         textViewProfName.setText(name);
@@ -86,7 +75,7 @@ public class Prof extends AppCompatActivity {
         textViewLocation.setText(location);
         textViewEmail.setText(email);
         textViewPhone.setText(contact);
-        description_about.setText(desc);
+        textViewDescription.setText(desc);
 
         Calendar yesterday = Calendar.getInstance();
         yesterday.add(DATE,-1);
@@ -116,7 +105,7 @@ public class Prof extends AppCompatActivity {
                     Toast.makeText(book.getContext(), calendars.get(0).getTime().toString(), Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(book.getContext(), BookTimings.class);
                     intent.putExtra(DATE_PICKED, calendars.get(0).getTime ());
-                    intent.putExtra ( TIME, calendars.get ( 0 ).getTimeInMillis () );
+//                    intent.putExtra ( TIME, calendars.get ( 0 ).getTimeInMillis () );
                     intent.putExtra(PROF, true);
                     intent.putExtra(NAME, name);
                     intent.putExtra(BLOCKED_TIMINGS, blockedTimings);

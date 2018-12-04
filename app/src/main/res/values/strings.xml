@@ -22,4 +22,5 @@
     <string name="time">Date: Wed 4 Dec 2018</string>
     <string name="timing">Time: 13:00-13:30</string>
     <string name="name">Professor: Ngai Man Cheung</string>
+    <string name="facility_name">Laser cutter</string>
 </resources>

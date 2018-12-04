@@ -8,9 +8,9 @@
     tools:context=".Facility">
 
     <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imageFacility"
         android:padding="10dp"
         android:layout_gravity="center"
-        android:id="@+id/imageFacility"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:src="@mipmap/ic_launcher"/>
@@ -20,22 +20,37 @@
         android:id="@+id/textViewFacilityName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginRight="8dp"
-        android:text="@string/prof_name"
+        android:text="@string/facility_name"
         android:textAllCaps="true"
         android:textSize="18sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/facil_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/prof_office"
+        android:layout_gravity="center" />
+
+
+    <TextView
+        android:id="@+id/description_about"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="italic"
+        android:padding="15dp"
+        android:text="XXX, useful for A, use me carefully. I am very dangerous."
+        android:layout_gravity="center" />
 
     <Button
         android:id="@+id/buttonBookFacility"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_marginBottom="135dp"
+        android:text="@string/book_this_facility"
         android:layout_gravity="center"
-        android:text="@string/book_this_facility"/>
+        android:background="@color/colorPrimaryDark"/>
 
 
 </LinearLayout>

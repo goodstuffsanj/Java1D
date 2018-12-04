@@ -12,6 +12,7 @@ public class TimingsData {
     private LocalDateTime time;
     private String name;
     private Boolean availability;
+    private Boolean isProf;
 
 //    public TimingsData(String time, Boolean available) {
 //        this.time = time;
@@ -30,6 +31,10 @@ public class TimingsData {
         return availability;
    }
 
+    public Boolean getIsProf() {
+        return isProf;
+    }
+
     public TimingsData setName(String name) {
         this.name = name;
         return this;
@@ -45,5 +50,9 @@ public class TimingsData {
         return this;
     }
 
+    public TimingsData setIsProf(Boolean prof) {
+        isProf = prof;
+        return this;
+    }
 
 }

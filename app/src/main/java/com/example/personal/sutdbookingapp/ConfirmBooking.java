@@ -63,7 +63,7 @@ public class ConfirmBooking extends AppCompatActivity {
                     //create dialog to confirm on show
                     AlertDialog.Builder builder = new AlertDialog.Builder(ConfirmBooking.this, R.style.Theme_AppCompat_Light_Dialog);
 
-                    String text = "Confirm booking for "
+                    String text = "Confirm booking at "
                             + time.toString("d MMM yyyy '('E')'")
                             + " at "
                             + time.toString("h:mm a")
@@ -120,6 +120,69 @@ public class ConfirmBooking extends AppCompatActivity {
                             .show();
 
                 }
+
+                else {
+                    //create dialog to confirm on show
+                    AlertDialog.Builder builder = new AlertDialog.Builder(ConfirmBooking.this, R.style.Theme_AppCompat_Light_Dialog);
+
+                    String text = "Confirm booking at "
+                            + time.toString("d MMM yyyy '('E')'")
+                            + " at "
+                            + time.toString("h:mm a")
+                            + " for "
+                            + name
+                            + "?";
+                    builder.setTitle("Confirm")
+                            .setMessage(text)
+                            .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    //
+                                    dialog.cancel();
+                                }
+                            })
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    //update database
+                                    Database b = new Database(ConfirmBooking.this);
+
+                                    //update profTableDO database
+                                    b.getDataHandler(new Database.DataHandler() {
+                                        @Override
+                                        <T> void postReceivedData(T result) {
+                                            FacilityTableDO facility = (FacilityTableDO) result;
+                                            blockedTimings = facility.getFacilityBlockedTimings();
+                                            blockedTimings.add(time.toString());
+                                            facility.setFacilityBlockedTimings(blockedTimings);
+                                            Log.i("Database", "Update FacilityTableDO: done");
+                                            b.update(facility);
+                                        }
+                                    }).getData(FacilityTableDO.class, name);
+
+                                    //add to bookingInstanceDO database
+                                    BookingInstanceTableDO bookingInstance = new BookingInstanceTableDO();
+                                    bookingInstance.setBookingID(UUID.randomUUID().toString());
+                                    bookingInstance.setName(name);
+                                    bookingInstance.setTiming(time.toString());
+                                    bookingInstance.setStudentName("John Smith");
+                                    bookingInstance.setStatus("Pending");
+                                    Log.i("Database", "Add to BookingInstanceDO: done");
+                                    b.create(bookingInstance);
+
+                                    Toast.makeText(ConfirmBooking.this, "Confirmed booking", Toast.LENGTH_LONG).show();
+
+                                    Intent intent = new Intent(ConfirmBooking.this, HomePage.class);
+                                    startActivity(intent);
+
+                                }
+                            })
+                            .create()
+                            .show();
+
+                }
+
+
 
             }
         });
