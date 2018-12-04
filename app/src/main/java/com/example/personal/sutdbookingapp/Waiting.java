@@ -4,9 +4,13 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import java.util.ArrayList;
 
 
 /**
@@ -26,6 +30,7 @@ public class Waiting extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private ArrayList<BookingInstance> waitings = new ArrayList<>();
 
     private OnFragmentInteractionListener mListener;
 
@@ -64,7 +69,17 @@ public class Waiting extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_waiting, container, false);
+
+        View rootView = inflater.inflate(R.layout.fragment_waiting, container, false);
+        for (int i=0; i<20; i++) {
+            BookingInstance bookingInstance = new BookingInstance("120839201","Professor "+Integer.toString(i+1),"12/11/2018","08:30","09:30","Building 1 lvl 5","https://www.biography.com/.image/t_share/MTE5NDg0MDU0OTU2OTAxOTAz/albert-einstein-9285408-1-402.jpg");
+            waitings.add(bookingInstance);
+        }
+        RecyclerView recyclerView = rootView.findViewById(R.id.recyclerView);
+        BookingInstanceAdapter adapter = new BookingInstanceAdapter(this.getContext(), waitings);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(Waiting.this.getContext()));
+        return  rootView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

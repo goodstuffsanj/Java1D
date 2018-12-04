@@ -53,14 +53,18 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.Reques
         holder.tick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                RequestsData.remove(position);
                 Toast.makeText(context, "request has been accepted", Toast.LENGTH_LONG).show();
+                notifyDataSetChanged();
             }
         });
 
         holder.cross.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                RequestsData.remove(position);
                 Toast.makeText(context, "request has been declined", Toast.LENGTH_LONG).show();
+                notifyDataSetChanged();
             }
         });
 
