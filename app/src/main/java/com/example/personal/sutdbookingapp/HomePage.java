@@ -3,6 +3,9 @@ package com.example.personal.sutdbookingapp;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.os.Handler;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.applandeo.materialcalendarview.CalendarUtils;
@@ -28,7 +32,10 @@ import com.applandeo.materialcalendarview.listeners.OnDayClickListener;
 import com.google.gson.Gson;
 import com.applandeo.materialcalendarview.adapters.CalendarPageAdapter;
 
+import org.joda.time.LocalDateTime;
+
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class HomePage extends AppCompatActivity {
@@ -52,6 +59,37 @@ public class HomePage extends AppCompatActivity {
         drawerLayout.addDrawerListener(mToggle);
         mToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        NavigationView navigation = findViewById(R.id.navigation);
+
+//        View header = navigation.getHeaderView(0);
+//        TextView text = header.findViewById(R.id.textView);
+//        text.setText("Welcome");
+
+        navigation.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                // set item as selected to persist highlight
+
+                menuItem.setChecked(true);
+                int id = menuItem.getItemId();
+                Log.i("Homepage", "onNavigationItemSelected: inside");
+
+                if (id == R.id.nav_bookingHistory) {
+                    Intent intent = new Intent(HomePage.this, History.class);
+                    startActivity(intent);
+
+                }
+                else if (id == R.id.nav_logout) {
+                    Intent intent = new Intent(HomePage.this, LoginPage.class);
+                    startActivity(intent);
+                }
+
+                // close drawer when item is tapped
+                drawerLayout.closeDrawers();
+                return true;
+            }
+        });
+
 
         Database b = new Database(HomePage.this);
 
@@ -62,10 +100,34 @@ public class HomePage extends AppCompatActivity {
 
         // Create Data
 
-        james.setName("James Andrew Pohadi");
-        james.setUserId("1002899");
-        james.setPassword("secret");
+        james.setStudentName("James Andrew Pohadi");
+        james.setStudentID("1002899");
+        james.setStudentPassword("secret");
         b.create(james);
+
+
+        //creating database for prof
+//        ArrayList<String> blockedTimings = new ArrayList<>();
+//        blockedTimings.add(new LocalDateTime(2018, 12, 4, 17, 0 ).toString());
+//        blockedTimings.add(new LocalDateTime(2018, 12, 5, 16, 0 ).toString());
+//
+//        for (int i = 0; i < 300; i ++) {
+//            ProfTableDO prof = new ProfTableDO();
+//            prof.setProfName("Prof " + i);
+//            prof.setProfPassword("Sutd1234");
+//            prof.setProfImage("https://www.biography.com/.image/t_share/MTE5NDg0MDU0OTU2OTAxOTAz/albert-einstein-9285408-1-402.jpg");
+//            prof.setProfOffice("Building 1 Level 5 1.502-8");
+//            prof.setProfBlockedTimings(blockedTimings);
+//            prof.setProfCalendar("infosysapi883@gmail.com");
+//            prof.setProfEmail("abc@mymail.sutd.edu.sg");
+//            prof.setProfContact("+65 69876543");
+//            prof.setProfDescription("I am a passionate professor. I studied x in university XYZ and I have been doing research about Y for K years.");
+//            prof.setProfPillar("ISTD");
+//
+//            b.create(prof);
+//        }
+
+
 
         // Update Data
 
@@ -86,18 +148,49 @@ public class HomePage extends AppCompatActivity {
         b.getQueryHandler(new Database.QueryHandler(){
             @Override
             <T> void postQuery(PaginatedList<T> result) {
-                Log.d("Yesss",result.toString());
+                //Log.d("Yesss",);
+//                Iterator<T> iter = result.iterator();
+//                while (iter.hasNext()) {
+//                    Log.i("yesss", "postQuery: " + iter);
+//                }
+
             }
-        }).getQuery(NewsDO.class,"Authors",news);
+        }).getQuery(NewsDO.class,"Authors", news);
 
         // Get Data -> check Logcat dataReceived
-        // hash key
+        // hash key (get specific entry by id)
         b.getDataHandler(new Database.DataHandler() {
             @Override
             <T> void postReceivedData(T result) {
-                Log.d("dataReceived",result.toString());
+                NewsDO a = (NewsDO) result;
+                Log.d("dataReceived",a.getContent());
+
             }
         }).getData(NewsDO.class,"123","Article1");
+
+
+        //how to get all table items
+//        String name;
+//        b.getDataHandlerAll(new Database.DataHandlerAll() {
+//            @Override
+//            <T> void postQueryAll(PaginatedList<T> result) {
+//                for (int i = 0; i < result.size(); i ++) {
+//                    ProfTableDO prof = (ProfTableDO) result.get(i);
+//                    name = prof.getProfName();
+//                }
+//            }
+//
+//            @Override
+//            void showOnUI(Handler handler) {
+//                handler.post(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        textView.setText(name);
+//                    }
+//                });
+//
+//            }
+//        }).getAll(ProfTableDO.class);
 
         Calendar calendar = Calendar.getInstance();
         calendar.set(2018,10,28);
@@ -149,6 +242,9 @@ public class HomePage extends AppCompatActivity {
         if (mToggle.onOptionsItemSelected(item)) {
             return true;
         }
+
         return super.onOptionsItemSelected(item);
+
+
     }
 }

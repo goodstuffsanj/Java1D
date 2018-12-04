@@ -15,11 +15,14 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int i) {
         switch(i) {
             case 0:
-                Upcoming waiti= new Upcoming();
-                return (Fragment) waiti;
+                Upcoming upcoming= new Upcoming();
+                return upcoming;
             case 1:
                 Waiting waiting = new Waiting();
                 return waiting;
+            case 2:
+                Completed completed = new Completed();
+                return completed;
             default:
                 return null;
         }

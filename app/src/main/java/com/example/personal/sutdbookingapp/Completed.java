@@ -22,7 +22,7 @@ import java.util.ArrayList;
  * Use the {@link Upcoming#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Upcoming extends Fragment {
+public class Completed extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -31,11 +31,11 @@ public class Upcoming extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private ArrayList<BookingInstance> upcomings = new ArrayList<>();
+    private ArrayList<BookingInstance> completeds = new ArrayList<>();
 
     private OnFragmentInteractionListener mListener;
 
-    public Upcoming() {
+    public Completed() {
         // Required empty public constructor
     }
 
@@ -72,14 +72,14 @@ public class Upcoming extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         Log.i("BookingInstance", "OnCreateView");
-        View rootView = inflater.inflate(R.layout.fragment_upcoming, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_completed, container, false);
         for (int i=0; i<20; i++) {
-            BookingInstance bookingInstance = new BookingInstance("120839201","Professor "+Integer.toString(i+1),"12/11/2018","08:30","09:30","Building 1 lvl 5","https://www.biography.com/.image/t_share/MTE5NDg0MDU0OTU2OTAxOTAz/albert-einstein-9285408-1-402.jpg","upcoming");
-            upcomings.add(bookingInstance);
+            BookingInstance bookingInstance = new BookingInstance("120839201","Professor "+Integer.toString(i+1),"12/11/2018","08:30","09:30","Building 1 lvl 5","https://www.biography.com/.image/t_share/MTE5NDg0MDU0OTU2OTAxOTAz/albert-einstein-9285408-1-402.jpg","completed");
+            completeds.add(bookingInstance);
         }
         RecyclerView recyclerView = rootView.findViewById(R.id.recyclerView);
-        BookingInstanceAdapter adapter = new BookingInstanceAdapter(this.getContext(), upcomings);
-        recyclerView.setLayoutManager(new LinearLayoutManager(Upcoming.this.getActivity()));
+        BookingInstanceAdapter adapter = new BookingInstanceAdapter(this.getContext(), completeds);
+        recyclerView.setLayoutManager(new LinearLayoutManager(Completed.this.getActivity()));
         recyclerView.setAdapter(adapter);
         return  rootView;
 

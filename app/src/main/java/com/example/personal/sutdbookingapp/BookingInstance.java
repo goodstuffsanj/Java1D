@@ -8,8 +8,9 @@ public class BookingInstance {
     private String endTime;
     private String location;
     private String imgUrl;
+    private String status;
 
-    public BookingInstance(String bookingId, String name, String date, String startTime, String endTime, String location, String imgUrl) {
+    public BookingInstance(String bookingId, String name, String date, String startTime, String endTime, String location, String imgUrl, String status) {
         this.bookingId = bookingId;
         this.name = name;
         this.date = date;
@@ -17,6 +18,7 @@ public class BookingInstance {
         this.endTime = endTime;
         this.location = location;
         this.imgUrl = imgUrl;
+        this.status = status;
     }
 
     public String getBookingId() {
@@ -45,5 +47,9 @@ public class BookingInstance {
 
     public String getImgUrl() {
         return imgUrl;
+    }
+
+    public String getStatus() {
+        return status;
     }
 }

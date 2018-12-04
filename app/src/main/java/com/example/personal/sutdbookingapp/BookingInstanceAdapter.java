@@ -1,8 +1,11 @@
 package com.example.personal.sutdbookingapp;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -24,7 +27,9 @@ public class BookingInstanceAdapter extends RecyclerView.Adapter<BookingInstance
     @NonNull
     @Override
     public BookingInstanceAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return null;
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.booking_instance, viewGroup, false);
+        ViewHolder holder = new ViewHolder(view);
+        return holder;
     }
 
     @Override
@@ -34,6 +39,22 @@ public class BookingInstanceAdapter extends RecyclerView.Adapter<BookingInstance
         viewHolder.bookingDate.setText(bookingInstance.getDate());
         viewHolder.bookingTime.setText(bookingInstance.getEndTime()+"-"+bookingInstance.getEndTime());
         viewHolder.bookingId.setText(bookingInstance.getBookingId());
+        String status = bookingInstance.getStatus();
+        switch (status) {
+            case "upcoming":
+                viewHolder.status.setText(status);
+                viewHolder.status.setTextColor(Color.parseColor("#2ca411"));
+                break;
+            case "waiting":
+                viewHolder.status.setText(status);
+                viewHolder.status.setTextColor(Color.parseColor("#ffbc3f"));
+                break;
+            case "completed":
+                viewHolder.status.setText(status);
+                viewHolder.status.setTextColor(Color.parseColor("#e81e1e"));
+                break;
+                //viewHolder.status.setTextColor(Color.parseColor("#ffbc3f"));
+        }
         Glide.with(context).load(bookingInstance.getImgUrl()).into(viewHolder.image);
     }
 
@@ -48,7 +69,7 @@ public class BookingInstanceAdapter extends RecyclerView.Adapter<BookingInstance
         TextView bookingTime;
         TextView name;
         ImageView image;
-
+        TextView status;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -57,6 +78,7 @@ public class BookingInstanceAdapter extends RecyclerView.Adapter<BookingInstance
             bookingTime = itemView.findViewById(R.id.bookingTime);
             name = itemView.findViewById(R.id.name);
             image = itemView.findViewById(R.id.image);
+            status = itemView.findViewById(R.id.status);
         }
     }
 }

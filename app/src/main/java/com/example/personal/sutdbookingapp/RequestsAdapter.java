@@ -1,7 +1,13 @@
 package com.example.personal.sutdbookingapp;
 
+import android.Manifest;
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Context;
-import android.media.Image;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.provider.CalendarContract;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,9 +18,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.lang.reflect.Array;
+import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.PaginatedList;
+
+import org.joda.time.LocalDateTime;
+
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 /**
  * Created by sanjayshankar on 24/11/18.
@@ -24,12 +34,13 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.Reques
 
     private static final String TAG = "RequestsAdapter";
 
-    //private List RequestsData;
-    private ArrayList<RequestsData> RequestsData = new ArrayList<>();
+    //private List requestsList;
+    private ArrayList<RequestsData> requestsList = new ArrayList<>();
     private Context context;
+    private String calId;
 
-    public RequestsAdapter(Context context, ArrayList<RequestsData> RequestsData) {
-        this.RequestsData = RequestsData;
+    public RequestsAdapter(Context context, ArrayList<RequestsData> requestsList) {
+        this.requestsList = requestsList;
         this.context = context;
     }
 
@@ -45,32 +56,68 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.Reques
     @Override
     public void onBindViewHolder(RequestsViewHolder holder, int position) {
         Log.i(TAG, "onBindViewHolder() is called");  //for every item that is in the list
+        String name = "Prof 0";
+        String bookingID = requestsList.get(position).getBookingID();
+        String senderName = requestsList.get(position).getSenderName();
+        LocalDateTime timing = requestsList.get(position).getTime();
+        String timeSlot = timing.toString("E, d MMM yyyy, h:mm a - ") + timing.plusMinutes(30).toString("h:mm a");
+        String message = requestsList.get(position).getReason();
+        holder.senderName.setText(senderName);
+        holder.date.setText(timeSlot);
+        holder.reason.setText(message);
 
-        holder.senderName.setText(RequestsData.get(position).getSenderName());
-        holder.date.setText(RequestsData.get(position).getDate());
-        holder.reason.setText(RequestsData.get(position).getReason());
+        Database b = new Database(context);
+        b.getDataHandler(new Database.DataHandler() {
+            @Override
+            <T> void postReceivedData(T result) {
+                ProfTableDO prof = (ProfTableDO) result;
+                calId = prof.getProfCalendar();
+            }
+        }).getData(ProfTableDO.class, name);
 
         holder.tick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                RequestsData.remove(position);
-                Toast.makeText(context, "request has been accepted", Toast.LENGTH_LONG).show();
-                notifyDataSetChanged();
+                Toast.makeText(context, "Request has been accepted", Toast.LENGTH_LONG).show();
+                ContentResolver cr = context.getContentResolver ( );
+                ContentValues cv = new ContentValues ( );
+                cv.put ( CalendarContract.Events.TITLE, "Booking With "  + senderName);
+                cv.put ( CalendarContract.Events.DESCRIPTION, "getDescription" );
+                cv.put ( CalendarContract.Events.EVENT_LOCATION, "getLocation" );
+                cv.put ( CalendarContract.Events.DTSTART, getLongAsDate(timing));
+                cv.put ( CalendarContract.Events.DTEND,  getLongAsDate(timing.plusMinutes(30)));
+                cv.put ( CalendarContract.Events.CALENDAR_ID, 1 );
+                cv.put ( CalendarContract.Events.EVENT_TIMEZONE, "Singapore" );
+                if (ActivityCompat.checkSelfPermission ( context, Manifest.permission.WRITE_CALENDAR ) != PackageManager.PERMISSION_GRANTED) {
+                    // TODO: Consider calling
+                    //    ActivityCompat#requestPermissions
+                    // here to request the missing permissions, and then overriding
+                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                    //                                          int[] grantResults)
+                    // to handle the case where the user grants the permission. See the documentation
+                    // for ActivityCompat#requestPermissions for more details.
+                    return;
+                }
+                Uri uri = cr.insert ( CalendarContract.Events.CONTENT_URI, cv );
+                Toast.makeText (context, timeSlot, Toast.LENGTH_SHORT ).show ();
+
+                Toast.makeText(context, "Request has been accepted", Toast.LENGTH_LONG).show();
             }
         });
 
         holder.cross.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                RequestsData.remove(position);
-                Toast.makeText(context, "request has been declined", Toast.LENGTH_LONG).show();
-                notifyDataSetChanged();
+                //RequestsData.remove(position);
+                //Toast.makeText(context, "request has been declined", Toast.LENGTH_LONG).show();
+                //notifyDataSetChanged();
+                Toast.makeText(context, "Request has been declined", Toast.LENGTH_LONG).show();
             }
         });
 
-//        holder.senderName.setText(RequestsData.get(position).getSenderName());
-//        holder.date.setText(RequestsData.get(position).getDate());
-//        holder.reason.setText(RequestsData.get(position).getReason());
+//        holder.senderName.setText(requestsList.get(position).getSenderName());
+//        holder.date.setText(requestsList.get(position).getTime());
+//        holder.reason.setText(requestsList.get(position).getReason());
 //
 //
 //
@@ -91,7 +138,7 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.Reques
 
     @Override
     public int getItemCount() {
-        return RequestsData.size();
+        return requestsList.size();
     }
 
     class RequestsViewHolder extends RecyclerView.ViewHolder {
@@ -114,6 +161,14 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.Reques
             date = itemView.findViewById(R.id.requestTime);
             reason = itemView.findViewById(R.id.requestReason);
         }
+    }
+
+    private long getLongAsDate(LocalDateTime date) {
+        Calendar calendar = new GregorianCalendar();
+        calendar.set(Calendar.DAY_OF_MONTH, date.getDayOfMonth());
+        calendar.set(Calendar.MONTH, date.getMonthOfYear());
+        calendar.set(Calendar.YEAR, date.getYear());
+        return calendar.getTimeInMillis();
     }
 }
 

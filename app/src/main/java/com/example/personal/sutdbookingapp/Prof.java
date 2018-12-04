@@ -3,6 +3,7 @@ package com.example.personal.sutdbookingapp;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,6 +21,9 @@ import com.applandeo.materialcalendarview.listeners.OnDayClickListener;
 import com.applandeo.materialcalendarview.listeners.OnSelectDateListener;
 import com.bumptech.glide.Glide;
 
+import org.w3c.dom.Text;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -28,15 +32,26 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import static java.util.Calendar.DATE;
-// This class is created to create a new intent to book proffesors
+// This class is created to create a new intent to book professors
 public class Prof extends AppCompatActivity {
-    public final static String PROF_ID = "PROF_ID";
-    public final static String IMAGE = "IMAGE";
-    public final static String DESCRIPTION = "DESCRIPTION";
+    public final static String NAME = "NAME";
+    public final static String BLOCKED_TIMINGS = "BLOCKED_TIMINGS";
     public final static String DATE_PICKED = "DATE_PICKED";
+    public final static String PROF = "PROF";
+    public final static String TIME = "TIME";
+    private String name;
+    private String image;
+    private String location;
+    private String email;
+    private String contact;
+    private ArrayList<String> blockedTimings;
+    private String desc;
     CircleImageView imageProf;
-    TextView description_about;
     TextView textViewProfName;
+    TextView textViewLocation;
+    TextView textViewEmail;
+    TextView textViewPhone;
+    TextView description_about;
     CalendarView calendarView;
     Button book;
 
@@ -47,19 +62,32 @@ public class Prof extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prof);
         Intent intent = getIntent();
-        String name = intent.getStringExtra(PROF_ID);
-        String image = intent.getStringExtra(IMAGE);
-        String desc = intent.getStringExtra(DESCRIPTION);
-        setTitle("BookProf");
+        name = intent.getStringExtra(ListAdapter.NAME);
+        image = intent.getStringExtra(ListAdapter.IMAGE);
+        location = intent.getStringExtra(ListAdapter.LOCATION);
+        email = intent.getStringExtra(ListAdapter.EMAIL);
+        contact = intent.getStringExtra(ListAdapter.CONTACT);
+        desc = intent.getStringExtra(ListAdapter.DESCRIPTION);
+        blockedTimings = intent.getStringArrayListExtra(ListAdapter.BLOCKED_TIMINGS);
+
+
+        setTitle("Book Consultation");
 
         imageProf = findViewById(R.id.imageProf);
+        textViewProfName = findViewById(R.id.textViewProfName);
+        textViewLocation = findViewById(R.id.description_office);
+        textViewEmail = findViewById(R.id.description_email);
+        textViewPhone = findViewById(R.id.description_contact);
         description_about = findViewById(R.id.description_about);
         book = findViewById(R.id.bookConsult);
-        textViewProfName = findViewById(R.id.textViewProfName);
 
         textViewProfName.setText(name);
         Glide.with(this).load(image).into(imageProf);
+        textViewLocation.setText(location);
+        textViewEmail.setText(email);
+        textViewPhone.setText(contact);
         description_about.setText(desc);
+
         Calendar yesterday = Calendar.getInstance();
         yesterday.add(DATE,-1);
         Calendar nextWeek = Calendar.getInstance();
@@ -80,23 +108,21 @@ public class Prof extends AppCompatActivity {
 
                 DatePicker datePicker = builder.build();
                 datePicker.show();
-
-                //String print = calendarView.getSelectedDates().get(0).getTime().toString();
-
-
-                //Log.i("calendar", "onClick: " + print);
-                //Toast.makeText(book.getContext(), print, Toast.LENGTH_SHORT).show();
             }
 
             private OnSelectDateListener listener = new OnSelectDateListener() {
                 @Override
                 public void onSelect(List<Calendar> calendars) {
-                    String print = calendars.get(0).getTime().toString();
-                    Intent intent = new Intent ( Prof.this, Calendar.class );
-                    intent.putExtra ( DATE_PICKED, print );
-                    startActivity ( intent );
+                    Toast.makeText(book.getContext(), calendars.get(0).getTime().toString(), Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(book.getContext(), BookTimings.class);
+                    intent.putExtra(DATE_PICKED, calendars.get(0).getTime ());
+                    intent.putExtra ( TIME, calendars.get ( 0 ).getTimeInMillis () );
+                    intent.putExtra(PROF, true);
+                    intent.putExtra(NAME, name);
+                    intent.putExtra(BLOCKED_TIMINGS, blockedTimings);
 
-                    Toast.makeText(book.getContext(), print, Toast.LENGTH_LONG).show();
+
+                    startActivity(intent);
                 }
             };
 

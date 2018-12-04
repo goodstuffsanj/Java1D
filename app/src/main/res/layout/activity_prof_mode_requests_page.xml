@@ -1,19 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.example.personal.sutdbookingapp.ProfModeRequestsPage">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scrollbars="vertical">
+        android:scrollbars="vertical" />
 
-    </android.support.v7.widget.RecyclerView>
+
+
+
+
+</LinearLayout>
+
+
+
+
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--xmlns:tools="http://schemas.android.com/tools"-->
+    <!--android:orientation="vertical"-->
+    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--tools:context="com.example.personal.sutdbookingapp.ProfModeRequestsPage">-->
+
+    <!--<android.support.v7.widget.RecyclerView-->
+        <!--android:id="@+id/recyclerView"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:scrollbars="vertical">-->
+
+    <!--</android.support.v7.widget.RecyclerView>-->
 
 
     <!--<TextView-->
@@ -38,9 +72,9 @@
         <!--android:scaleX="0.5"-->
         <!--android:scaleY="0.5"-->
         <!--android:src="@drawable/tick"-->
-        <!--android:background="#FFFFFF"-->
+        <!--android:background="?android:attr/selectableItemBackground"-->
         <!--/>-->
-    <!--&lt;!&ndash;later change the background to transparent&ndash;&gt;-->
+
 
     <!--<ImageButton-->
         <!--android:id="@+id/cross"-->
@@ -52,7 +86,7 @@
         <!--android:scaleY="0.5"-->
         <!--android:src="@drawable/cross"-->
         <!--android:background="#FFFFFF"/>-->
-    <!--&lt;!&ndash;later change the background to transparent&ndash;&gt;-->
+        <!--android:background="?android:attr/selectableItemBackground"-->
 
     <!--<TextView-->
         <!--android:id="@+id/requestTime1"-->
@@ -80,36 +114,6 @@
 
 
 
-</LinearLayout>
+<!--</LinearLayout>-->
 
 
-<!--<?xml version="1.0" encoding="utf-8"?>-->
-<!--<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
-    <!--xmlns:tools="http://schemas.android.com/tools"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:orientation="vertical"-->
-    <!--tools:context="com.example.personal.sutdbookingapp.ProfModeRequestsPage">-->
-
-    <!--<android.support.v7.widget.Toolbar-->
-        <!--android:id="@+id/toolbar"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:background="?attr/colorPrimary"-->
-        <!--android:minHeight="?attr/actionBarSize"-->
-        <!--android:theme="?attr/actionBarTheme"-->
-        <!--app:popupTheme="@style/ThemeOverlay.AppCompat.Light"-->
-        <!--app:theme="@style/ThemeOverlay.AppCompat.Dark" />-->
-
-    <!--<android.support.v7.widget.RecyclerView-->
-        <!--android:id="@+id/recyclerView"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:scrollbars="vertical" />-->
-
-
-    <!---->
-    <!---->
-
-<!--</android.support.constraint.ConstraintLayout>-->

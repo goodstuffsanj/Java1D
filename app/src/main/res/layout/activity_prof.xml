@@ -61,18 +61,22 @@
                 android:id="@+id/description_about"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/vegan"
+                android:textStyle="italic"
+                android:padding="15dp"
+                android:text="I am a passionate professor. I studied x in university XYZ and I have been doing research about Y for K years."
                 android:layout_gravity="center" />
 
             <Button
                 android:id="@+id/bookConsult"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:padding="10dp"
                 android:layout_marginBottom="135dp"
                 android:text="@string/book_consultation"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center"
+                android:background="@color/colorPrimaryDark"/>
         </LinearLayout>
-
+s
     </ScrollView>
 
 </android.support.constraint.ConstraintLayout>
