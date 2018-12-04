@@ -242,9 +242,13 @@ public class HomePage extends AppCompatActivity {
         overridePendingTransition(0, 0);
     }
 
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
         if (mToggle.onOptionsItemSelected(item)) {
+
             return true;
         }
 
