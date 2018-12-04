@@ -27,7 +27,8 @@
         android:scaleX="0.5"
         android:scaleY="0.5"
         android:src="@drawable/tick"
-        android:background="#FFFFFF"/>
+        android:background="?android:attr/selectableItemBackground"/>
+    <!--the background set to transparent already-->
     <!--later change the background to transparent-->
 
     <ImageButton
@@ -39,7 +40,8 @@
         android:scaleX="0.5"
         android:scaleY="0.5"
         android:src="@drawable/cross"
-        android:background="#FFFFFF"/>
+        android:background="?android:attr/selectableItemBackground"/>
+    <!--the background set to transparent already-->
     <!--later change the background to transparent-->
 
     <TextView
