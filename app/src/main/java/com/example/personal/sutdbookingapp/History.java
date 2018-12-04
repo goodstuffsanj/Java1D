@@ -29,8 +29,8 @@ public class History extends AppCompatActivity{
         for (int i=0; i<300; i++) {
             HistoryData historyItem = new HistoryData();
             historyItem.setBookingHistory("2333");
-            historyItem.setTime("10:20");
-            historyItem.setStatus("completed");
+            historyItem.setTime("2018-12-15T09:00:00.000");
+            historyItem.setStatus("Completed");
             history.add(historyItem);
         }
         initRecyclerView();
