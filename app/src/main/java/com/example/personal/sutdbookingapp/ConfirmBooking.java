@@ -46,6 +46,7 @@ public class ConfirmBooking extends AppCompatActivity {
         textViewDate = findViewById(R.id.date);
         textViewTime = findViewById(R.id.timing);
         textViewName.setText(name);
+        Log.i(TAG, "onCreate: " + time);
         textViewDate.setText(time.toString("E d MMM yyyy"));
         String timeSlot = time.toString("h:mm a - ") + time.plusMinutes(30).toString("h:mm a");
         textViewTime.setText(timeSlot);
@@ -101,9 +102,9 @@ public class ConfirmBooking extends AppCompatActivity {
                                     BookingInstanceTableDO bookingInstance = new BookingInstanceTableDO();
                                     bookingInstance.setBookingID(UUID.randomUUID().toString());
                                     bookingInstance.setName(name);
-                                    bookingInstance.setTiming(timeSlot);
+                                    bookingInstance.setTiming(time.toString());
                                     bookingInstance.setMessage(typeMessage.getText().toString());
-                                    bookingInstance.setStudentID("1001234");
+                                    bookingInstance.setStudentName("John Smith");
                                     bookingInstance.setStatus("Pending");
                                     Log.i("Database", "Add to BookingInstanceDO: done");
                                     b.create(bookingInstance);

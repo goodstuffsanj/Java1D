@@ -77,14 +77,14 @@ public class BookProf extends AppCompatActivity {
                     desc = prof.getProfDescription();
                     blockedTimings = prof.getProfBlockedTimings();
 
-                    Bookable profInfo = new Bookable();
-                    profInfo.setName(name);
-                    profInfo.setImage(image);
-                    profInfo.setLocation(location);
-                    profInfo.setEmail(email);
-                    profInfo.setContact(contact);
-                    profInfo.setDescription(desc);
-                    profInfo.setBlockedTimings(blockedTimings);
+                    Bookable profInfo = new Bookable()
+                            .setName(name)
+                            .setImage(image)
+                            .setLocation(location)
+                            .setEmail(email)
+                            .setContact(contact)
+                            .setDescription(desc)
+                            .setBlockedTimings(blockedTimings);
                     profs.add(profInfo);
                     Log.i(TAG, "postQueryAll: done");
                     Log.i(TAG, "postQueryAll: " + profs.size());

@@ -152,11 +152,10 @@
                 android:layout_margin="27dp"
                 android:layout_marginStart="27dp"
                 android:layout_marginEnd="27dp"
-                android:layout_marginBottom="32dp"
                 app:cardCornerRadius="15dp"
-                app:layout_constraintBottom_toTopOf="@+id/announcement"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/book_prof">
 
                 <com.applandeo.materialcalendarview.CalendarView
                     android:id="@+id/calendarView"
@@ -168,31 +167,6 @@
                     app:selectionColor="@color/red"
                     app:todayLabelColor="@color/red" />
 
-            </android.support.v7.widget.CardView>
-
-            <android.support.v7.widget.CardView
-                android:id="@+id/announcement"
-                android:layout_width="0dp"
-                android:layout_height="190dp"
-
-                android:layout_marginStart="23dp"
-                android:layout_marginEnd="23dp"
-                android:padding="10dp"
-                app:cardCornerRadius="20dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="5dp"
-                    android:text="Announcement"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                    android:textColor="@color/colorPrimary"
-                    android:fontFamily="@font/skia"/>
             </android.support.v7.widget.CardView>
 
 

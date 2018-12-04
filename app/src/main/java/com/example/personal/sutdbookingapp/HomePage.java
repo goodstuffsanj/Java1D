@@ -29,7 +29,7 @@ import com.applandeo.materialcalendarview.listeners.OnDayClickListener;
 import com.google.gson.Gson;
 import com.applandeo.materialcalendarview.adapters.CalendarPageAdapter;
 
-// import org.joda.time.LocalDateTime;
+import org.joda.time.LocalDateTime;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -42,7 +42,7 @@ public class HomePage extends AppCompatActivity {
     private ScrollView scrollHome;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle mToggle;
-    public String TAG = "DB";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,24 +57,20 @@ public class HomePage extends AppCompatActivity {
         mToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        // ******************* database query
-        Database test = new Database(HomePage.this);
-        StudentTableDO studentTableDO = new StudentTableDO();
-        StudentTableDO studentTableDO1 = new StudentTableDO();
+        Database b = new Database(HomePage.this);
 
-        studentTableDO.setUserId("222");
-        studentTableDO.setName("best student");
-        studentTableDO.setPassword("2333666");
-        Log.i(TAG, "get password"+studentTableDO.getPassword());
+        NewsDO news = new NewsDO();
+        news.setAuthor("James");
 
-        // ******************* Create Data
-        Log.i(TAG,"item is creating");
-        test.create(studentTableDO);
-        Log.i(TAG,"item is creating!!! yay!!!!!!!!!");
+        StudentTableDO james= new StudentTableDO();
 
+        // Create Data
 
-        // ******************* Update Data
-//        test.update(studentTableDO);
+        james.setStudentName("James Andrew Pohadi");
+        james.setStudentID("1002899");
+        james.setStudentPassword("secret");
+        b.create(james);
+
 
         //creating database for prof
 //        ArrayList<String> blockedTimings = new ArrayList<>();
@@ -106,31 +102,18 @@ public class HomePage extends AppCompatActivity {
         james.setPassword("secret");
         b.update(james); */
 
-        // ******************* Delete Data
+        // Delete Data
 
-//        studentTableDO1.setUserId("ss");
-//        studentTableDO1.setPassword("ss");
-//        test.delete(studentTableDO1);
+        /*james.setUserId("1002899");
+        james.setPassword("secret");
+        b.delete(james); */
 
-        //Query Data -> check Logcat Yesss
+        // Query Data -> check Logcat Yesss
         // index
-        test.getQueryHandler(new Database.QueryHandler(){
+
+        b.getQueryHandler(new Database.QueryHandler(){
             @Override
             <T> void postQuery(PaginatedList<T> result) {
-                Log.i(TAG,"this is the result" + result.toString());
-            }
-        }).getQuery(StudentTableDO.class,"Names",studentTableDO);
-//
-        // Get Data -> check Logcat dataReceived
-        // hash key
-        test.getDataHandler(new Database.DataHandler() {
-            @Override
-            <T> void postReceivedData(T result) {
-                StudentTableDO a = (StudentTableDO) result;
-                Log.i("DB_dataReceived ", ((StudentTableDO) result).getPassword());
-            }
-        }).getData(StudentTableDO.class,"222");
-/*
                 //Log.d("Yesss",);
 //                Iterator<T> iter = result.iterator();
 //                while (iter.hasNext()) {
@@ -148,10 +131,8 @@ public class HomePage extends AppCompatActivity {
                 NewsDO a = (NewsDO) result;
                 Log.d("dataReceived",a.getContent());
 
-*/
-
-
-//////////////////////////////////////////////////////////////////////////////////
+            }
+        }).getData(NewsDO.class,"123","Article1");
 
 
         //how to get all table items
@@ -224,15 +205,10 @@ public class HomePage extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
         if (mToggle.onOptionsItemSelected(item)) {
             return true;
         }
-        if(id==R.id.nav_bookingHistory){
-            Intent intent = new Intent(HomePage.this, History.class);
-            startActivity(intent);
-            return true;
-        }
+
         return super.onOptionsItemSelected(item);
     }
 }
