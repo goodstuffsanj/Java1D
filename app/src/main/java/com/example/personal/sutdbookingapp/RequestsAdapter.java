@@ -60,7 +60,7 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.Reques
         String bookingID = requestsList.get(position).getBookingID();
         String senderName = requestsList.get(position).getSenderName();
         LocalDateTime timing = requestsList.get(position).getTime();
-        String timeSlot = timing.toString("h:mm a - ") + timing.plusMinutes(30).toString("h:mm a");
+        String timeSlot = timing.toString("E, d MMM yyyy, h:mm a - ") + timing.plusMinutes(30).toString("h:mm a");
         String message = requestsList.get(position).getReason();
         holder.senderName.setText(senderName);
         holder.date.setText(timeSlot);
@@ -78,27 +78,28 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.Reques
         holder.tick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                ContentResolver cr = context.getContentResolver ( );
-//                ContentValues cv = new ContentValues ( );
-//                cv.put ( CalendarContract.Events.TITLE, "Booking With "  + name);
-//                cv.put ( CalendarContract.Events.DESCRIPTION, "getDescription" );
-//                cv.put ( CalendarContract.Events.EVENT_LOCATION, "getLocation" );
-//                cv.put ( CalendarContract.Events.DTSTART, getLongAsDate(timing));
-//                cv.put ( CalendarContract.Events.DTEND,  getLongAsDate(timing.plusMinutes(30)));
-//                cv.put ( CalendarContract.Events.CALENDAR_ID, 1 );
-//                cv.put ( CalendarContract.Events.EVENT_TIMEZONE, "Singapore" );
-//                if (ActivityCompat.checkSelfPermission ( context, Manifest.permission.WRITE_CALENDAR ) != PackageManager.PERMISSION_GRANTED) {
-//                    // TODO: Consider calling
-//                    //    ActivityCompat#requestPermissions
-//                    // here to request the missing permissions, and then overriding
-//                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-//                    //                                          int[] grantResults)
-//                    // to handle the case where the user grants the permission. See the documentation
-//                    // for ActivityCompat#requestPermissions for more details.
-//                    return;
-//                }
-//                Uri uri = cr.insert ( CalendarContract.Events.CONTENT_URI, cv );
-//                Toast.makeText (context, timeSlot, Toast.LENGTH_SHORT ).show ();
+                Toast.makeText(context, "Request has been accepted", Toast.LENGTH_LONG).show();
+                ContentResolver cr = context.getContentResolver ( );
+                ContentValues cv = new ContentValues ( );
+                cv.put ( CalendarContract.Events.TITLE, "Booking With "  + senderName);
+                cv.put ( CalendarContract.Events.DESCRIPTION, "getDescription" );
+                cv.put ( CalendarContract.Events.EVENT_LOCATION, "getLocation" );
+                cv.put ( CalendarContract.Events.DTSTART, getLongAsDate(timing));
+                cv.put ( CalendarContract.Events.DTEND,  getLongAsDate(timing.plusMinutes(30)));
+                cv.put ( CalendarContract.Events.CALENDAR_ID, 1 );
+                cv.put ( CalendarContract.Events.EVENT_TIMEZONE, "Singapore" );
+                if (ActivityCompat.checkSelfPermission ( context, Manifest.permission.WRITE_CALENDAR ) != PackageManager.PERMISSION_GRANTED) {
+                    // TODO: Consider calling
+                    //    ActivityCompat#requestPermissions
+                    // here to request the missing permissions, and then overriding
+                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                    //                                          int[] grantResults)
+                    // to handle the case where the user grants the permission. See the documentation
+                    // for ActivityCompat#requestPermissions for more details.
+                    return;
+                }
+                Uri uri = cr.insert ( CalendarContract.Events.CONTENT_URI, cv );
+                Toast.makeText (context, timeSlot, Toast.LENGTH_SHORT ).show ();
 
                 Toast.makeText(context, "Request has been accepted", Toast.LENGTH_LONG).show();
             }

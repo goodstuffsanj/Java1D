@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.applandeo.materialcalendarview.CalendarUtils;
@@ -56,6 +59,37 @@ public class HomePage extends AppCompatActivity {
         drawerLayout.addDrawerListener(mToggle);
         mToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        NavigationView navigation = findViewById(R.id.navigation);
+
+//        View header = navigation.getHeaderView(0);
+//        TextView text = header.findViewById(R.id.textView);
+//        text.setText("Welcome");
+
+        navigation.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                // set item as selected to persist highlight
+
+                menuItem.setChecked(true);
+                int id = menuItem.getItemId();
+                Log.i("Homepage", "onNavigationItemSelected: inside");
+
+                if (id == R.id.nav_bookingHistory) {
+                    Intent intent = new Intent(HomePage.this, History.class);
+                    startActivity(intent);
+
+                }
+                else if (id == R.id.nav_logout) {
+                    Intent intent = new Intent(HomePage.this, LoginPage.class);
+                    startActivity(intent);
+                }
+
+                // close drawer when item is tapped
+                drawerLayout.closeDrawers();
+                return true;
+            }
+        });
+
 
         Database b = new Database(HomePage.this);
 
@@ -214,5 +248,7 @@ public class HomePage extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+
+
     }
 }

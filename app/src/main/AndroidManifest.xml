@@ -93,6 +93,10 @@
             android:name=".ConfirmBooking"
             android:screenOrientation="portrait"
             android:parentActivityName=".BookTimings"></activity>
+        <activity
+            android:name=".History"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".HomePage"></activity>
     </application>
 
 </manifest>
