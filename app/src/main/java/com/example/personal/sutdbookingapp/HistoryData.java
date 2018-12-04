@@ -1,16 +1,16 @@
 package com.example.personal.sutdbookingapp;
 
-public class historylist {
+public class HistoryData {
     private String bookingHistory;
     private String time;
     private String bookingStatus;
 
 
-    public String getbookingHistory() {
+    public String getBookingHistory() {
         return bookingHistory;
     }
 
-    public void setbookingHistory(String bookingHistory) {
+    public void setBookingHistory(String bookingHistory) {
         this.bookingHistory = bookingHistory;
     }
     public String getStatus(){

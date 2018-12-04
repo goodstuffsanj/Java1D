@@ -8,15 +8,6 @@
     android:orientation="vertical"
     android:id="@+id/drawer">
 
-    <android.support.design.widget.NavigationView
-        android:id="@+id/navigation"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        app:menu="@menu/navigation_menu"
-        app:headerLayout="@layout/header_layout"
-        app:itemTextColor="@color/colorAccent"/>
-
     <ScrollView
         android:layout_marginTop="-10dp"
         android:id="@+id/scrollHome"
@@ -172,5 +163,14 @@
 
         </android.support.constraint.ConstraintLayout>
     </ScrollView>
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/navigation"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:menu="@menu/navigation_menu"
+        app:headerLayout="@layout/header_layout"
+        app:itemTextColor="@color/colorAccent"/>
 
 </android.support.v4.widget.DrawerLayout>

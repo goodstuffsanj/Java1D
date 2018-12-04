@@ -8,21 +8,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class historyAdapter extends RecyclerView.Adapter<historyAdapter.HistoryViewHolder>{
+public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder>{
 
 
 //Recycler view for timings_list
 
-    private static final String TAG = "historyAdapter";
+    private static final String TAG = "HistoryAdapter";
 
-    private ArrayList<historylist> history_list;
+    private ArrayList<HistoryData> history_list;
     private Context context;
 
-    public historyAdapter (Context context, ArrayList<historylist> history_list) {
+    public HistoryAdapter(Context context, ArrayList<HistoryData> history_list) {
         this.history_list = history_list;
         this.context = context;
     }
@@ -54,12 +53,12 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.HistoryV
     }
 
     @Override
-    public void onBindViewHolder(historyAdapter.HistoryViewHolder holder, int position) {
-        historylist historyData = history_list.get(position);
+    public void onBindViewHolder(HistoryAdapter.HistoryViewHolder holder, int position) {
+        HistoryData historyData = history_list.get(position);
 
         holder.bookingTime.setText(historyData.getTime());
         holder.bookingStatus.setText(historyData.getStatus());
-        holder.bookingHistory.setText(historyData.getbookingHistory());
+        holder.bookingHistory.setText(historyData.getBookingHistory());
 
 
 
