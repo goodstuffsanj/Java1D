@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -82,12 +83,13 @@ public class Waiting extends Fragment {
             <T> void postQueryAll(PaginatedList<T> result) {
                 for (int i = 0; i < result.size(); i ++) {
                     BookingInstanceTableDO bookingInstance = (BookingInstanceTableDO) result.get(i);
-                    if (bookingInstance.getName() == username || bookingInstance.getStudentName() == username) {
+                    Log.i("DATABASEXXX", "postQueryAll: " + String.valueOf(bookingInstance.getName().equals(username)));
+                    Log.i("DATABASEXXX", "postQueryAll: " + bookingInstance.getStudentName());
+                    if (bookingInstance.getName().equals(username) || bookingInstance.getStudentName().equals(username)) {
                         LocalDateTime timing = new LocalDateTime(bookingInstance.getTiming());
                         if (timing.isAfter(new LocalDateTime())&& bookingInstance.getStatus().equals("Pending")) {
-                            BookingInstance booking = new BookingInstance(bookingInstance.getBookingID(), bookingInstance.getName(), bookingInstance.getStudentName(), bookingInstance.getTiming(), bookingInstance.getLocation(), "Upcoming");
+                            BookingInstance booking = new BookingInstance(bookingInstance.getBookingID(), bookingInstance.getName(), bookingInstance.getStudentName(), bookingInstance.getTiming(), bookingInstance.getLocation(), "Waiting");
                             waitings.add(booking);
-
                         }
                     }
                 }
@@ -109,7 +111,7 @@ public class Waiting extends Fragment {
 
     public void initRecycler(View rootView) {
         RecyclerView recyclerView = rootView.findViewById(R.id.recyclerView);
-        BookingInstanceAdapter adapter = new BookingInstanceAdapter(this.getContext(), waitings);
+        BookingInstanceAdapter adapter = new BookingInstanceAdapter(this.getContext(), waitings, username);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }

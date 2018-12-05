@@ -3,6 +3,7 @@ package com.example.personal.sutdbookingapp;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -24,7 +25,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import static java.util.Calendar.DATE;
 
 public class Facility extends AppCompatActivity {
-    public final static String NAME = "USERNAME";
+    public final static String NAME = "NAME";
     public final static String BLOCKED_TIMINGS = "BLOCKED_TIMINGS";
     public final static String DATE_PICKED = "DATE_PICKED";
     public final static String PROF = "PROF";

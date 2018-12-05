@@ -32,7 +32,7 @@ public class LoginPageNew extends AppCompatActivity implements Student.OnFragmen
     final static int RC_SIGN_IN = 100;
     private static final String TAG = "LoginPageNew";
     private GoogleSignInClient mGoogleSignInClient;
-    private final static String NAME = "USERNAME";
+    private final static String USERNAME = "USERNAME";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -101,7 +101,7 @@ public class LoginPageNew extends AppCompatActivity implements Student.OnFragmen
                                     passwordFail = false;
 
                                     Intent intent = new Intent(LoginPageNew.this,HomePage.class);
-                                    intent.putExtra(NAME, username);
+                                    intent.putExtra(USERNAME, username);
                                     startActivity(intent);
                                 }
                                 else {
@@ -153,7 +153,7 @@ public class LoginPageNew extends AppCompatActivity implements Student.OnFragmen
                                     passwordFail = false;
 
                                     Intent intent = new Intent(LoginPageNew.this, ProfModeHomePage.class);
-                                    intent.putExtra(NAME, username);
+                                    intent.putExtra(USERNAME, username);
                                     startActivity(intent);
                                 }
                                 else {

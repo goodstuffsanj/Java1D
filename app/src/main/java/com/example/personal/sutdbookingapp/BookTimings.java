@@ -45,15 +45,16 @@ public class BookTimings extends AppCompatActivity{
             date = (Date) intent.getSerializableExtra(Prof.DATE_PICKED);
 //            time = (Long) intent.getSerializableExtra ( Prof.TIME );
             name = intent.getStringExtra(Prof.NAME);
-            Log.i("DATABASEXXX", "onCreate: " + name);
             blockedTimings = intent.getStringArrayListExtra(Prof.BLOCKED_TIMINGS);
             username = intent.getStringExtra(Prof.USERNAME);
+            Log.i("DATABASEXXX", "onCreate: " + username);
         }
         else{
             date = (Date) intent.getSerializableExtra(Facility.DATE_PICKED);
             name = intent.getStringExtra(Facility.NAME);
             blockedTimings = intent.getStringArrayListExtra(Facility.BLOCKED_TIMINGS);
             username = intent.getStringExtra(Facility.USERNAME);
+            Log.i("DATABASEXXX", "onCreate: " + username);
         }
 
         //convert Date to joda-date

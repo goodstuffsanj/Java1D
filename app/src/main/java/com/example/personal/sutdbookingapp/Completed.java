@@ -31,7 +31,6 @@ public class Completed extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String USERNAME = "USERNAME";
-    private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
     private String username;
@@ -84,10 +83,10 @@ public class Completed extends Fragment {
             <T> void postQueryAll(PaginatedList<T> result) {
                 for (int i = 0; i < result.size(); i ++) {
                     BookingInstanceTableDO bookingInstance = (BookingInstanceTableDO) result.get(i);
-                    if (bookingInstance.getName() == username || bookingInstance.getStudentName() == username) {
+                    if (bookingInstance.getName().equals(username) || bookingInstance.getStudentName().equals(username)) {
                         LocalDateTime timing = new LocalDateTime(bookingInstance.getTiming());
-                        if (timing.isBefore(new LocalDateTime())) {
-                            BookingInstance booking = new BookingInstance(bookingInstance.getBookingID(), bookingInstance.getName(), bookingInstance.getStudentName(), bookingInstance.getTiming(), bookingInstance.getLocation(), bookingInstance.getStatus());
+                        if (timing.isBefore(new LocalDateTime()) && bookingInstance.getStatus().equals("Accepted")) {
+                            BookingInstance booking = new BookingInstance(bookingInstance.getBookingID(), bookingInstance.getName(), bookingInstance.getStudentName(), bookingInstance.getTiming(), bookingInstance.getLocation(), "Completed");
                             completeds.add(booking);
 
                         }
@@ -111,7 +110,7 @@ public class Completed extends Fragment {
 
     public void initRecycler(View rootView) {
         RecyclerView recyclerView = rootView.findViewById(R.id.recyclerView);
-        BookingInstanceAdapter adapter = new BookingInstanceAdapter(this.getContext(), completeds);
+        BookingInstanceAdapter adapter = new BookingInstanceAdapter(this.getContext(), completeds, username);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }

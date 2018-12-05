@@ -131,18 +131,18 @@ public class ConfirmBooking extends AppCompatActivity {
                                     endTime.set(2012, 9, 14, 8, 45);
                                     endMillis = endTime.getTimeInMillis();
 
-//                                    ContentResolver cr = getContentResolver();
-//                                    ContentValues values = new ContentValues();
-//                                    values.put(Events.DTSTART, startMillis);
-//                                    values.put(Events.DTEND, endMillis);
-//                                    values.put(Events.TITLE, "Jazzercise");
-//                                    values.put(Events.DESCRIPTION, "Group workout");
-//                                    values.put(Events.CALENDAR_ID, calID);
-//                                    values.put(Events.EVENT_TIMEZONE, "America/Los_Angeles");
-//                                    Uri uri = cr.insert(Events.CONTENT_URI, values);
-//
-//// get the event ID that is the last element in the Uri
-//                                    long eventID = Long.parseLong(uri.getLastPathSegment());
+                                    ContentResolver cr = getContentResolver();
+                                    ContentValues values = new ContentValues();
+                                    values.put(Events.DTSTART, startMillis);
+                                    values.put(Events.DTEND, endMillis);
+                                    values.put(Events.TITLE, "Jazzercise");
+                                    values.put(Events.DESCRIPTION, "Group workout");
+                                    values.put(Events.CALENDAR_ID, calID);
+                                    values.put(Events.EVENT_TIMEZONE, "America/Los_Angeles");
+                                    Uri uri = cr.insert(Events.CONTENT_URI, values);
+
+// get the event ID that is the last element in the Uri
+                                    long eventID = Long.parseLong(uri.getLastPathSegment());
 
                                     Intent intent = new Intent(ConfirmBooking.this, HomePage.class);
                                     startActivity(intent);
@@ -200,13 +200,13 @@ public class ConfirmBooking extends AppCompatActivity {
                                     bookingInstance.setTiming(time.toString());
                                     bookingInstance.setStudentName(username);
                                     Log.i(TAG, "onClick: " + username);
-                                    bookingInstance.setStatus("Pending");
+                                    bookingInstance.setStatus("Accepted");
                                     Log.i("Database", "Add to BookingInstanceDO: done");
                                     b.create(bookingInstance);
 
                                     Toast.makeText(ConfirmBooking.this, "Confirmed booking", Toast.LENGTH_LONG).show();
 
-                                    Intent intent = new Intent(ConfirmBooking.this, HomePage.class);
+                                    Intent intent = new Intent(ConfirmBooking.this, ProfModeHomePage.class);
                                     startActivity(intent);
 
                                 }

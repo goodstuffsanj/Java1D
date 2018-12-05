@@ -88,10 +88,10 @@ public class Upcoming extends Fragment {
             <T> void postQueryAll(PaginatedList<T> result) {
                 for (int i = 0; i < result.size(); i ++) {
                     BookingInstanceTableDO bookingInstance = (BookingInstanceTableDO) result.get(i);
-                    if (bookingInstance.getName() == username || bookingInstance.getStudentName() == username) {
+                    if (bookingInstance.getName().equals(username)|| bookingInstance.getStudentName().equals(username)) {
                         LocalDateTime timing = new LocalDateTime(bookingInstance.getTiming());
                         if (timing.isAfter(new LocalDateTime()) && bookingInstance.getStatus().equals("Accepted")) {
-                            BookingInstance booking = new BookingInstance(bookingInstance.getBookingID(), bookingInstance.getName(), bookingInstance.getStudentName(), bookingInstance.getTiming(), bookingInstance.getLocation(), "Waiting");
+                            BookingInstance booking = new BookingInstance(bookingInstance.getBookingID(), bookingInstance.getName(), bookingInstance.getStudentName(), bookingInstance.getTiming(), bookingInstance.getLocation(), "Upcoming");
                             upcomings.add(booking);
 
                         }
@@ -117,7 +117,7 @@ public class Upcoming extends Fragment {
 
     public void initRecycler(View rootView) {
         RecyclerView recyclerView = rootView.findViewById(R.id.recyclerView);
-        BookingInstanceAdapter adapter = new BookingInstanceAdapter(this.getContext(), upcomings);
+        BookingInstanceAdapter adapter = new BookingInstanceAdapter(this.getContext(), upcomings, username);
         recyclerView.setLayoutManager(new LinearLayoutManager(Upcoming.this.getActivity()));
         recyclerView.setAdapter(adapter);
     }

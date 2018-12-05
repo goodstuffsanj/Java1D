@@ -62,10 +62,10 @@ public class HomePage extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         NavigationView navigation = findViewById(R.id.navigation);
 
-        View header = navigation.getHeaderView(0);
-        TextView text = header.findViewById(R.id.name);
-        text.setText(username);
-        text.setTextColor(Color.WHITE);
+//        View header = navigation.getHeaderView(0);
+//        TextView text = header.findViewById(R.id.name);
+//        text.setText(username);
+//        text.setTextColor(Color.WHITE);
 
         navigation.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -261,15 +261,15 @@ public class HomePage extends AppCompatActivity {
         });
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        SharedPreferences.Editor preferenceEditor = mPreferences.edit();
-        preferenceEditor.putString(USERNAME, username);
-        preferenceEditor.apply();
-        overridePendingTransition(0, 0);
-
-    }
+//    @Override
+//    protected void onPause() {
+//        super.onPause();
+//        SharedPreferences.Editor preferenceEditor = mPreferences.edit();
+//        preferenceEditor.putString(USERNAME, username);
+//        preferenceEditor.apply();
+//        overridePendingTransition(0, 0);
+//
+//    }
 
 
 

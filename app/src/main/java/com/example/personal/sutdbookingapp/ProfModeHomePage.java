@@ -44,9 +44,13 @@ public class ProfModeHomePage extends AppCompatActivity {
         setContentView(R.layout.activity_prof_mode_home_page);
         setTitle("My Activity");
 
-        mPreferences = getSharedPreferences("sharedPrefFileStudent", MODE_PRIVATE);
-        username = mPreferences.getString(USERNAME, "");
+        Intent intent = getIntent();
+        username = intent.getStringExtra(USERNAME);
 
+//        mPreferences = getSharedPreferences("sharedPrefFileStudent", MODE_PRIVATE);
+//        username = mPreferences.getString(USERNAMEP, "");
+
+        Log.i("DATABASEXXX", "onCreate: " + username);
 
 
         scrollHome = findViewById(R.id.scrollHome);
@@ -61,10 +65,9 @@ public class ProfModeHomePage extends AppCompatActivity {
         NavigationView navigation = findViewById(R.id.navigation);
 
         //set username on navigation panel
-        View header = navigation.getHeaderView(0);
-        TextView text = header.findViewById(R.id.name);
-        text.setText(username);
-        text.setTextColor(Color.WHITE);
+//        View header = navigation.getHeaderView(0);
+//        TextView navUsername = header.findViewById(R.id.name);
+//        navUsername.setText(username);
 
         navigation.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -82,7 +85,7 @@ public class ProfModeHomePage extends AppCompatActivity {
 
                 }
                 else if (id == R.id.nav_logout) {
-                    Intent intent = new Intent(ProfModeHomePage.this, LoginPage.class);
+                    Intent intent = new Intent(ProfModeHomePage.this, LoginPageNew.class);
                     startActivity(intent);
                 }
 
@@ -135,14 +138,14 @@ public class ProfModeHomePage extends AppCompatActivity {
         });
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        SharedPreferences.Editor preferenceEditor = mPreferences.edit();
-        preferenceEditor.putString(USERNAME, username);
-        preferenceEditor.apply();
-        overridePendingTransition(0, 0);
-    }
+//    @Override
+//    protected void onPause() {
+//        super.onPause();
+//        SharedPreferences.Editor preferenceEditor = mPreferences.edit();
+//        preferenceEditor.putString(USERNAME, username);
+//        preferenceEditor.apply();
+//        overridePendingTransition(0, 0);
+//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

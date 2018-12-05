@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -37,6 +38,7 @@ public class BookFacilities extends AppCompatActivity {
 
         Intent intent = getIntent();
         username = intent.getStringExtra(HomePage.USERNAME);
+        Log.i("DATABASEXXX_BookFacil", "onCreate: " + username);
         initImage();
     }
 

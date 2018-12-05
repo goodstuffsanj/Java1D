@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,10 +22,12 @@ import java.util.ArrayList;
 public class BookingInstanceAdapter extends RecyclerView.Adapter<BookingInstanceAdapter.ViewHolder> {
     private ArrayList<BookingInstance> bookingInstances = new ArrayList<>();
     private Context context;
+    private String username;
 
-    public BookingInstanceAdapter(Context context, ArrayList<BookingInstance> bookings) {
+    public BookingInstanceAdapter(Context context, ArrayList<BookingInstance> bookings, String username) {
         this.context = context;
         this.bookingInstances = bookings;
+        this.username = username;
     }
 
     @NonNull
@@ -41,7 +44,8 @@ public class BookingInstanceAdapter extends RecyclerView.Adapter<BookingInstance
         viewHolder.name.setText(bookingInstance.getName());
         String timeSlot = bookingInstance.getStartTime().toString("E, d MMM yyyy, h:mm a - ") + bookingInstance.getEndTime().toString("h:mm a");
         viewHolder.bookingTime.setText(timeSlot);
-        viewHolder.bookingId.setText(bookingInstance.getBookingId());
+        viewHolder.bookingId.setText("Booking ID: " + bookingInstance.getBookingId());
+        viewHolder.bookerName.setText(bookingInstance.getBookerName());
         String status = bookingInstance.getStatus();
         switch (status) {
             case "Upcoming":

@@ -39,6 +39,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
         this.bookables = bookables;
         this.context = context;
         this.username = username;
+        Log.i("DATABASEXXX_oncreate", "ListAdapter: " + username);
         copies = new ArrayList<>(bookables);
     }
 
@@ -63,6 +64,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
                 Log.d(TAG, "onclick: clicked on: "+ bookable.getName());
                 if (context.getClass() == BookFacilities.class) {
                     Intent intent = new Intent(context, Facility.class);
+                    intent.putExtra(USERNAME, username);
                     intent.putExtra(NAME, bookable.getName());
                     intent.putExtra(IMAGE, bookable.getImage());
                     intent.putExtra(LOCATION, bookable.getLocation());
