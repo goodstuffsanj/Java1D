@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.amazonaws.auth.AWSCredentialsProvider;
 import com.amazonaws.mobile.client.AWSMobileClient;
@@ -111,13 +112,25 @@ public class Database {
         //for no sort key
         public <T extends Object> void getData(Class<T> dbClass, Object hashKey) {
             new Thread(new Runnable() {
+
+                Handler mHandler = new Handler(Looper.getMainLooper());
+
                 @Override
                 public void run() {
+
                     T result = dynamoDBMapper.load(dbClass, hashKey);
-                    postReceivedData(result);
+                    try {
+                        postReceivedData(result);
+                        showOnUI(mHandler);
+                    } catch (NullPointerException ex) {
+                        Log.i("", "run: no such hashkey!");
+                    }
                 }
             }).start();
         }
+
+        public void showOnUI(Handler handler) {};
+
     }
 
     //class that handles getting all table items

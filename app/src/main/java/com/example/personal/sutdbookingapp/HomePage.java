@@ -82,7 +82,7 @@ public class HomePage extends AppCompatActivity {
 
                 }
                 else if (id == R.id.nav_logout) {
-                    Intent intent = new Intent(HomePage.this, LoginPage.class);
+                    Intent intent = new Intent(HomePage.this, LoginPageNew.class);
                     startActivity(intent);
                 }
 
