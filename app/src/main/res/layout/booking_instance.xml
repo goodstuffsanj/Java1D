@@ -24,51 +24,57 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/bookingDate"
+                android:id="@+id/bookingTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/bookingId"
                 android:text="20/11/2018"
                 android:textSize="16dp" />
 
-            <TextView
-                android:id="@+id/bookingTime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/bookingId"
-                android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@+id/bookingDate"
-                android:text="08:00 - 09:00"
-                android:textSize="16dp" />
+            <!--<TextView-->
+                <!--android:id="@+id/bookingTime"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_below="@id/bookingId"-->
+                <!--android:layout_marginLeft="10dp"-->
+                <!--android:layout_toRightOf="@+id/bookingDate"-->
+                <!--android:text="08:00 - 09:00"-->
+                <!--android:textSize="16dp" />-->
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/image"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_below="@+id/bookingTime"
-                android:layout_marginTop="5dp"
-                android:src="@drawable/ic_launcher_background" />
+            <!--<de.hdodenhof.circleimageview.CircleImageView-->
+                <!--android:id="@+id/image"-->
+                <!--android:layout_width="100dp"-->
+                <!--android:layout_height="100dp"-->
+                <!--android:layout_below="@+id/bookingTime"-->
+                <!--android:layout_marginTop="5dp"-->
+                <!--android:src="@drawable/ic_launcher_background" />-->
 
             <TextView
                 android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/bookingTime"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="5dp"
                 android:layout_toRightOf="@+id/image"
                 android:text="Ngaiman"
                 android:textAllCaps="true"
-                android:textSize="20dp"
+                android:textSize="15dp"
                 android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/bookerName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/name"
+                android:layout_marginTop="5dp"
+                android:text="Student A"
+                android:textSize="15dp" />
 
             <TextView
                 android:id="@+id/location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/name"
-                android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@+id/image"
+                android:layout_below="@+id/bookerName"
                 android:text="Building 1 Level 5" />
 
             <TextView
@@ -76,8 +82,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/location"
-                android:layout_marginTop="15dp"
-                android:layout_marginLeft="10dp"
+                android:layout_marginTop="8dp"
                 android:layout_toRightOf="@+id/image"
                 android:text="status" />
 

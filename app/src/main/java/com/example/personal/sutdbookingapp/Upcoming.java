@@ -3,6 +3,7 @@ package com.example.personal.sutdbookingapp;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +11,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.PaginatedList;
+
+import org.joda.time.LocalDateTime;
 
 import java.util.ArrayList;
 
@@ -25,17 +30,14 @@ import java.util.ArrayList;
 public class Upcoming extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String TIME = "TIME";
-    private static final String STATUS = "STATUS";
-    private static final String IS_PROF = "IS_PROF";
+    private static final String USERNAME = "USERNAME";
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
     private ArrayList<BookingInstance> upcomings = new ArrayList<>();
-    private String mTime;
-    private String mStatus;
-    private Boolean mIsProf;
+    private String username;
+
 
     private OnFragmentInteractionListener mListener;
 
@@ -47,18 +49,14 @@ public class Upcoming extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param timing get timing of booking
-     * @param status get status of booking
-     * @param isProf check if booking is prof (not facility)
+     * @param username get username
      * @return A new instance of fragment Upcoming.
      */
     // TODO: Rename and change types and number of parameters
-    public static Upcoming newInstance(String timing, String status, Boolean isProf) {
+    public static Upcoming newInstance(String username) {
         Upcoming fragment = new Upcoming();
         Bundle args = new Bundle();
-        args.putString(TIME, timing);
-        args.putString(STATUS, status);
-        args.putBoolean(IS_PROF, isProf);
+        args.putString(USERNAME, username);
         fragment.setArguments(args);
         return fragment;
     }
@@ -67,9 +65,7 @@ public class Upcoming extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mTime = getArguments().getString(TIME);
-            mStatus = getArguments().getString(STATUS);
-            mIsProf = getArguments().getBoolean(IS_PROF);
+            username = getArguments().getString(USERNAME);
         }
 
     }
@@ -80,16 +76,50 @@ public class Upcoming extends Fragment {
         // Inflate the layout for this fragment
         Log.i("BookingInstance", "OnCreateView");
         View rootView = inflater.inflate(R.layout.fragment_upcoming, container, false);
-        for (int i=0; i<20; i++) {
-            BookingInstance bookingInstance = new BookingInstance("120839201","Professor "+Integer.toString(i+1),"12/11/2018","08:30","09:30","Building 1 lvl 5","https://www.biography.com/.image/t_share/MTE5NDg0MDU0OTU2OTAxOTAz/albert-einstein-9285408-1-402.jpg","upcoming");
-            upcomings.add(bookingInstance);
-        }
+//        for (int i=0; i<20; i++) {
+//            BookingInstance bookingInstance = new BookingInstance("120839201","Professor "+Integer.toString(i+1),"12/11/2018","08:30","09:30","Building 1 lvl 5","https://www.biography.com/.image/t_share/MTE5NDg0MDU0OTU2OTAxOTAz/albert-einstein-9285408-1-402.jpg","upcoming");
+//            upcomings.add(bookingInstance);
+//        }
+
+        //get from database
+        Database b = new Database(getContext());
+        b.getDataHandlerAll(new Database.DataHandlerAll() {
+            @Override
+            <T> void postQueryAll(PaginatedList<T> result) {
+                for (int i = 0; i < result.size(); i ++) {
+                    BookingInstanceTableDO bookingInstance = (BookingInstanceTableDO) result.get(i);
+                    if (bookingInstance.getName() == username || bookingInstance.getStudentName() == username) {
+                        LocalDateTime timing = new LocalDateTime(bookingInstance.getTiming());
+                        if (timing.isAfter(new LocalDateTime()) && bookingInstance.getStatus().equals("Accepted")) {
+                            BookingInstance booking = new BookingInstance(bookingInstance.getBookingID(), bookingInstance.getName(), bookingInstance.getStudentName(), bookingInstance.getTiming(), bookingInstance.getLocation(), "Waiting");
+                            upcomings.add(booking);
+
+                        }
+                    }
+                }
+
+            }
+
+            @Override
+            void showOnUI(Handler handler) {
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        initRecycler(rootView);
+                    }
+                });
+            }
+        }).getAll(BookingInstanceTableDO.class);
+
+        return  rootView;
+
+    }
+
+    public void initRecycler(View rootView) {
         RecyclerView recyclerView = rootView.findViewById(R.id.recyclerView);
         BookingInstanceAdapter adapter = new BookingInstanceAdapter(this.getContext(), upcomings);
         recyclerView.setLayoutManager(new LinearLayoutManager(Upcoming.this.getActivity()));
         recyclerView.setAdapter(adapter);
-        return  rootView;
-
     }
 
     // TODO: Rename method, update argument and hook method into UI event

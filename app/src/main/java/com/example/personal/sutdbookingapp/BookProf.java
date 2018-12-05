@@ -1,5 +1,6 @@
 package com.example.personal.sutdbookingapp;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Looper;
@@ -38,6 +39,7 @@ public class BookProf extends AppCompatActivity {
     private List<String> blockedTimings;
     private String desc;
     private String calendar;
+    private String username;
 
 
     @Override
@@ -45,6 +47,9 @@ public class BookProf extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_prof);
         getData();
+
+        Intent intent = getIntent();
+        username = intent.getStringExtra(HomePage.USERNAME);
 
     }
 
@@ -96,14 +101,14 @@ public class BookProf extends AppCompatActivity {
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        initRecyclerView();
+                        initRecyclerView(username);
                     }
                 });
             }
         }).getAll(ProfTableDO.class);
     }
 
-    public void initRecyclerView() {
+    public void initRecyclerView(String username) {
         RecyclerView recyclerView= findViewById(R.id.recycler_view);
         Collections.sort(profs, new Comparator<Bookable>() {
             @Override
@@ -111,7 +116,7 @@ public class BookProf extends AppCompatActivity {
                 return o1.getName().compareTo(o2.getName());
             }
         });
-        listAdapter = new ListAdapter(profs, this);
+        listAdapter = new ListAdapter(profs, this, username);
         recyclerView.setAdapter(listAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         Log.i(TAG, "initRecyclerView: " + profs.size());

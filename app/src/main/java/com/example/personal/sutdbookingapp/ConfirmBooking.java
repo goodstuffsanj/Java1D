@@ -28,6 +28,7 @@ public class ConfirmBooking extends AppCompatActivity {
     private Boolean isProf;
     private String name;
     private LocalDateTime time;
+    private String username;
     private List<String> blockedTimings;
     private TextView typeMessage;
     private TextView textViewName;
@@ -44,6 +45,7 @@ public class ConfirmBooking extends AppCompatActivity {
         name = intent.getStringExtra(TimingsAdapter.NAME);
         time = new LocalDateTime(intent.getStringExtra(TimingsAdapter.TIME));
         isProf = intent.getExtras().getBoolean(TimingsAdapter.IS_PROF);
+        username = intent.getStringExtra(TimingsAdapter.USERNAME);
 
 
         Button okButton = findViewById(R.id.okButton);
@@ -110,7 +112,8 @@ public class ConfirmBooking extends AppCompatActivity {
                                     bookingInstance.setName(name);
                                     bookingInstance.setTiming(time.toString());
                                     bookingInstance.setMessage(typeMessage.getText().toString());
-                                    bookingInstance.setStudentName("John Smith");
+                                    bookingInstance.setStudentName(username);
+                                    Log.i(TAG, "onClick: " + username);
                                     bookingInstance.setStatus("Pending");
                                     Log.i("Database", "Add to BookingInstanceDO: done");
                                     b.create(bookingInstance);
@@ -128,18 +131,18 @@ public class ConfirmBooking extends AppCompatActivity {
                                     endTime.set(2012, 9, 14, 8, 45);
                                     endMillis = endTime.getTimeInMillis();
 
-                                    ContentResolver cr = getContentResolver();
-                                    ContentValues values = new ContentValues();
-                                    values.put(Events.DTSTART, startMillis);
-                                    values.put(Events.DTEND, endMillis);
-                                    values.put(Events.TITLE, "Jazzercise");
-                                    values.put(Events.DESCRIPTION, "Group workout");
-                                    values.put(Events.CALENDAR_ID, calID);
-                                    values.put(Events.EVENT_TIMEZONE, "America/Los_Angeles");
-                                    Uri uri = cr.insert(Events.CONTENT_URI, values);
-
-// get the event ID that is the last element in the Uri
-                                    long eventID = Long.parseLong(uri.getLastPathSegment());
+//                                    ContentResolver cr = getContentResolver();
+//                                    ContentValues values = new ContentValues();
+//                                    values.put(Events.DTSTART, startMillis);
+//                                    values.put(Events.DTEND, endMillis);
+//                                    values.put(Events.TITLE, "Jazzercise");
+//                                    values.put(Events.DESCRIPTION, "Group workout");
+//                                    values.put(Events.CALENDAR_ID, calID);
+//                                    values.put(Events.EVENT_TIMEZONE, "America/Los_Angeles");
+//                                    Uri uri = cr.insert(Events.CONTENT_URI, values);
+//
+//// get the event ID that is the last element in the Uri
+//                                    long eventID = Long.parseLong(uri.getLastPathSegment());
 
                                     Intent intent = new Intent(ConfirmBooking.this, HomePage.class);
                                     startActivity(intent);
@@ -195,7 +198,8 @@ public class ConfirmBooking extends AppCompatActivity {
                                     bookingInstance.setBookingID(UUID.randomUUID().toString());
                                     bookingInstance.setName(name);
                                     bookingInstance.setTiming(time.toString());
-                                    bookingInstance.setStudentName("John Smith");
+                                    bookingInstance.setStudentName(username);
+                                    Log.i(TAG, "onClick: " + username);
                                     bookingInstance.setStatus("Pending");
                                     Log.i("Database", "Add to BookingInstanceDO: done");
                                     b.create(bookingInstance);

@@ -1,9 +1,11 @@
 package com.example.personal.sutdbookingapp;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.provider.CalendarContract;
@@ -38,10 +40,12 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.Reques
     private ArrayList<RequestsData> requestsList = new ArrayList<>();
     private Context context;
     private String calId;
+    private String username;
 
-    public RequestsAdapter(Context context, ArrayList<RequestsData> requestsList) {
+    public RequestsAdapter(Context context, ArrayList<RequestsData> requestsList, String username) {
         this.requestsList = requestsList;
         this.context = context;
+        this.username = username;
     }
 
     @Override
@@ -56,7 +60,6 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.Reques
     @Override
     public void onBindViewHolder(RequestsViewHolder holder, int position) {
         Log.i(TAG, "onBindViewHolder() is called");  //for every item that is in the list
-        String name = "Prof 0";
         String bookingID = requestsList.get(position).getBookingID();
         String senderName = requestsList.get(position).getSenderName();
         LocalDateTime timing = requestsList.get(position).getTime();
@@ -75,7 +78,7 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.Reques
                 ProfTableDO prof = (ProfTableDO) result;
                 calId = prof.getProfCalendar();
             }
-        }).getData(ProfTableDO.class, name);
+        }).getData(ProfTableDO.class, username);
 
         holder.tick.setOnClickListener(new View.OnClickListener() {
             @Override

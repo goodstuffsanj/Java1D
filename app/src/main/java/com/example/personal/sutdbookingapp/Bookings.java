@@ -1,5 +1,6 @@
 package com.example.personal.sutdbookingapp;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -8,6 +9,8 @@ import android.os.Bundle;
 
 public class Bookings extends AppCompatActivity implements
         Upcoming.OnFragmentInteractionListener, Waiting.OnFragmentInteractionListener, Completed.OnFragmentInteractionListener {
+
+    private String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,8 +22,11 @@ public class Bookings extends AppCompatActivity implements
         tabLayout.addTab(tabLayout.newTab().setText("Completed"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
+        Intent intent = getIntent();
+        username = intent.getStringExtra(HomePage.USERNAME);
+
         final ViewPager viewPager= findViewById(R.id.pager);
-        final PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager(),tabLayout.getTabCount());
+        final PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager(),tabLayout.getTabCount(), username);
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 

@@ -14,6 +14,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import org.joda.time.LocalDateTime;
+
 import java.util.ArrayList;
 
 public class BookingInstanceAdapter extends RecyclerView.Adapter<BookingInstanceAdapter.ViewHolder> {
@@ -37,27 +39,27 @@ public class BookingInstanceAdapter extends RecyclerView.Adapter<BookingInstance
     public void onBindViewHolder(@NonNull BookingInstanceAdapter.ViewHolder viewHolder, int i) {
         BookingInstance bookingInstance = bookingInstances.get(i);
         viewHolder.name.setText(bookingInstance.getName());
-        viewHolder.bookingDate.setText(bookingInstance.getDate());
-        viewHolder.bookingTime.setText(bookingInstance.getEndTime()+"-"+bookingInstance.getEndTime());
+        String timeSlot = bookingInstance.getStartTime().toString("E, d MMM yyyy, h:mm a - ") + bookingInstance.getEndTime().toString("h:mm a");
+        viewHolder.bookingTime.setText(timeSlot);
         viewHolder.bookingId.setText(bookingInstance.getBookingId());
         String status = bookingInstance.getStatus();
         switch (status) {
-            case "upcoming":
+            case "Upcoming":
                 viewHolder.status.setText(status);
                 viewHolder.status.setTextColor(Color.parseColor("#2ca411"));
                 break;
-            case "waiting":
+            case "Waiting":
                 viewHolder.status.setText(status);
                 viewHolder.status.setTextColor(Color.parseColor("#ffbc3f"));
                 break;
-            case "completed":
+            case "Completed":
                 viewHolder.status.setText(status);
                 viewHolder.status.setTextColor(Color.parseColor("#e81e1e"));
                 viewHolder.buttonCancel.setVisibility(View.GONE);
                 break;
                 //viewHolder.status.setTextColor(Color.parseColor("#ffbc3f"));
         }
-        Glide.with(context).load(bookingInstance.getImgUrl()).into(viewHolder.image);
+//        Glide.with(context).load(bookingInstance.getImgUrl()).into(viewHolder.image);
     }
 
     @Override
@@ -70,6 +72,7 @@ public class BookingInstanceAdapter extends RecyclerView.Adapter<BookingInstance
         TextView bookingDate;
         TextView bookingTime;
         TextView name;
+        TextView bookerName;
         ImageView image;
         TextView status;
         Button buttonCancel;
@@ -77,9 +80,9 @@ public class BookingInstanceAdapter extends RecyclerView.Adapter<BookingInstance
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             bookingId = itemView.findViewById(R.id.bookingId);
-            bookingDate = itemView.findViewById(R.id.bookingDate);
             bookingTime = itemView.findViewById(R.id.bookingTime);
             name = itemView.findViewById(R.id.name);
+            bookerName = itemView.findViewById(R.id.bookerName);
             image = itemView.findViewById(R.id.image);
             status = itemView.findViewById(R.id.status);
             buttonCancel = itemView.findViewById(R.id.buttonCancel);

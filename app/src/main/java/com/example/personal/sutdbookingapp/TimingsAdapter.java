@@ -26,13 +26,16 @@ public class TimingsAdapter extends RecyclerView.Adapter<TimingsAdapter.TimingsV
 
     private ArrayList<TimingsData> timeDataList;
     private Context context;
+    private String username;
     public final static String NAME = "NAME";
     public final static String TIME = "TIME";
     public final static String IS_PROF = "IS_PROF";
+    public final static String USERNAME = "USERNAME";
 
-    public TimingsAdapter (Context context, ArrayList<TimingsData> timeDataList) {
+    public TimingsAdapter (Context context, ArrayList<TimingsData> timeDataList, String username) {
         this.timeDataList = timeDataList;
         this.context = context;
+        this.username = username;
     }
 
     class TimingsViewHolder extends RecyclerView.ViewHolder {
@@ -95,6 +98,7 @@ public class TimingsAdapter extends RecyclerView.Adapter<TimingsAdapter.TimingsV
                 intent.putExtra(NAME, timingsData.getName());
                 intent.putExtra(TIME, timingsData.getTime().toString());
                 intent.putExtra(IS_PROF, timingsData.getIsProf());
+                intent.putExtra(USERNAME, username);
                 context.startActivity(intent);
             }
         });

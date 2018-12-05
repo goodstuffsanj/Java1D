@@ -1,5 +1,6 @@
 package com.example.personal.sutdbookingapp;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -25,6 +26,7 @@ public class BookFacilities extends AppCompatActivity {
     private String location;
     private List<String> blockedTimings;
     private String desc;
+    private String username;
 
     ListAdapter listAdapter;
 
@@ -32,6 +34,9 @@ public class BookFacilities extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_facilities);
+
+        Intent intent = getIntent();
+        username = intent.getStringExtra(HomePage.USERNAME);
         initImage();
     }
 
@@ -71,7 +76,7 @@ public class BookFacilities extends AppCompatActivity {
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        initRecyclerView();
+                        initRecyclerView(username);
                     }
                 });
             }
@@ -86,9 +91,9 @@ public class BookFacilities extends AppCompatActivity {
 //        initRecyclerView();
     }
 
-    private void initRecyclerView() {
+    private void initRecyclerView(String username) {
         RecyclerView recyclerView= findViewById(R.id.recycler_view);
-        listAdapter = new ListAdapter(facilities, this);
+        listAdapter = new ListAdapter(facilities, this, username);
         recyclerView.setAdapter(listAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }

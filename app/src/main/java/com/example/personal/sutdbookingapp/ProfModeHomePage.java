@@ -1,6 +1,8 @@
 package com.example.personal.sutdbookingapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -13,6 +15,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.applandeo.materialcalendarview.CalendarUtils;
@@ -31,12 +34,20 @@ public class ProfModeHomePage extends AppCompatActivity {
     private ScrollView scrollHome;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle mToggle;
+    public final static String USERNAME = "USERNAME";
+    private String username;
+    private SharedPreferences mPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prof_mode_home_page);
         setTitle("My Activity");
+
+        mPreferences = getSharedPreferences("sharedPrefFileStudent", MODE_PRIVATE);
+        username = mPreferences.getString(USERNAME, "");
+
+
 
         scrollHome = findViewById(R.id.scrollHome);
         scrollHome.smoothScrollTo(0,0);
@@ -49,6 +60,12 @@ public class ProfModeHomePage extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         NavigationView navigation = findViewById(R.id.navigation);
 
+        //set username on navigation panel
+        View header = navigation.getHeaderView(0);
+        TextView text = header.findViewById(R.id.name);
+        text.setText(username);
+        text.setTextColor(Color.WHITE);
+
         navigation.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -60,6 +77,7 @@ public class ProfModeHomePage extends AppCompatActivity {
 
                 if (id == R.id.nav_bookingHistory) {
                     Intent intent = new Intent(ProfModeHomePage.this, Bookings.class);
+                    intent.putExtra(USERNAME, username);
                     startActivity(intent);
 
                 }
@@ -89,6 +107,7 @@ public class ProfModeHomePage extends AppCompatActivity {
                 Calendar clickedDayCalendar = eventDay.getCalendar();
                 Toast.makeText(ProfModeHomePage.this,clickedDayCalendar.toString(),Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(ProfModeHomePage.this,Bookings.class);
+                intent.putExtra(USERNAME, username);
                 startActivity(intent);
             }
         });
@@ -101,6 +120,7 @@ public class ProfModeHomePage extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ProfModeHomePage.this, ProfModeRequestsPage.class);
+                intent.putExtra(USERNAME, username);
                 startActivity(intent);
             }
         });
@@ -109,6 +129,7 @@ public class ProfModeHomePage extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ProfModeHomePage.this, BookFacilities.class);
+                intent.putExtra(USERNAME, username);
                 startActivity(intent);
             }
         });
@@ -117,6 +138,9 @@ public class ProfModeHomePage extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+        SharedPreferences.Editor preferenceEditor = mPreferences.edit();
+        preferenceEditor.putString(USERNAME, username);
+        preferenceEditor.apply();
         overridePendingTransition(0, 0);
     }
 

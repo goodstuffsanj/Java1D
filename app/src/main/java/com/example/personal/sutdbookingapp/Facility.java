@@ -24,16 +24,18 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import static java.util.Calendar.DATE;
 
 public class Facility extends AppCompatActivity {
-    public final static String NAME = "NAME";
+    public final static String NAME = "USERNAME";
     public final static String BLOCKED_TIMINGS = "BLOCKED_TIMINGS";
     public final static String DATE_PICKED = "DATE_PICKED";
     public final static String PROF = "PROF";
+    public static final String USERNAME = "USERNAME";
 
     private String name;
     private String image;
     private String location;
     private ArrayList<String> blockedTimings;
     private String desc;
+    private String username;
 
     Button buttonBookFacility;
     TextView textViewFacilityName;
@@ -53,6 +55,7 @@ public class Facility extends AppCompatActivity {
         location = intent.getStringExtra(ListAdapter.LOCATION);
         desc = intent.getStringExtra(ListAdapter.DESCRIPTION);
         blockedTimings = intent.getStringArrayListExtra(ListAdapter.BLOCKED_TIMINGS);
+        username = intent.getStringExtra(ListAdapter.USERNAME);
 
         buttonBookFacility = findViewById(R.id.buttonBookFacility);
         textViewFacilityName = findViewById(R.id.textViewFacilityName);
@@ -96,7 +99,7 @@ public class Facility extends AppCompatActivity {
                     intent.putExtra(PROF, false);
                     intent.putExtra(NAME, name);
                     intent.putExtra(BLOCKED_TIMINGS, blockedTimings);
-
+                    intent.putExtra(USERNAME, username);
 
                     startActivity(intent);
                 }

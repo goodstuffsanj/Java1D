@@ -25,6 +25,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
     private ArrayList<Bookable> bookables = new ArrayList<>();
     private ArrayList<Bookable> copies = new ArrayList<>();
     private Context context;
+    private String username;
+    public final static String USERNAME = "USERNAME";
     public final static String NAME = "NAME";
     public final static String IMAGE = "IMAGE";
     public final static String LOCATION = "LOCATION";
@@ -33,9 +35,10 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
     public final static String DESCRIPTION = "DESCRIPTION";
     public final static String BLOCKED_TIMINGS = "BLOCKED_TIMINGS";
 
-    public ListAdapter(ArrayList<Bookable> bookables, Context context) {
+    public ListAdapter(ArrayList<Bookable> bookables, Context context, String username) {
         this.bookables = bookables;
         this.context = context;
+        this.username = username;
         copies = new ArrayList<>(bookables);
     }
 
@@ -69,6 +72,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
                 }
                 else if (context.getClass() == BookProf.class) {
                     Intent intent = new Intent(context, Prof.class);
+                    intent.putExtra(USERNAME, username);
                     intent.putExtra(NAME, bookable.getName());
                     intent.putExtra(IMAGE, bookable.getImage());
                     intent.putExtra(LOCATION, bookable.getLocation());

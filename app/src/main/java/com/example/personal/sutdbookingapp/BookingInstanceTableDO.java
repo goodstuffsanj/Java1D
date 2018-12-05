@@ -15,8 +15,10 @@ import java.util.Set;
 
 public class BookingInstanceTableDO {
     private String _bookingID;
+    private String _location;
     private String _message;
     private String _name;
+    private String _profName;
     private String _status;
     private String _studentName;
     private String _timing;
@@ -29,6 +31,14 @@ public class BookingInstanceTableDO {
 
     public void setBookingID(final String _bookingID) {
         this._bookingID = _bookingID;
+    }
+    @DynamoDBAttribute(attributeName = "Location")
+    public String getLocation() {
+        return _location;
+    }
+
+    public void setLocation(final String _location) {
+        this._location = _location;
     }
     @DynamoDBAttribute(attributeName = "Message")
     public String getMessage() {
@@ -45,6 +55,14 @@ public class BookingInstanceTableDO {
 
     public void setName(final String _name) {
         this._name = _name;
+    }
+    @DynamoDBAttribute(attributeName = "ProfName")
+    public String getProfName() {
+        return _profName;
+    }
+
+    public void setProfName(final String _profName) {
+        this._profName = _profName;
     }
     @DynamoDBAttribute(attributeName = "Status")
     public String getStatus() {
