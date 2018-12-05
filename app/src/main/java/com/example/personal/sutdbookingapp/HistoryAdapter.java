@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import org.joda.time.LocalDateTime;
+
 import java.util.ArrayList;
 
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder>{
@@ -18,11 +20,11 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
 
     private static final String TAG = "HistoryAdapter";
 
-    private ArrayList<HistoryData> history_list;
+    private ArrayList<HistoryData> historylist;
     private Context context;
 
-    public HistoryAdapter(Context context, ArrayList<HistoryData> history_list) {
-        this.history_list = history_list;
+    public HistoryAdapter(Context context, ArrayList<HistoryData> historylist) {
+        this.historylist = historylist;
         this.context = context;
     }
 
@@ -54,9 +56,12 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
 
     @Override
     public void onBindViewHolder(HistoryAdapter.HistoryViewHolder holder, int position) {
-        HistoryData historyData = history_list.get(position);
+        HistoryData historyData = historylist.get(position);
 
         holder.bookingTime.setText(historyData.getTime());
+        LocalDateTime startTime = new LocalDateTime(historyData.getTime());
+        String timeSlot = startTime.toString("E, d MMM yyyy, h:mm a - ") + startTime.plusMinutes(30).toString("h:mm a");
+        holder.bookingTime.setText(timeSlot);
         holder.bookingStatus.setText(historyData.getStatus());
         holder.bookingHistory.setText(historyData.getBookingHistory());
 
@@ -68,7 +73,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
     //how many results are displayed
     @Override
     public int getItemCount() {
-        return history_list.size();
+        return historylist.size();
     }
 
 

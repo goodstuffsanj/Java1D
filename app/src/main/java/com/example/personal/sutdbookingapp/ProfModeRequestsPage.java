@@ -63,7 +63,8 @@ public class ProfModeRequestsPage extends AppCompatActivity {
             <T> void postQueryAll(PaginatedList<T> result) {
                 for (int i = 0; i < result.size(); i++) {
                     BookingInstanceTableDO bookingInstance = (BookingInstanceTableDO) result.get(i);
-                    if (bookingInstance.getName().equals(name) && bookingInstance.getStatus().equals("Pending")) {
+                    Log.i(TAG, "postQueryAll: "+ bookingInstance.getName());
+                    if (bookingInstance.getName() != null && bookingInstance.getName().equals(name) && bookingInstance.getStatus().equals("Pending")) {
                         String bookingID = bookingInstance.getBookingID();
                         String studentName = bookingInstance.getStudentName();
                         String message = bookingInstance.getMessage();

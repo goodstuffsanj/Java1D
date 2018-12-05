@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -52,6 +53,7 @@ public class BookingInstanceAdapter extends RecyclerView.Adapter<BookingInstance
             case "completed":
                 viewHolder.status.setText(status);
                 viewHolder.status.setTextColor(Color.parseColor("#e81e1e"));
+                viewHolder.buttonCancel.setVisibility(View.GONE);
                 break;
                 //viewHolder.status.setTextColor(Color.parseColor("#ffbc3f"));
         }
@@ -70,6 +72,7 @@ public class BookingInstanceAdapter extends RecyclerView.Adapter<BookingInstance
         TextView name;
         ImageView image;
         TextView status;
+        Button buttonCancel;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -79,6 +82,7 @@ public class BookingInstanceAdapter extends RecyclerView.Adapter<BookingInstance
             name = itemView.findViewById(R.id.name);
             image = itemView.findViewById(R.id.image);
             status = itemView.findViewById(R.id.status);
+            buttonCancel = itemView.findViewById(R.id.buttonCancel);
         }
     }
 }

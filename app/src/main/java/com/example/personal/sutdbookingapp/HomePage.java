@@ -1,6 +1,8 @@
 package com.example.personal.sutdbookingapp;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
@@ -75,7 +77,7 @@ public class HomePage extends AppCompatActivity {
                 Log.i("Homepage", "onNavigationItemSelected: inside");
 
                 if (id == R.id.nav_bookingHistory) {
-                    Intent intent = new Intent(HomePage.this, History.class);
+                    Intent intent = new Intent(HomePage.this, Bookings.class);
                     startActivity(intent);
 
                 }
@@ -104,6 +106,11 @@ public class HomePage extends AppCompatActivity {
         james.setStudentID("1002899");
         james.setStudentPassword("secret");
         b.create(james);
+
+        //test student account:
+//        StudentID: 11111111
+//        StudentName = test
+//        StudentPassword = xyz
 
 
         //creating database for prof
@@ -237,9 +244,13 @@ public class HomePage extends AppCompatActivity {
         overridePendingTransition(0, 0);
     }
 
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
         if (mToggle.onOptionsItemSelected(item)) {
+
             return true;
         }
 

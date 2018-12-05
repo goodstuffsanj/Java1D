@@ -63,8 +63,10 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.Reques
         String timeSlot = timing.toString("E, d MMM yyyy, h:mm a - ") + timing.plusMinutes(30).toString("h:mm a");
         String message = requestsList.get(position).getReason();
         holder.senderName.setText(senderName);
+        holder.bookingID.setText(bookingID);
         holder.date.setText(timeSlot);
         holder.reason.setText(message);
+
 
         Database b = new Database(context);
         b.getDataHandler(new Database.DataHandler() {
@@ -78,6 +80,14 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.Reques
         holder.tick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                b.getDataHandler(new Database.DataHandler() {
+                    @Override
+                    <T> void postReceivedData(T result) {
+                        BookingInstanceTableDO booking = (BookingInstanceTableDO) result;
+                        booking.setStatus("Accepted");
+                        b.update(booking);
+                    }
+                }).getData(BookingInstanceTableDO.class, bookingID);
                 Toast.makeText(context, "Request has been accepted", Toast.LENGTH_LONG).show();
                 ContentResolver cr = context.getContentResolver ( );
                 ContentValues cv = new ContentValues ( );
@@ -101,7 +111,7 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.Reques
                 Uri uri = cr.insert ( CalendarContract.Events.CONTENT_URI, cv );
                 Toast.makeText (context, timeSlot, Toast.LENGTH_SHORT ).show ();
 
-                Toast.makeText(context, "Request has been accepted", Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "Request has been added to calendar", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -111,6 +121,14 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.Reques
                 //RequestsData.remove(position);
                 //Toast.makeText(context, "request has been declined", Toast.LENGTH_LONG).show();
                 //notifyDataSetChanged();
+                b.getDataHandler(new Database.DataHandler() {
+                    @Override
+                    <T> void postReceivedData(T result) {
+                        BookingInstanceTableDO booking = (BookingInstanceTableDO) result;
+                        booking.setStatus("Rejected");
+                        b.update(booking);
+                    }
+                }).getData(BookingInstanceTableDO.class, bookingID);
                 Toast.makeText(context, "Request has been declined", Toast.LENGTH_LONG).show();
             }
         });
@@ -146,6 +164,7 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.Reques
         LinearLayout request;
 
         TextView senderName;
+        TextView bookingID;
         ImageButton tick;
         ImageButton cross;
         TextView date;
@@ -155,6 +174,7 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.Reques
             super(itemView);
 
             request = itemView.findViewById(R.id.request);
+            bookingID = itemView.findViewById(R.id.bookingId);
             senderName = itemView.findViewById(R.id.requestName);
             tick = itemView.findViewById(R.id.tick);
             cross = itemView.findViewById(R.id.cross);
