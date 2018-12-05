@@ -23,7 +23,6 @@ public class StudentTableDO {
     public String getUserId() {
         return _userId;
     }
-
     public void setUserId(final String _userId) {
         this._userId = _userId;
     }
@@ -32,17 +31,22 @@ public class StudentTableDO {
     public String getPassword() {
         return _password;
     }
-
     public void setPassword(final String _password) {
         this._password = _password;
     }
-    @DynamoDBAttribute(attributeName = "name")
+
+    @DynamoDBIndexHashKey(attributeName = "name", globalSecondaryIndexName = "Names")
     public String getName() {
         return _name;
     }
-
     public void setName(final String _name) {
         this._name = _name;
     }
-
+//    @DynamoDBIndexHashKey(attributeName = "userId", globalSecondaryIndexName = "student")
+//    public String get_userId() {
+//        return _userId;
+//    }
+//    public void set_userId(final String _userId) {
+//        this._userId = _userId;
+//    }
 }

@@ -16,7 +16,7 @@
         android:src="@mipmap/ic_launcher"/>
 
     <Button
-        android:id="@+id/bookFacility"
+        android:id="@+id/buttonBookFacility"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
