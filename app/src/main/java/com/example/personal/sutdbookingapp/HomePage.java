@@ -125,14 +125,14 @@ public class HomePage extends AppCompatActivity {
             @Override
             <T> void postReceivedData(T result) {
                 StudentTableDO a = (StudentTableDO) result;
-                Log.i("DB_dataReceived ", ((StudentTableDO) result).getStudentPassword());
+//                Log.i("DB_dataReceived ", ((StudentTableDO) result).getStudentPassword());
             }
         }).getData(StudentTableDO.class,"222");
         test.getDataHandler(new Database.DataHandler() {
             @Override
             <T> void postReceivedData(T result) {
                 ProfTableDO a = (ProfTableDO) result;
-                Log.i("DB_dataReceived ", (a.getProfPassword()));
+//                Log.i("DB_dataReceived ", (a.getProfPassword()));
             }
         }).getData(ProfTableDO.class,"Prof 0");
 /*
