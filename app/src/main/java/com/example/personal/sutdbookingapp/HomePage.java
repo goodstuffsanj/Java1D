@@ -62,11 +62,9 @@ public class HomePage extends AppCompatActivity {
         StudentTableDO studentTableDO = new StudentTableDO();
         StudentTableDO studentTableDO1 = new StudentTableDO();
 
-        studentTableDO.setUserId("222");
-        studentTableDO.setName("best student");
-        studentTableDO.setPassword("2333666");
-        Log.i(TAG, "get password"+studentTableDO.getPassword());
-
+        studentTableDO.setStudentID("222");
+        studentTableDO.setStudentName("best student");
+        studentTableDO.setStudentPassword("2333666");
         // ***************************************************** Create Data
         Log.i(TAG,"item is creating");
         test.create(studentTableDO);
@@ -114,22 +112,29 @@ public class HomePage extends AppCompatActivity {
 
          //Query Data -> check Logcat Yesss
         // index
-        test.getQueryHandler(new Database.QueryHandler(){
-            @Override
-            <T> void postQuery(PaginatedList<T> result) {
-                Log.i(TAG,"this is the result" + result.toString());
-            }
-        }).getQuery(StudentTableDO.class,"Names",studentTableDO);
-//
+//        test.getQueryHandler(new Database.QueryHandler(){
+//            @Override
+//            <T> void postQuery(PaginatedList<T> result) {
+//                Log.i(TAG,"this is the result" + result.toString());
+//            }
+//        }).getQuery(StudentTableDO.class,"Names",studentTableDO);
+////
         // Get Data -> check Logcat dataReceived
         // hash key
         test.getDataHandler(new Database.DataHandler() {
             @Override
             <T> void postReceivedData(T result) {
                 StudentTableDO a = (StudentTableDO) result;
-                Log.i("DB_dataReceived ", ((StudentTableDO) result).getPassword());
+                Log.i("DB_dataReceived ", ((StudentTableDO) result).getStudentPassword());
             }
         }).getData(StudentTableDO.class,"222");
+        test.getDataHandler(new Database.DataHandler() {
+            @Override
+            <T> void postReceivedData(T result) {
+                ProfTableDO a = (ProfTableDO) result;
+                Log.i("DB_dataReceived ", (a.getProfPassword()));
+            }
+        }).getData(ProfTableDO.class,"Prof 0");
 /*
                 //Log.d("Yesss",);
 //                Iterator<T> iter = result.iterator();
