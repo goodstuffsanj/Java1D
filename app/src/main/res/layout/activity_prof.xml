@@ -76,7 +76,7 @@
                 android:layout_gravity="center"
                 android:background="@color/colorPrimaryDark"/>
         </LinearLayout>
-
+s
     </ScrollView>
 
 </android.support.constraint.ConstraintLayout>

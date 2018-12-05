@@ -58,12 +58,16 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "onclick: clicked on: "+ bookable.getName());
-                if (context.getClass()==BookFacilities.class) {
+                if (context.getClass() == BookFacilities.class) {
                     Intent intent = new Intent(context, Facility.class);
                     intent.putExtra(NAME, bookable.getName());
+                    intent.putExtra(IMAGE, bookable.getImage());
+                    intent.putExtra(LOCATION, bookable.getLocation());
+                    intent.putExtra(DESCRIPTION, bookable.getDescription());
+                    intent.putExtra(BLOCKED_TIMINGS, (ArrayList) bookable.getBlockedTimings());
                     context.startActivity(intent);
                 }
-                else if (context.getClass()==BookProf.class) {
+                else if (context.getClass() == BookProf.class) {
                     Intent intent = new Intent(context, Prof.class);
                     intent.putExtra(NAME, bookable.getName());
                     intent.putExtra(IMAGE, bookable.getImage());
@@ -83,7 +87,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
         return bookables.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
 
         CircleImageView image;
         TextView image_name;

@@ -8,15 +8,6 @@
     android:orientation="vertical"
     android:id="@+id/drawer">
 
-    <android.support.design.widget.NavigationView
-        android:id="@+id/navigation"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        app:menu="@menu/navigation_menu"
-        app:headerLayout="@layout/header_layout"
-        app:itemTextColor="@color/colorAccent"/>
-
     <ScrollView
         android:layout_marginTop="-10dp"
         android:id="@+id/scrollHome"
@@ -55,17 +46,6 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
 
-            <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:scaleType="centerCrop"
-                android:src="@drawable/search"
-                app:layout_constraintBottom_toBottomOf="@+id/textView"
-                app:layout_constraintEnd_toEndOf="@+id/textView"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView" />
-
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="0dp"
@@ -87,7 +67,7 @@
             <android.support.v7.widget.CardView
                 android:id="@+id/book_prof"
                 android:layout_width="0dp"
-                android:layout_height="185dp"
+                android:layout_height="167dp"
                 android:layout_marginStart="23dp"
                 android:layout_marginEnd="21dp"
                 android:padding="10dp"
@@ -97,20 +77,33 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/book_facilities">
 
+                <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="35dp"-->
+                <!--android:fontFamily="@font/skia"-->
+                <!--android:lineSpacingExtra="10sp"-->
+                <!--android:text="BOOK-->
+                <!--CONSULTATION"-->
+                <!--android:textAlignment="center"-->
+                <!--android:textAppearance="@style/TextAppearance.AppCompat.Title"-->
+                <!--android:textColor="@color/dark"-->
+                <!--android:textStyle="bold" />-->
+
                 <ImageView
 
                     android:layout_width="263dp"
                     android:layout_height="255dp"
                     android:layout_marginLeft="-100dp"
-                    android:layout_marginTop="-50dp"
+                    android:layout_marginTop="-60dp"
                     android:src="@drawable/bp" />
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
                 android:id="@+id/book_facilities"
                 android:layout_width="0dp"
-                android:layout_height="185dp"
-                android:layout_marginTop="120dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="140dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="8dp"
                 android:padding="10dp"
@@ -120,11 +113,24 @@
                 app:layout_constraintStart_toEndOf="@+id/book_prof"
                 app:layout_constraintTop_toTopOf="parent">
 
+                <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="35dp"-->
+                <!--android:fontFamily="@font/skia"-->
+                <!--android:lineSpacingExtra="10sp"-->
+                <!--android:text="BOOK-->
+                <!--FACILITIES"-->
+                <!--android:textAlignment="center"-->
+                <!--android:textAllCaps="false"-->
+                <!--android:textAppearance="@style/TextAppearance.AppCompat.Title"-->
+                <!--android:textColor="@color/dark"-->
+                <!--android:textStyle="bold" />-->
+
                 <ImageView
                     android:layout_width="306dp"
                     android:layout_height="152dp"
                     android:layout_marginLeft="-90dp"
-                    android:layout_marginTop="10dp"
 
                     android:layout_marginBottom="15dp"
                     android:src="@drawable/bf" />
@@ -137,11 +143,10 @@
                 android:layout_margin="27dp"
                 android:layout_marginStart="27dp"
                 android:layout_marginEnd="27dp"
-                android:layout_marginBottom="32dp"
                 app:cardCornerRadius="15dp"
-                app:layout_constraintBottom_toTopOf="@+id/announcement"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/book_prof">
 
                 <com.applandeo.materialcalendarview.CalendarView
                     android:id="@+id/calendarView"
@@ -155,33 +160,17 @@
 
             </android.support.v7.widget.CardView>
 
-            <android.support.v7.widget.CardView
-                android:id="@+id/announcement"
-                android:layout_width="0dp"
-                android:layout_height="190dp"
-
-                android:layout_marginStart="23dp"
-                android:layout_marginEnd="23dp"
-                android:padding="10dp"
-                app:cardCornerRadius="20dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="5dp"
-                    android:text="Announcement"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                    android:textColor="@color/colorPrimary"
-                    android:fontFamily="@font/skia"/>
-            </android.support.v7.widget.CardView>
-
 
         </android.support.constraint.ConstraintLayout>
     </ScrollView>
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/navigation"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:menu="@menu/navigation_menu"
+        app:headerLayout="@layout/header_layout"
+        app:itemTextColor="@color/colorAccent"/>
 
 </android.support.v4.widget.DrawerLayout>

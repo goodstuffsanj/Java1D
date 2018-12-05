@@ -26,7 +26,6 @@ public class TimingsAdapter extends RecyclerView.Adapter<TimingsAdapter.TimingsV
 
     private ArrayList<TimingsData> timeDataList;
     private Context context;
-    private List<String> blockedTimings;
     public final static String NAME = "NAME";
     public final static String TIME = "TIME";
     public final static String IS_PROF = "IS_PROF";
@@ -72,7 +71,7 @@ public class TimingsAdapter extends RecyclerView.Adapter<TimingsAdapter.TimingsV
     private void setTiming(TimingsViewHolder viewHolder, TimingsData timingsData) {
         TextView timeSlot = viewHolder.time;
         LocalDateTime time = timingsData.getTime();
-        LocalDateTime time1 = new LocalDateTime(timingsData.getTime().getYear(), timingsData.getTime().getMonthOfYear(), timingsData.getTime().getDayOfMonth(), timingsData.getTime().getHourOfDay(), timingsData.getTime().getMinuteOfHour());
+        LocalDateTime time1 = new LocalDateTime(timingsData.getTime().getYear(), timingsData.getTime().getMonthOfYear(), timingsData.getTime().getDayOfMonth(), timingsData.getTime().getHourOfDay()+ (int) Math.floor((timingsData.getTime().getMinuteOfHour()+30) / 60), (timingsData.getTime().getMinuteOfHour()+30) % 60);
         String text = time.toString("HH:mm - ") + time1.toString("HH:mm");
         timeSlot.setText(text);
     }
@@ -83,7 +82,6 @@ public class TimingsAdapter extends RecyclerView.Adapter<TimingsAdapter.TimingsV
         Boolean enabled = timingsData.getAvailability();
         //if not available for booking
         if (!enabled) {
-            Log.i(TAG, "setButton: " + timingsData.getTime());
             bookButton.setBackgroundColor(bookButton.getContext().getResources().getColor(R.color.colorPrimary));
             bookButton.setEnabled(enabled);
         }
@@ -96,8 +94,7 @@ public class TimingsAdapter extends RecyclerView.Adapter<TimingsAdapter.TimingsV
                 Intent intent = new Intent(bookButton.getContext(), ConfirmBooking.class);
                 intent.putExtra(NAME, timingsData.getName());
                 intent.putExtra(TIME, timingsData.getTime().toString());
-                Log.i(TAG, "onClick: " + timingsData.getTime().toString());
-                intent.putExtra(IS_PROF, true);
+                intent.putExtra(IS_PROF, timingsData.getIsProf());
                 context.startActivity(intent);
             }
         });

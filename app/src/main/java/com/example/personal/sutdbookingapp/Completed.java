@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,12 +17,12 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link Waiting.OnFragmentInteractionListener} interface
+ * {@link Upcoming.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link Waiting#newInstance} factory method to
+ * Use the {@link Upcoming#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Waiting extends Fragment {
+public class Completed extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -30,11 +31,11 @@ public class Waiting extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private ArrayList<BookingInstance> waitings = new ArrayList<>();
+    private ArrayList<BookingInstance> completeds = new ArrayList<>();
 
     private OnFragmentInteractionListener mListener;
 
-    public Waiting() {
+    public Completed() {
         // Required empty public constructor
     }
 
@@ -44,11 +45,11 @@ public class Waiting extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment Waiting.
+     * @return A new instance of fragment Upcoming.
      */
     // TODO: Rename and change types and number of parameters
-    public static Waiting newInstance(String param1, String param2) {
-        Waiting fragment = new Waiting();
+    public static Upcoming newInstance(String param1, String param2) {
+        Upcoming fragment = new Upcoming();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -63,23 +64,25 @@ public class Waiting extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
-        View rootView = inflater.inflate(R.layout.fragment_waiting, container, false);
+        Log.i("BookingInstance", "OnCreateView");
+        View rootView = inflater.inflate(R.layout.fragment_completed, container, false);
         for (int i=0; i<20; i++) {
-            BookingInstance bookingInstance = new BookingInstance("120839201","Professor "+Integer.toString(i+1),"12/11/2018","08:30","09:30","Building 1 lvl 5","https://www.biography.com/.image/t_share/MTE5NDg0MDU0OTU2OTAxOTAz/albert-einstein-9285408-1-402.jpg","waiting");
-            waitings.add(bookingInstance);
+            BookingInstance bookingInstance = new BookingInstance("120839201","Professor "+Integer.toString(i+1),"12/11/2018","08:30","09:30","Building 1 lvl 5","https://www.biography.com/.image/t_share/MTE5NDg0MDU0OTU2OTAxOTAz/albert-einstein-9285408-1-402.jpg","completed");
+            completeds.add(bookingInstance);
         }
         RecyclerView recyclerView = rootView.findViewById(R.id.recyclerView);
-        BookingInstanceAdapter adapter = new BookingInstanceAdapter(this.getContext(), waitings);
+        BookingInstanceAdapter adapter = new BookingInstanceAdapter(this.getContext(), completeds);
+        recyclerView.setLayoutManager(new LinearLayoutManager(Completed.this.getActivity()));
         recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         return  rootView;
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event

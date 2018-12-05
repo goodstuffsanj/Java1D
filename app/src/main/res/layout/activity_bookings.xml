@@ -17,12 +17,15 @@
         android:theme="@style/AppTheme"
         app:tabRippleColor="@color/ripple_red"
         app:tabIndicatorHeight="4dp"
-        android:layout_margin="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         app:tabIndicatorGravity="stretch"
         app:tabSelectedTextColor="@color/defaultTextColor"
         app:tabTextColor="@color/red"
         app:tabIndicatorColor="@color/red"
         android:scrollbarSize="4dp"></android.support.design.widget.TabLayout>
+
     <android.support.v4.view.ViewPager
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -9,7 +9,7 @@
         android:id="@+id/requestName"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:background="@drawable/rounded_drawable"
         android:gravity="center"
         android:text="James Andrew Pohadi"
@@ -17,6 +17,13 @@
         android:textSize="15sp"
         android:layout_marginLeft="15sp"
         android:textStyle="bold"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15sp"
+        android:id="@+id/bookingId"
+        android:text="Booking ID: 0f666d20-96ec-479b-9f02-5f7bec76b4aa"/>
 
     <ImageButton
         android:id="@+id/tick"
@@ -27,7 +34,8 @@
         android:scaleX="0.5"
         android:scaleY="0.5"
         android:src="@drawable/tick"
-        android:background="#FFFFFF"/>
+        android:background="?android:attr/selectableItemBackground"/>
+    <!--the background set to transparent already-->
     <!--later change the background to transparent-->
 
     <ImageButton
@@ -39,7 +47,8 @@
         android:scaleX="0.5"
         android:scaleY="0.5"
         android:src="@drawable/cross"
-        android:background="#FFFFFF"/>
+        android:background="?android:attr/selectableItemBackground"/>
+    <!--the background set to transparent already-->
     <!--later change the background to transparent-->
 
     <TextView
@@ -65,6 +74,10 @@
         android:textColor="@android:color/black"
         android:textSize="15sp"
         android:layout_marginLeft="15sp" />
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="2dp"
+        android:background="@android:color/darker_gray" />
 
 
 </LinearLayout>

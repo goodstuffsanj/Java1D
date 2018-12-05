@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 public class Bookings extends AppCompatActivity implements
-        Upcoming.OnFragmentInteractionListener, Waiting.OnFragmentInteractionListener {
+        Upcoming.OnFragmentInteractionListener, Waiting.OnFragmentInteractionListener, Completed.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,6 +16,7 @@ public class Bookings extends AppCompatActivity implements
         TabLayout tabLayout = findViewById(R.id.tabLayout);
         tabLayout.addTab(tabLayout.newTab().setText("Upcoming"));
         tabLayout.addTab(tabLayout.newTab().setText("Waiting"));
+        tabLayout.addTab(tabLayout.newTab().setText("Completed"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final ViewPager viewPager= findViewById(R.id.pager);
