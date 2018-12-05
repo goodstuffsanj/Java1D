@@ -6,4 +6,77 @@
     android:layout_height="match_parent"
     tools:context=".Prof">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imageProf"
+                android:padding="10dp"
+                android:layout_gravity="center"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:src="@mipmap/ic_launcher"/>
+
+            <TextView
+                android:layout_gravity="center"
+                android:id="@+id/textViewProfName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/prof_name"
+                android:textAllCaps="true"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/description_office"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/prof_office"
+                android:layout_gravity="center" />
+
+            <TextView
+                android:id="@+id/description_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/prof_email"
+                android:layout_gravity="center" />
+
+            <TextView
+                android:id="@+id/description_contact"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/prof_contact"
+                android:layout_gravity="center" />
+
+
+            <TextView
+                android:id="@+id/description_about"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="italic"
+                android:padding="15dp"
+                android:text="I am a passionate professor. I studied x in university XYZ and I have been doing research about Y for K years."
+                android:layout_gravity="center" />
+
+            <Button
+                android:id="@+id/bookConsult"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_marginBottom="135dp"
+                android:text="@string/book_consultation"
+                android:layout_gravity="center"
+                android:background="@color/colorPrimaryDark"/>
+        </LinearLayout>
+s
+    </ScrollView>
+
 </android.support.constraint.ConstraintLayout>

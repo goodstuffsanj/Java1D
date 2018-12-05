@@ -1,67 +1,176 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".HomePage"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/drawer">
 
     <ScrollView
+        android:layout_marginTop="-10dp"
+        android:id="@+id/scrollHome"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
 
-        <LinearLayout
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="415dp"
+                android:layout_height="253dp"
+                android:layout_marginBottom="32dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/bgtop"
+                app:layout_constraintBottom_toTopOf="@+id/calendar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.060000002" />
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:src="@drawable/sutdooking"
+                app:layout_constraintBottom_toTopOf="@+id/book_facilities"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
 
             <TextView
-                android:text="What do you want to do today?"
-                android:layout_width="match_parent"
+                android:id="@+id/textView"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_marginTop="8dp"
                 android:gravity="center"
+                android:includeFontPadding="false"
                 android:padding="10dp"
-                android:includeFontPadding="false"/>
+                android:text="@string/what"
+                android:textAllCaps="false"
+                android:textSize="20dp"
+                app:layout_constraintBottom_toTopOf="@+id/book_prof"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
-            <LinearLayout
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/book_prof"
+                android:layout_width="0dp"
+                android:layout_height="167dp"
+                android:layout_marginStart="23dp"
+                android:layout_marginEnd="21dp"
+                android:padding="10dp"
+                app:cardCornerRadius="15dp"
+                app:layout_constraintBottom_toBottomOf="@+id/book_facilities"
+                app:layout_constraintEnd_toStartOf="@+id/book_facilities"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/book_facilities">
+
+                <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="35dp"-->
+                <!--android:fontFamily="@font/skia"-->
+                <!--android:lineSpacingExtra="10sp"-->
+                <!--android:text="BOOK-->
+                <!--CONSULTATION"-->
+                <!--android:textAlignment="center"-->
+                <!--android:textAppearance="@style/TextAppearance.AppCompat.Title"-->
+                <!--android:textColor="@color/dark"-->
+                <!--android:textStyle="bold" />-->
+
+                <ImageView
+
+                    android:layout_width="263dp"
+                    android:layout_height="255dp"
+                    android:layout_marginLeft="-100dp"
+                    android:layout_marginTop="-60dp"
+                    android:src="@drawable/bp" />
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/book_facilities"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="140dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="8dp"
+                android:padding="10dp"
+                app:cardCornerRadius="15dp"
+                app:layout_constraintBottom_toTopOf="@+id/calendar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/book_prof"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="35dp"-->
+                <!--android:fontFamily="@font/skia"-->
+                <!--android:lineSpacingExtra="10sp"-->
+                <!--android:text="BOOK-->
+                <!--FACILITIES"-->
+                <!--android:textAlignment="center"-->
+                <!--android:textAllCaps="false"-->
+                <!--android:textAppearance="@style/TextAppearance.AppCompat.Title"-->
+                <!--android:textColor="@color/dark"-->
+                <!--android:textStyle="bold" />-->
+
+                <ImageView
+                    android:layout_width="306dp"
+                    android:layout_height="152dp"
+                    android:layout_marginLeft="-95dp"
+
+                    android:layout_marginBottom="15dp"
+                    android:src="@drawable/bf" />
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/calendar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <android.support.v7.widget.CardView
-                    android:id="@+id/book_prof"
-                    android:layout_weight="1"
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
+                android:layout_margin="27dp"
+                android:layout_marginStart="27dp"
+                android:layout_marginEnd="27dp"
+                app:cardCornerRadius="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/book_prof">
+
+                <com.applandeo.materialcalendarview.CalendarView
+                    android:id="@+id/calendarView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:padding="10dp"
-                    android:layout_margin="10dp"
-                    app:cardCornerRadius="7dp">
+                    app:eventsEnabled="true"
+                    app:headerColor="@color/red"
+                    app:selectionColor="@color/red"
+                    app:todayLabelColor="@color/red" />
 
-                    <TextView
-                        android:text="Book Prof"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-                </android.support.v7.widget.CardView>
+            </android.support.v7.widget.CardView>
 
-                <android.support.v7.widget.CardView
-                    android:id="@+id/book_facilities"
-                    android:layout_weight="1"
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
-                    android:layout_gravity="center"
-                    android:padding="10dp"
-                    android:layout_margin="10dp"
-                    app:cardCornerRadius="7dp">
-                    <TextView
-                        android:text="Book Facilities"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-                </android.support.v7.widget.CardView>
-            </LinearLayout>
 
-        </LinearLayout>
+        </android.support.constraint.ConstraintLayout>
     </ScrollView>
 
-</LinearLayout>
+    <android.support.design.widget.NavigationView
+        android:id="@+id/navigation"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:menu="@menu/navigation_menu"
+        app:headerLayout="@layout/header_layout"
+        app:itemTextColor="@color/colorAccent"/>
+
+</android.support.v4.widget.DrawerLayout>

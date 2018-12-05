@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textAllCaps="true"
+        android:textStyle="bold"
+        android:textSize="25sp"
+        android:padding="10dp"
+        android:text="Booking Details"
+        android:id="@+id/title"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/name"
+        android:text="@string/name"
+        android:layout_gravity="center"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/time"
+        android:layout_gravity="center"
+        android:id="@+id/date"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/timing"
+        android:layout_gravity="center"
+        android:text="@string/timing"/>
+
+    <EditText
+        android:id="@+id/sendMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:width="340dp"
+        android:height="100dp"
+        android:background="@drawable/edit_text_border"
+        android:gravity="fill_horizontal"
+        android:hint="@string/message_hint"
+        android:padding="8dp"
+        android:textSize="15sp"
+        android:textColor="@color/colorPrimary"
+        android:layout_margin="10dp"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="OK"
+        android:background="@color/colorPrimaryDark"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        style="@style/Theme.AppCompat.Light"
+        android:id="@+id/okButton"
+
+        />
+
+
+</LinearLayout>

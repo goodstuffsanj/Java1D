@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:id="@+id/request" >
+
+    <TextView
+        android:id="@+id/requestName"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/rounded_drawable"
+        android:gravity="center"
+        android:text="James Andrew Pohadi"
+        android:textColor="@android:color/black"
+        android:textSize="15sp"
+        android:layout_marginLeft="15sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15sp"
+        android:id="@+id/bookingId"
+        android:text="Booking ID: 0f666d20-96ec-479b-9f02-5f7bec76b4aa"/>
+
+    <ImageButton
+        android:id="@+id/tick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="300sp"
+        android:layout_marginTop="-60sp"
+        android:background="?android:attr/selectableItemBackground"
+        android:scaleX="0.5"
+        android:scaleY="0.5"
+        android:src="@drawable/tick" />
+    <!--the background set to transparent already-->
+    <!--later change the background to transparent-->
+
+    <ImageButton
+        android:id="@+id/cross"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="330sp"
+        android:layout_marginTop="-48sp"
+        android:scaleX="0.5"
+        android:scaleY="0.5"
+        android:src="@drawable/cross"
+        android:background="?android:attr/selectableItemBackground"/>
+    <!--the background set to transparent already-->
+    <!--later change the background to transparent-->
+
+    <TextView
+        android:id="@+id/requestTime"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginLeft="15sp"
+        android:layout_marginTop="10sp"
+        android:background="@drawable/rounded_drawable"
+        android:gravity="center"
+        android:text="Friday, 14th December, 14:00 - 15:00"
+        android:textColor="@android:color/black"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/requestReason"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_drawable"
+        android:gravity="start"
+        android:text="Meet to submit the claim forms for java 1D project and also discuss fiture improvements for the 1D java project"
+        android:textColor="@android:color/black"
+        android:textSize="15sp"
+        android:layout_marginLeft="15sp" />
+</LinearLayout>
+
+
+<!--<LinearLayout-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="match_parent"-->
+<!--android:orientation="vertical"-->
+<!--android:id="@+id/request2"-->
+<!--android:layout_marginTop="100sp">-->
+
+<!--<TextView-->
+    <!--android:id="@+id/requestName2"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="40dp"-->
+    <!--android:layout_marginTop="10dp"-->
+    <!--android:background="@drawable/rounded_drawable"-->
+    <!--android:gravity="center"-->
+    <!--android:text="Sanjay Shankar"-->
+    <!--android:textColor="@android:color/black"-->
+    <!--android:textSize="15sp"-->
+    <!--android:layout_marginLeft="15sp"-->
+    <!--android:textStyle="bold"/>-->
+
+<!--<ImageButton-->
+    <!--android:id="@+id/tick2"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginLeft="300sp"-->
+    <!--android:layout_marginTop="-43sp"-->
+    <!--android:scaleX="0.5"-->
+    <!--android:scaleY="0.5"-->
+    <!--android:src="@drawable/tick"-->
+    <!--android:background="white"/>-->
+<!--&lt;!&ndash;later change the background to transparent&ndash;&gt;-->
+
+<!--<ImageButton-->
+    <!--android:id="@+id/cross2"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginLeft="330sp"-->
+    <!--android:layout_marginTop="-49sp"-->
+    <!--android:scaleX="0.5"-->
+    <!--android:scaleY="0.5"-->
+    <!--android:src="@drawable/cross"-->
+    <!--android:background="white"/>-->
+<!--&lt;!&ndash;later change the background to transparent&ndash;&gt;-->
+
+<!--<TextView-->
+    <!--android:id="@+id/requestTime2"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="30dp"-->
+    <!--android:layout_marginTop="-10sp"-->
+    <!--android:background="@drawable/rounded_drawable"-->
+    <!--android:gravity="center"-->
+    <!--android:text="Friday, 21th December, 10:00 - 11:00"-->
+    <!--android:textColor="@android:color/black"-->
+    <!--android:textSize="15sp"-->
+    <!--android:layout_marginLeft="15sp" />-->
+
+<!--<TextView-->
+    <!--android:id="@+id/requestReason2"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginTop="0sp"-->
+    <!--android:background="@drawable/rounded_drawable"-->
+    <!--android:gravity="left"-->
+    <!--android:text="To discuss about the ISTD courses in term 5 and also meet for feedback regarding the final app for java 1D final"-->
+    <!--android:textColor="@android:color/black"-->
+    <!--android:textSize="15sp"-->
+    <!--android:layout_marginLeft="15sp" />-->
+
+<!--</LinearLayout>-->
+
