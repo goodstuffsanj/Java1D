@@ -43,6 +43,7 @@ public class Database {
 
     public <T extends Object> void create(T o) {
         new Thread(new Runnable() {
+
             @Override
             public void run() {
                 dynamoDBMapper.save(o);
@@ -51,9 +52,12 @@ public class Database {
     }
 
     public <T extends Object> void update(T o) {
+        Log.i("DB", "in update");
         new Thread(new Runnable() {
+
             @Override
             public void run() {
+                Log.i("DB", "update is calling");
                 dynamoDBMapper.save(o);
             }
         }).start();
@@ -63,6 +67,8 @@ public class Database {
         new Thread(new Runnable() {
             @Override
             public void run() {
+                System.out.println("****************************************************");
+                Log.i("DB", "delete is calling");
                 dynamoDBMapper.delete(o);
             }
         }).start();
@@ -85,6 +91,7 @@ public class Database {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
+                    Log.i("DB", "query is calling");
                     DynamoDBQueryExpression<T> queryExpression = new DynamoDBQueryExpression<>();
                     queryExpression.setHashKeyValues(o);
                     queryExpression.setIndexName(index);

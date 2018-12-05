@@ -5,18 +5,23 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.system.ErrnoException;
 import android.util.Log;
+import android.view.CollapsibleActionView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ScrollView;
 
+import com.amazonaws.mobile.auth.core.signin.ui.buttons.SignInButton;
+import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBMappingException;
 //import com.amazonaws.mobile.auth.core.signin.ui.buttons.SignInButton;
 import com.applandeo.materialcalendarview.EventDay;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 
@@ -26,6 +31,8 @@ import java.util.List;
 public class LoginPage extends AppCompatActivity {
     Button imageButtonLoginStudent;
     Button buttonStaff;
+    EditText username;
+    EditText password;
     private ScrollView scrollLogin;
     final static int RC_SIGN_IN = 100;
     private static final String TAG = "Login Page";
@@ -74,9 +81,10 @@ public class LoginPage extends AppCompatActivity {
         setContentView(R.layout.activity_login_page);
         imageButtonLoginStudent = findViewById(R.id.imageButtonLoginStudent);
         buttonStaff = findViewById(R.id.buttonStaff);
+        username = findViewById(R.id.username);
+        password = findViewById(R.id.password);
         scrollLogin = findViewById(R.id.scrollLogin);
         scrollLogin.smoothScrollTo(0,0);
-
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
@@ -90,10 +98,38 @@ public class LoginPage extends AppCompatActivity {
                 startActivityForResult(signInIntent, RC_SIGN_IN);
             }
         });
-
         imageButtonLoginStudent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Database test = new Database(LoginPage.this);
+//
+//                test.getDataHandler(new Database.DataHandler() {
+//                    @Override
+//                    <T> void postReceivedData(T result) {
+//                        StudentTableDO a = (StudentTableDO) result;
+//                        Log.i("DB_data from Loginpage", (a.getStudentPassword()));
+//                    }}).getData(StudentTableDO.class, usernameInput);
+
+
+                try {
+                    Log.i("DB_try", "in try");
+                    test.getDataHandler(new Database.DataHandler() {
+                        @Override
+                        <T> void postReceivedData(T result) {
+                            StudentTableDO a = (StudentTableDO) result;
+                            Log.i("DB_data from Loginpage", (a.getStudentPassword()));
+                        }
+                    }).getData(StudentTableDO.class, username);
+                    throw new Exception();
+                }
+                catch(Exception ex){
+                    Log.i("DB_extype:", ex.getClass().getCanonicalName());
+                    Log.i("DB_ex from loginpage", "invalid username");
+                }
+                catch(Error error) {
+                    Log.i("DB_error from loginpage", "invalid username");
+                }
+
                 Intent intent = new Intent(LoginPage.this,HomePage.class);
                 startActivity(intent);
                 finish();

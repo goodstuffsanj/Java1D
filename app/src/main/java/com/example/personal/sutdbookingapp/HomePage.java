@@ -25,6 +25,10 @@ import java.util.Calendar;
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.PaginatedList;
 import com.applandeo.materialcalendarview.EventDay;
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener;
+import com.google.gson.Gson;
+import com.applandeo.materialcalendarview.adapters.CalendarPageAdapter;
+
+// import org.joda.time.LocalDateTime;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +43,7 @@ public class HomePage extends AppCompatActivity {
     private SharedPreferences mPreferences;
     public final static String USERNAME = "USERNAME";
     private String username;
+    public String TAG = "DB";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,24 +94,22 @@ public class HomePage extends AppCompatActivity {
         });
 
 
-        Database b = new Database(HomePage.this);
+        // ***************************************************** database query
+        Database test = new Database(HomePage.this);
+        StudentTableDO studentTableDO = new StudentTableDO();
+        StudentTableDO studentTableDO1 = new StudentTableDO();
 
-        NewsDO news = new NewsDO();
-        news.setAuthor("James");
+        studentTableDO.setStudentID("222");
+        studentTableDO.setStudentName("best student");
+        studentTableDO.setStudentPassword("2333666");
+        // ***************************************************** Create Data
+        Log.i(TAG,"item is creating");
+        test.create(studentTableDO);
+        Log.i(TAG,"item is creating!!! yay!!!!!!!!!");
 
-        StudentTableDO james= new StudentTableDO();
 
-        // Create Data
-
-        james.setStudentName("James Andrew Pohadi");
-        james.setStudentID("1002899");
-        james.setStudentPassword("secret");
-        b.create(james);
-
-        //test student account:
-//        StudentID: 11111111
-//        StudentName = test
-//        StudentPassword = xyz
+        // ***************************************************** Update Data
+//        test.update(studentTableDO);
 
 
         //creating database for prof
@@ -139,18 +142,38 @@ public class HomePage extends AppCompatActivity {
         james.setPassword("secret");
         b.update(james); */
 
-        // Delete Data
+        // ***************************************************** Delete Data
 
-        /*james.setUserId("1002899");
-        james.setPassword("secret");
-        b.delete(james); */
+//        studentTableDO1.setUserId("ss");
+//        studentTableDO1.setPassword("ss");
+//        test.delete(studentTableDO1);
 
-        // Query Data -> check Logcat Yesss
+         //Query Data -> check Logcat Yesss
         // index
-
-        b.getQueryHandler(new Database.QueryHandler(){
+//        test.getQueryHandler(new Database.QueryHandler(){
+//            @Override
+//            <T> void postQuery(PaginatedList<T> result) {
+//                Log.i(TAG,"this is the result" + result.toString());
+//            }
+//        }).getQuery(StudentTableDO.class,"Names",studentTableDO);
+////
+        // Get Data -> check Logcat dataReceived
+        // hash key
+        test.getDataHandler(new Database.DataHandler() {
             @Override
-            <T> void postQuery(PaginatedList<T> result) {
+            <T> void postReceivedData(T result) {
+                StudentTableDO a = (StudentTableDO) result;
+//                Log.i("DB_dataReceived ", ((StudentTableDO) result).getStudentPassword());
+            }
+        }).getData(StudentTableDO.class,"222");
+        test.getDataHandler(new Database.DataHandler() {
+            @Override
+            <T> void postReceivedData(T result) {
+                ProfTableDO a = (ProfTableDO) result;
+//                Log.i("DB_dataReceived ", (a.getProfPassword()));
+            }
+        }).getData(ProfTableDO.class,"Prof 0");
+/*
                 //Log.d("Yesss",);
 //                Iterator<T> iter = result.iterator();
 //                while (iter.hasNext()) {
@@ -168,8 +191,10 @@ public class HomePage extends AppCompatActivity {
                 NewsDO a = (NewsDO) result;
                 Log.d("dataReceived",a.getContent());
 
-            }
-        }).getData(NewsDO.class,"123","Article1");
+*/
+
+
+//////////////////////////////////////////////////////////////////////////////////
 
 
         //how to get all table items

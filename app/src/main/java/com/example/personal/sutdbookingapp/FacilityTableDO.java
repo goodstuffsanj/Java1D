@@ -15,6 +15,7 @@ import java.util.Set;
 
 public class FacilityTableDO {
     private String _facilityName;
+
     private List<String> _facilityBlockedTimings;
     private String _facilityDescription;
     private String _facilityImage;
@@ -29,6 +30,7 @@ public class FacilityTableDO {
     public void setFacilityName(final String _facilityName) {
         this._facilityName = _facilityName;
     }
+
     @DynamoDBAttribute(attributeName = "FacilityBlockedTimings")
     public List<String> getFacilityBlockedTimings() {
         return _facilityBlockedTimings;

@@ -103,7 +103,7 @@ public class BookTimings extends AppCompatActivity{
 
     private Boolean getAvailability(LocalDateTime timingGiven) {
         for (int i = 0; i < blockedTimings.size(); i ++) {
-            if (timingGiven.toString().equals(blockedTimings.get(i)) || timingGiven.isBefore(new LocalDateTime())) {
+            if (timingGiven.toString().equals(blockedTimings.get(i)) || timingGiven.isBefore(new LocalDateTime(DateTimeZone.forID("+08:00")))) {
                 return false;
             }
         }

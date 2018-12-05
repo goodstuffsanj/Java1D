@@ -14,6 +14,7 @@ import java.util.Set;
 @DynamoDBTable(tableName = "sutdbookingapp-mobilehub-1464484747-ProfTable")
 
 public class ProfTableDO {
+
     private String _profName;
     private List<String> _profBlockedTimings;
     private String _profCalendar;
