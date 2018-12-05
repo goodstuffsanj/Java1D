@@ -132,7 +132,7 @@
                 android:textColor="@color/colorAccent" />
 
             <Button
-                android:id="@+id/imageButtonLoginStaff"
+                android:id="@+id/imageButtonLogin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"

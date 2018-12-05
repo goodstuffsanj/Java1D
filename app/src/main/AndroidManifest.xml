@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".LoginPage"
+            android:name=".LoginPageNew"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme">
             <intent-filter>
@@ -66,12 +66,9 @@
             android:name=".LoginPageStaff"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ProfHomePage"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".ProfModeRequestsPage"
             android:screenOrientation="portrait"
-            android:parentActivityName=".ProfHomePage"/>
+            android:parentActivityName=".ProfModeHomePage"/>
         <activity
             android:name=".Prof"
             android:parentActivityName=".BookProf"

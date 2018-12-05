@@ -12,10 +12,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ScrollView;
 
 import com.amazonaws.mobile.auth.core.signin.ui.buttons.SignInButton;
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBMappingException;
 //import com.amazonaws.mobile.auth.core.signin.ui.buttons.SignInButton;
+import com.applandeo.materialcalendarview.EventDay;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -23,11 +25,15 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LoginPage extends AppCompatActivity {
     Button imageButtonLoginStudent;
     Button buttonStaff;
     EditText username;
     EditText password;
+    private ScrollView scrollLogin;
     final static int RC_SIGN_IN = 100;
     private static final String TAG = "Login Page";
     private GoogleSignInClient mGoogleSignInClient;
@@ -70,13 +76,15 @@ public class LoginPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Context context = this;
+
         SharedPreferences sharedPref = context.getSharedPreferences("name", Context.MODE_PRIVATE);
         setContentView(R.layout.activity_login_page);
         imageButtonLoginStudent = findViewById(R.id.imageButtonLoginStudent);
         buttonStaff = findViewById(R.id.buttonStaff);
-
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
+        scrollLogin = findViewById(R.id.scrollLogin);
+        scrollLogin.smoothScrollTo(0,0);
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
