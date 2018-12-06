@@ -196,7 +196,7 @@ public class ConfirmBooking extends AppCompatActivity {
                                     bookingInstance.setName(name);
                                     bookingInstance.setTiming(time.toString());
                                     bookingInstance.setStudentName("John Smith");
-                                    bookingInstance.setStatus("Pending");
+                                    bookingInstance.setStatus("waiting");
                                     Log.i("Database", "Add to BookingInstanceDO: done");
                                     b.create(bookingInstance);
 
