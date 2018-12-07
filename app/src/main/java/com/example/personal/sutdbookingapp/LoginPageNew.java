@@ -32,7 +32,7 @@ public class LoginPageNew extends AppCompatActivity implements Student.OnFragmen
     final static int RC_SIGN_IN = 100;
     private static final String TAG = "LoginPageNew";
     private GoogleSignInClient mGoogleSignInClient;
-    private final static String USERNAME = "USERNAME";
+    public final static String USERNAME = "USERNAME";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

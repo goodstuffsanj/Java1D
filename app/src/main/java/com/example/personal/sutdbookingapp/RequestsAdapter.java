@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Handler;
 import android.provider.CalendarContract;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.RecyclerView;
@@ -27,6 +28,7 @@ import org.joda.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 /**
  * Created by sanjayshankar on 24/11/18.
@@ -66,7 +68,8 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.Reques
         String timeSlot = timing.toString("E, d MMM yyyy, h:mm a - ") + timing.plusMinutes(30).toString("h:mm a");
         String message = requestsList.get(position).getReason();
         holder.senderName.setText(senderName);
-        holder.bookingID.setText(bookingID);
+        String bookingIDText = "Booking ID: " + bookingID;
+        holder.bookingID.setText(bookingIDText);
         holder.date.setText(timeSlot);
         holder.reason.setText(message);
 
@@ -90,8 +93,18 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.Reques
                         booking.setStatus("Accepted");
                         b.update(booking);
                     }
+
+                    @Override
+                    public void showOnUI(Handler handler) {
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                notifyDataSetChanged();
+                                Toast.makeText(context, "Request has been accepted", Toast.LENGTH_LONG).show();
+                            }
+                        });
+                    }
                 }).getData(BookingInstanceTableDO.class, bookingID);
-                Toast.makeText(context, "Request has been accepted", Toast.LENGTH_LONG).show();
                 ContentResolver cr = context.getContentResolver ( );
                 ContentValues cv = new ContentValues ( );
                 cv.put ( CalendarContract.Events.TITLE, "Booking With "  + senderName);
@@ -131,8 +144,37 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.Reques
                         booking.setStatus("Rejected");
                         b.update(booking);
                     }
+
+                    @Override
+                    public void showOnUI(Handler handler) {
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                notifyDataSetChanged();
+                            }
+                        });
+                    }
                 }).getData(BookingInstanceTableDO.class, bookingID);
-                Toast.makeText(context, "Request has been declined", Toast.LENGTH_LONG).show();
+                b.getDataHandler(new Database.DataHandler() {
+                    @Override
+                    <T> void postReceivedData(T result) {
+                        ProfTableDO prof = (ProfTableDO) result;
+                        List<String> blockedTimings = ((ProfTableDO) result).getProfBlockedTimings();
+                        blockedTimings.remove(timing.toString());
+                        prof.setProfBlockedTimings(blockedTimings);
+                        b.update(prof);
+                    }
+
+                    @Override
+                    public void showOnUI(Handler handler) {
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(context, "Request has been declined", Toast.LENGTH_LONG).show();
+                            }
+                        });
+                    }
+                }).getData(ProfTableDO.class, username);
             }
         });
 

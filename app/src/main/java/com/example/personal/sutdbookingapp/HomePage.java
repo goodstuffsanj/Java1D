@@ -52,8 +52,16 @@ public class HomePage extends AppCompatActivity {
         scrollHome = findViewById(R.id.scrollHome);
         scrollHome.smoothScrollTo(0,0);
         List<EventDay> events = new ArrayList<>();
+
         mPreferences = getSharedPreferences("sharedPrefFileStudent", MODE_PRIVATE);
         username = mPreferences.getString(USERNAME, "");
+
+        Intent intent = getIntent();
+        String username_temp = intent.getStringExtra(LoginPageNew.USERNAME);
+        if (!(username_temp == null)) {
+            //i.e. intent.getStringExtra(LoginPageNew.USERNAME, username); (default value)
+            username = username_temp;
+        }
 
         drawerLayout = findViewById(R.id.drawer);
         mToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
@@ -234,6 +242,7 @@ public class HomePage extends AppCompatActivity {
                 Calendar clickedDayCalendar = eventDay.getCalendar();
                 Toast.makeText(HomePage.this,clickedDayCalendar.toString(),Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(HomePage.this,Bookings.class);
+                intent.putExtra(USERNAME, username);
                 startActivity(intent);
             }
         });
@@ -261,15 +270,15 @@ public class HomePage extends AppCompatActivity {
         });
     }
 
-//    @Override
-//    protected void onPause() {
-//        super.onPause();
-//        SharedPreferences.Editor preferenceEditor = mPreferences.edit();
-//        preferenceEditor.putString(USERNAME, username);
-//        preferenceEditor.apply();
-//        overridePendingTransition(0, 0);
-//
-//    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        SharedPreferences.Editor preferenceEditor = mPreferences.edit();
+        preferenceEditor.putString(USERNAME, username);
+        preferenceEditor.apply();
+        overridePendingTransition(0, 0);
+
+    }
 
 
 

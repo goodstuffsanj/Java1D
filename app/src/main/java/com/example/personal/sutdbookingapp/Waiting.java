@@ -83,6 +83,7 @@ public class Waiting extends Fragment {
             <T> void postQueryAll(PaginatedList<T> result) {
                 for (int i = 0; i < result.size(); i ++) {
                     BookingInstanceTableDO bookingInstance = (BookingInstanceTableDO) result.get(i);
+                    Log.i("DATABASEXXX", "postQueryAll: " + username);
                     Log.i("DATABASEXXX", "postQueryAll: " + String.valueOf(bookingInstance.getName().equals(username)));
                     Log.i("DATABASEXXX", "postQueryAll: " + bookingInstance.getStudentName());
                     if (bookingInstance.getName().equals(username) || bookingInstance.getStudentName().equals(username)) {

@@ -44,7 +44,8 @@ public class BookingInstanceAdapter extends RecyclerView.Adapter<BookingInstance
         viewHolder.name.setText(bookingInstance.getName());
         String timeSlot = bookingInstance.getStartTime().toString("E, d MMM yyyy, h:mm a - ") + bookingInstance.getEndTime().toString("h:mm a");
         viewHolder.bookingTime.setText(timeSlot);
-        viewHolder.bookingId.setText("Booking ID: " + bookingInstance.getBookingId());
+        String bookingIDText = "Booking ID: " + bookingInstance.getBookingId();
+        viewHolder.bookingId.setText(bookingIDText);
         viewHolder.bookerName.setText(bookingInstance.getBookerName());
         String status = bookingInstance.getStatus();
         switch (status) {
@@ -73,7 +74,6 @@ public class BookingInstanceAdapter extends RecyclerView.Adapter<BookingInstance
 
     class ViewHolder extends RecyclerView.ViewHolder {
         TextView bookingId;
-        TextView bookingDate;
         TextView bookingTime;
         TextView name;
         TextView bookerName;
