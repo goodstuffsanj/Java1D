@@ -40,6 +40,7 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.Reques
 
     //private List requestsList;
     private ArrayList<RequestsData> requestsList = new ArrayList<>();
+    private ArrayList<RequestsData> updatedResult = new ArrayList<>();
     private Context context;
     private String calId;
     private String username;
@@ -48,6 +49,7 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.Reques
         this.requestsList = requestsList;
         this.context = context;
         this.username = username;
+        this.updatedResult = new ArrayList<>(requestsList);
     }
 
     @Override
@@ -99,6 +101,10 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.Reques
                         handler.post(new Runnable() {
                             @Override
                             public void run() {
+                                //update UI
+                                updatedResult.remove(requestsList.get(position));
+                                requestsList.clear();
+                                requestsList.addAll(updatedResult);
                                 notifyDataSetChanged();
                                 Toast.makeText(context, "Request has been accepted", Toast.LENGTH_LONG).show();
                             }
@@ -144,16 +150,6 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.Reques
                         booking.setStatus("Rejected");
                         b.update(booking);
                     }
-
-                    @Override
-                    public void showOnUI(Handler handler) {
-                        handler.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                notifyDataSetChanged();
-                            }
-                        });
-                    }
                 }).getData(BookingInstanceTableDO.class, bookingID);
                 b.getDataHandler(new Database.DataHandler() {
                     @Override
@@ -170,6 +166,10 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.Reques
                         handler.post(new Runnable() {
                             @Override
                             public void run() {
+                                updatedResult.remove(requestsList.get(position));
+                                requestsList.clear();
+                                requestsList.addAll(updatedResult);
+                                notifyDataSetChanged();
                                 Toast.makeText(context, "Request has been declined", Toast.LENGTH_LONG).show();
                             }
                         });
