@@ -1,5 +1,6 @@
 package com.example.personal.sutdbookingapp;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,12 +21,15 @@ public class ProfModeRequestsPage extends AppCompatActivity {
 
     //vars
     private ArrayList<RequestsData> requestsList = new ArrayList<>();
+    private String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prof_mode_requests_page);
         Log.i(TAG, "onCreate() inside ProfModeRequestsPage has been called");
+        Intent intent = getIntent();
+        username = intent.getStringExtra(HomePage.USERNAME);
         initRequests();
     }
 
@@ -56,7 +60,6 @@ public class ProfModeRequestsPage extends AppCompatActivity {
 //            request.setTime("Friday, 21 Dec, 10:00 - 11:00");
 //            request.setReason("Meet for discussion of potential UROP in the field of either Machine Learning or Artificial Intelligence");
 //            requestsList.add(request);
-        String name = "Prof 0";
         Database b = new Database(ProfModeRequestsPage.this);
         b.getDataHandlerAll(new Database.DataHandlerAll() {
             @Override
@@ -64,7 +67,7 @@ public class ProfModeRequestsPage extends AppCompatActivity {
                 for (int i = 0; i < result.size(); i++) {
                     BookingInstanceTableDO bookingInstance = (BookingInstanceTableDO) result.get(i);
                     Log.i(TAG, "postQueryAll: "+ bookingInstance.getName());
-                    if (bookingInstance.getName() != null && bookingInstance.getName().equals(name) && bookingInstance.getStatus().equals("Pending")) {
+                    if (bookingInstance.getName() != null && bookingInstance.getName().equals(username) && bookingInstance.getStatus().equals("Pending")) {
                         String bookingID = bookingInstance.getBookingID();
                         String studentName = bookingInstance.getStudentName();
                         String message = bookingInstance.getMessage();
@@ -91,7 +94,7 @@ public class ProfModeRequestsPage extends AppCompatActivity {
         RecyclerView RecyclerView = findViewById(R.id.recyclerView);
         LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(ProfModeRequestsPage.this,
                 LinearLayoutManager.VERTICAL, false);
-        RequestsAdapter adapter = new RequestsAdapter(ProfModeRequestsPage.this, requestsList);
+        RequestsAdapter adapter = new RequestsAdapter(ProfModeRequestsPage.this, requestsList, username);
         RecyclerView.setAdapter(adapter);
         RecyclerView.setLayoutManager(new LinearLayoutManager(this));
 

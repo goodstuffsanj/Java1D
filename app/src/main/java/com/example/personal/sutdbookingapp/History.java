@@ -34,7 +34,6 @@ public class History extends AppCompatActivity{
             historyItem.setTime("2018-12-15T09:00:00.000");
             historyItem.setStatus("Completed");
             historylist.add(historyItem);
-
         }
         initRecyclerView();
     }

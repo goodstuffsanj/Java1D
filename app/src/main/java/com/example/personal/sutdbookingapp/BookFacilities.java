@@ -1,5 +1,6 @@
 package com.example.personal.sutdbookingapp;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -27,7 +29,11 @@ public class BookFacilities extends AppCompatActivity {
     private String location;
     private List<String> blockedTimings;
     private String desc;
+<<<<<<< HEAD
     private ProgressBar spinner;
+=======
+    private String username;
+>>>>>>> 6a81ab52c8acfbd288581d29c03127aa3454c8a4
 
     ListAdapter listAdapter;
 
@@ -35,8 +41,15 @@ public class BookFacilities extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_facilities);
+<<<<<<< HEAD
         spinner = (ProgressBar)findViewById(R.id.progressBar1);
         spinner.setVisibility(View.VISIBLE);
+=======
+
+        Intent intent = getIntent();
+        username = intent.getStringExtra(HomePage.USERNAME);
+        Log.i("DATABASEXXX_BookFacil", "onCreate: " + username);
+>>>>>>> 6a81ab52c8acfbd288581d29c03127aa3454c8a4
         initImage();
     }
 
@@ -85,7 +98,7 @@ public class BookFacilities extends AppCompatActivity {
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        initRecyclerView();
+                        initRecyclerView(username);
                     }
                 });
             }
@@ -100,9 +113,9 @@ public class BookFacilities extends AppCompatActivity {
 //        initRecyclerView();
     }
 
-    private void initRecyclerView() {
+    private void initRecyclerView(String username) {
         RecyclerView recyclerView= findViewById(R.id.recycler_view);
-        listAdapter = new ListAdapter(facilities, this);
+        listAdapter = new ListAdapter(facilities, this, username);
         recyclerView.setAdapter(listAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }

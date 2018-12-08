@@ -3,6 +3,7 @@ package com.example.personal.sutdbookingapp;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -28,6 +29,7 @@ public class Prof extends AppCompatActivity {
     public final static String DATE_PICKED = "DATE_PICKED";
     public final static String PROF = "PROF";
     public final static String TIME = "TIME";
+    public final static String USERNAME = "USERNAME";
     private String name;
     private String image;
     private String location;
@@ -35,6 +37,7 @@ public class Prof extends AppCompatActivity {
     private String contact;
     private ArrayList<String> blockedTimings;
     private String desc;
+    private String username;
     CircleImageView imageProf;
     TextView textViewProfName;
     TextView textViewLocation;
@@ -58,6 +61,7 @@ public class Prof extends AppCompatActivity {
         contact = intent.getStringExtra(ListAdapter.CONTACT);
         desc = intent.getStringExtra(ListAdapter.DESCRIPTION);
         blockedTimings = intent.getStringArrayListExtra(ListAdapter.BLOCKED_TIMINGS);
+        username = intent.getStringExtra(ListAdapter.USERNAME);
 
 
         setTitle("Book Consultation");
@@ -109,6 +113,7 @@ public class Prof extends AppCompatActivity {
                     intent.putExtra(PROF, true);
                     intent.putExtra(NAME, name);
                     intent.putExtra(BLOCKED_TIMINGS, blockedTimings);
+                    intent.putExtra(USERNAME, username);
 
 
                     startActivity(intent);

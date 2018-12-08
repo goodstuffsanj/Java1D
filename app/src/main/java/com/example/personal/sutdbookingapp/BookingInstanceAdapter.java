@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,15 +15,19 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import org.joda.time.LocalDateTime;
+
 import java.util.ArrayList;
 
 public class BookingInstanceAdapter extends RecyclerView.Adapter<BookingInstanceAdapter.ViewHolder> {
     private ArrayList<BookingInstance> bookingInstances = new ArrayList<>();
     private Context context;
+    private String username;
 
-    public BookingInstanceAdapter(Context context, ArrayList<BookingInstance> bookings) {
+    public BookingInstanceAdapter(Context context, ArrayList<BookingInstance> bookings, String username) {
         this.context = context;
         this.bookingInstances = bookings;
+        this.username = username;
     }
 
     @NonNull
@@ -37,27 +42,28 @@ public class BookingInstanceAdapter extends RecyclerView.Adapter<BookingInstance
     public void onBindViewHolder(@NonNull BookingInstanceAdapter.ViewHolder viewHolder, int i) {
         BookingInstance bookingInstance = bookingInstances.get(i);
         viewHolder.name.setText(bookingInstance.getName());
-        viewHolder.bookingDate.setText(bookingInstance.getDate());
-        viewHolder.bookingTime.setText(bookingInstance.getEndTime()+"-"+bookingInstance.getEndTime());
-        viewHolder.bookingId.setText(bookingInstance.getBookingId());
+        String timeSlot = bookingInstance.getStartTime().toString("E, d MMM yyyy, h:mm a - ") + bookingInstance.getEndTime().toString("h:mm a");
+        viewHolder.bookingTime.setText(timeSlot);
+        viewHolder.bookingId.setText("Booking ID: " + bookingInstance.getBookingId());
+        viewHolder.bookerName.setText(bookingInstance.getBookerName());
         String status = bookingInstance.getStatus();
         switch (status) {
-            case "upcoming":
+            case "Upcoming":
                 viewHolder.status.setText(status);
                 viewHolder.status.setTextColor(Color.parseColor("#2ca411"));
                 break;
-            case "waiting":
+            case "Waiting":
                 viewHolder.status.setText(status);
                 viewHolder.status.setTextColor(Color.parseColor("#ffbc3f"));
                 break;
-            case "completed":
+            case "Completed":
                 viewHolder.status.setText(status);
                 viewHolder.status.setTextColor(Color.parseColor("#e81e1e"));
                 viewHolder.buttonCancel.setVisibility(View.GONE);
                 break;
                 //viewHolder.status.setTextColor(Color.parseColor("#ffbc3f"));
         }
-        Glide.with(context).load(bookingInstance.getImgUrl()).into(viewHolder.image);
+//        Glide.with(context).load(bookingInstance.getImgUrl()).into(viewHolder.image);
     }
 
     @Override
@@ -70,6 +76,7 @@ public class BookingInstanceAdapter extends RecyclerView.Adapter<BookingInstance
         TextView bookingDate;
         TextView bookingTime;
         TextView name;
+        TextView bookerName;
         ImageView image;
         TextView status;
         Button buttonCancel;
@@ -77,9 +84,9 @@ public class BookingInstanceAdapter extends RecyclerView.Adapter<BookingInstance
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             bookingId = itemView.findViewById(R.id.bookingId);
-            bookingDate = itemView.findViewById(R.id.bookingDate);
             bookingTime = itemView.findViewById(R.id.bookingTime);
             name = itemView.findViewById(R.id.name);
+            bookerName = itemView.findViewById(R.id.bookerName);
             image = itemView.findViewById(R.id.image);
             status = itemView.findViewById(R.id.status);
             buttonCancel = itemView.findViewById(R.id.buttonCancel);

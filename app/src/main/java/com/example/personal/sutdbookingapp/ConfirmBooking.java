@@ -28,6 +28,7 @@ public class ConfirmBooking extends AppCompatActivity {
     private Boolean isProf;
     private String name;
     private LocalDateTime time;
+    private String username;
     private List<String> blockedTimings;
     private TextView typeMessage;
     private TextView textViewName;
@@ -44,6 +45,7 @@ public class ConfirmBooking extends AppCompatActivity {
         name = intent.getStringExtra(TimingsAdapter.NAME);
         time = new LocalDateTime(intent.getStringExtra(TimingsAdapter.TIME));
         isProf = intent.getExtras().getBoolean(TimingsAdapter.IS_PROF);
+        username = intent.getStringExtra(TimingsAdapter.USERNAME);
 
 
         Button okButton = findViewById(R.id.okButton);
@@ -110,7 +112,8 @@ public class ConfirmBooking extends AppCompatActivity {
                                     bookingInstance.setName(name);
                                     bookingInstance.setTiming(time.toString());
                                     bookingInstance.setMessage(typeMessage.getText().toString());
-                                    bookingInstance.setStudentName("John Smith");
+                                    bookingInstance.setStudentName(username);
+                                    Log.i(TAG, "onClick: " + username);
                                     bookingInstance.setStatus("Pending");
                                     Log.i("Database", "Add to BookingInstanceDO: done");
                                     b.create(bookingInstance);
@@ -195,14 +198,20 @@ public class ConfirmBooking extends AppCompatActivity {
                                     bookingInstance.setBookingID(UUID.randomUUID().toString());
                                     bookingInstance.setName(name);
                                     bookingInstance.setTiming(time.toString());
+<<<<<<< HEAD
                                     bookingInstance.setStudentName("John Smith");
                                     bookingInstance.setStatus("waiting");
+=======
+                                    bookingInstance.setStudentName(username);
+                                    Log.i(TAG, "onClick: " + username);
+                                    bookingInstance.setStatus("Accepted");
+>>>>>>> 6a81ab52c8acfbd288581d29c03127aa3454c8a4
                                     Log.i("Database", "Add to BookingInstanceDO: done");
                                     b.create(bookingInstance);
 
                                     Toast.makeText(ConfirmBooking.this, "Confirmed booking", Toast.LENGTH_LONG).show();
 
-                                    Intent intent = new Intent(ConfirmBooking.this, HomePage.class);
+                                    Intent intent = new Intent(ConfirmBooking.this, ProfModeHomePage.class);
                                     startActivity(intent);
 
                                 }

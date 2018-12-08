@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.widget.TextView;
 
 import org.joda.time.DateTimeZone;
@@ -27,6 +28,7 @@ public class BookTimings extends AppCompatActivity{
     private String name;
     private ArrayList<String> blockedTimings;
     private Boolean isProf;
+    private String username;
 
 
     @Override
@@ -44,11 +46,15 @@ public class BookTimings extends AppCompatActivity{
 //            time = (Long) intent.getSerializableExtra ( Prof.TIME );
             name = intent.getStringExtra(Prof.NAME);
             blockedTimings = intent.getStringArrayListExtra(Prof.BLOCKED_TIMINGS);
+            username = intent.getStringExtra(Prof.USERNAME);
+            Log.i("DATABASEXXX", "onCreate: " + username);
         }
         else{
             date = (Date) intent.getSerializableExtra(Facility.DATE_PICKED);
             name = intent.getStringExtra(Facility.NAME);
             blockedTimings = intent.getStringArrayListExtra(Facility.BLOCKED_TIMINGS);
+            username = intent.getStringExtra(Facility.USERNAME);
+            Log.i("DATABASEXXX", "onCreate: " + username);
         }
 
         //convert Date to joda-date
@@ -81,12 +87,12 @@ public class BookTimings extends AppCompatActivity{
             timings.add(timingsData1);
         }
 
-        initRecyclerView();
+        initRecyclerView(username);
     }
 
-    private void initRecyclerView() {
+    private void initRecyclerView(String username) {
         RecyclerView recyclerView= findViewById(R.id.recycler_view);
-        timingsAdapter = new TimingsAdapter(this, timings);
+        timingsAdapter = new TimingsAdapter(this, timings, username);
         recyclerView.setAdapter(timingsAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
@@ -98,7 +104,7 @@ public class BookTimings extends AppCompatActivity{
 
     private Boolean getAvailability(LocalDateTime timingGiven) {
         for (int i = 0; i < blockedTimings.size(); i ++) {
-            if (timingGiven.toString().equals(blockedTimings.get(i))) {
+            if (timingGiven.toString().equals(blockedTimings.get(i)) || timingGiven.isBefore(new LocalDateTime(DateTimeZone.forID("+08:00")))) {
                 return false;
             }
         }

@@ -6,22 +6,24 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 
 public class PagerAdapter extends FragmentStatePagerAdapter {
     int n;
-    public PagerAdapter(FragmentManager fm, int numberOfTabs) {
+    private String username;
+    public PagerAdapter(FragmentManager fm, int numberOfTabs, String username) {
         super(fm);
         this.n = numberOfTabs;
+        this.username = username;
     }
 
     @Override
     public Fragment getItem(int i) {
         switch(i) {
             case 0:
-                Upcoming upcoming= new Upcoming();
+                Upcoming upcoming= Upcoming.newInstance(username);
                 return upcoming;
             case 1:
-                Waiting waiting = new Waiting();
+                Waiting waiting = Waiting.newInstance(username);
                 return waiting;
             case 2:
-                Completed completed = new Completed();
+                Completed completed = Completed.newInstance(username);
                 return completed;
             default:
                 return null;

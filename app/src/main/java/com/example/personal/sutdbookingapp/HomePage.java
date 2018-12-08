@@ -1,11 +1,9 @@
 package com.example.personal.sutdbookingapp;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Typeface;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -13,13 +11,9 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
-import android.support.v7.widget.SearchView;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,7 +21,7 @@ import android.widget.Toast;
 import com.applandeo.materialcalendarview.CalendarUtils;
 import com.applandeo.materialcalendarview.CalendarView;
 import java.util.Calendar;
-import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBMapper;
+
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.PaginatedList;
 import com.applandeo.materialcalendarview.EventDay;
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener;
@@ -37,7 +31,6 @@ import com.applandeo.materialcalendarview.adapters.CalendarPageAdapter;
 // import org.joda.time.LocalDateTime;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class HomePage extends AppCompatActivity {
@@ -47,7 +40,11 @@ public class HomePage extends AppCompatActivity {
     private ScrollView scrollHome;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle mToggle;
+    private SharedPreferences mPreferences;
+    public final static String USERNAME = "USERNAME";
+    private String username;
     public String TAG = "DB";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +52,8 @@ public class HomePage extends AppCompatActivity {
         scrollHome = findViewById(R.id.scrollHome);
         scrollHome.smoothScrollTo(0,0);
         List<EventDay> events = new ArrayList<>();
+        mPreferences = getSharedPreferences("sharedPrefFileStudent", MODE_PRIVATE);
+        username = mPreferences.getString(USERNAME, "");
 
         drawerLayout = findViewById(R.id.drawer);
         mToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
@@ -64,8 +63,9 @@ public class HomePage extends AppCompatActivity {
         NavigationView navigation = findViewById(R.id.navigation);
 
 //        View header = navigation.getHeaderView(0);
-//        TextView text = header.findViewById(R.id.textView);
-//        text.setText("Welcome");
+//        TextView text = header.findViewById(R.id.name);
+//        text.setText(username);
+//        text.setTextColor(Color.WHITE);
 
         navigation.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -78,6 +78,7 @@ public class HomePage extends AppCompatActivity {
 
                 if (id == R.id.nav_bookingHistory) {
                     Intent intent = new Intent(HomePage.this, Bookings.class);
+                    intent.putExtra(USERNAME, username);
                     startActivity(intent);
 
                 }
@@ -197,13 +198,13 @@ public class HomePage extends AppCompatActivity {
 
 
         //how to get all table items
-//        String name;
+//        String username;
 //        b.getDataHandlerAll(new Database.DataHandlerAll() {
 //            @Override
 //            <T> void postQueryAll(PaginatedList<T> result) {
 //                for (int i = 0; i < result.size(); i ++) {
 //                    ProfTableDO prof = (ProfTableDO) result.get(i);
-//                    name = prof.getProfName();
+//                    username = prof.getProfName();
 //                }
 //            }
 //
@@ -212,7 +213,7 @@ public class HomePage extends AppCompatActivity {
 //                handler.post(new Runnable() {
 //                    @Override
 //                    public void run() {
-//                        textView.setText(name);
+//                        textView.setText(username);
 //                    }
 //                });
 //
@@ -245,6 +246,7 @@ public class HomePage extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(HomePage.this, BookProf.class);
+                intent.putExtra(USERNAME, username);
                 startActivity(intent);
             }
         });
@@ -253,16 +255,21 @@ public class HomePage extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(HomePage.this, BookFacilities.class);
+                intent.putExtra(USERNAME, username);
                 startActivity(intent);
             }
         });
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        overridePendingTransition(0, 0);
-    }
+//    @Override
+//    protected void onPause() {
+//        super.onPause();
+//        SharedPreferences.Editor preferenceEditor = mPreferences.edit();
+//        preferenceEditor.putString(USERNAME, username);
+//        preferenceEditor.apply();
+//        overridePendingTransition(0, 0);
+//
+//    }
 
 
 

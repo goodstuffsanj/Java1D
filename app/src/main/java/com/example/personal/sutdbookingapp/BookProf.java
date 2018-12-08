@@ -1,5 +1,6 @@
 package com.example.personal.sutdbookingapp;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Looper;
@@ -39,8 +40,12 @@ public class BookProf extends AppCompatActivity {
     private List<String> blockedTimings;
     private String desc;
     private String calendar;
+<<<<<<< HEAD
     private ProgressBar spinner;
 
+=======
+    private String username;
+>>>>>>> 6a81ab52c8acfbd288581d29c03127aa3454c8a4
 
 
     @Override
@@ -50,6 +55,9 @@ public class BookProf extends AppCompatActivity {
         spinner = (ProgressBar)findViewById(R.id.progressBar1);
         spinner.setVisibility(View.VISIBLE);
         getData();
+
+        Intent intent = getIntent();
+        username = intent.getStringExtra(HomePage.USERNAME);
 
     }
 
@@ -113,14 +121,14 @@ public class BookProf extends AppCompatActivity {
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        initRecyclerView();
+                        initRecyclerView(username);
                     }
                 });
             }
         }).getAll(ProfTableDO.class);
     }
 
-    public void initRecyclerView() {
+    public void initRecyclerView(String username) {
         RecyclerView recyclerView= findViewById(R.id.recycler_view);
         Collections.sort(profs, new Comparator<Bookable>() {
             @Override
@@ -128,7 +136,7 @@ public class BookProf extends AppCompatActivity {
                 return o1.getName().compareTo(o2.getName());
             }
         });
-        listAdapter = new ListAdapter(profs, this);
+        listAdapter = new ListAdapter(profs, this, username);
         recyclerView.setAdapter(listAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         Log.i(TAG, "initRecyclerView: " + profs.size());

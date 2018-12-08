@@ -1,6 +1,8 @@
 package com.example.personal.sutdbookingapp;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -30,6 +32,7 @@ public class LoginPageNew extends AppCompatActivity implements Student.OnFragmen
     final static int RC_SIGN_IN = 100;
     private static final String TAG = "LoginPageNew";
     private GoogleSignInClient mGoogleSignInClient;
+    private final static String USERNAME = "USERNAME";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -98,6 +101,7 @@ public class LoginPageNew extends AppCompatActivity implements Student.OnFragmen
                                     passwordFail = false;
 
                                     Intent intent = new Intent(LoginPageNew.this,HomePage.class);
+                                    intent.putExtra(USERNAME, username);
                                     startActivity(intent);
                                 }
                                 else {
@@ -149,6 +153,7 @@ public class LoginPageNew extends AppCompatActivity implements Student.OnFragmen
                                     passwordFail = false;
 
                                     Intent intent = new Intent(LoginPageNew.this, ProfModeHomePage.class);
+                                    intent.putExtra(USERNAME, username);
                                     startActivity(intent);
                                 }
                                 else {
@@ -247,5 +252,4 @@ public class LoginPageNew extends AppCompatActivity implements Student.OnFragmen
 
         }
     }
-
 }
