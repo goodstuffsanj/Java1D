@@ -89,7 +89,7 @@ public class Upcoming extends Fragment {
                 for (int i = 0; i < result.size(); i ++) {
                     BookingInstanceTableDO bookingInstance = (BookingInstanceTableDO) result.get(i);
                     if (bookingInstance != null) {
-                        Log.i("bookingInstance:", bookingInstance.toString());
+                        Log.i("bookingInstance:", bookingInstance.getName()+bookingInstance.getStudentName());
                         Log.i("username", username);
                         if (bookingInstance.getName().equals(username)|| bookingInstance.getStudentName().equals(username)) {
                             LocalDateTime timing = new LocalDateTime(bookingInstance.getTiming());

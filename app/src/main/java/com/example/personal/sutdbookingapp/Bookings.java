@@ -53,4 +53,9 @@ public class Bookings extends AppCompatActivity implements
     public void onFragmentInteraction(Uri uri) {
 
     }
+
+    protected void onPause() {
+        super.onPause();
+        overridePendingTransition(0, 0);
+    }
 }

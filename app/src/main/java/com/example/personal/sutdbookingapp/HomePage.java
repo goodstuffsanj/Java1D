@@ -230,6 +230,7 @@ public class HomePage extends AppCompatActivity {
 
         Calendar calendar = Calendar.getInstance();
         calendar.set(2018,10,28);
+
         Drawable a = CalendarUtils.getDrawableText(this, "+32", null, R.color.green, 10);
         events.add(new EventDay(calendar, a));
 

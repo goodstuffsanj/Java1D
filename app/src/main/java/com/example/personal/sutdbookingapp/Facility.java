@@ -111,4 +111,9 @@ public class Facility extends AppCompatActivity {
 
 
     }
+
+    protected void onPause() {
+        super.onPause();
+        overridePendingTransition(0, 0);
+    }
 }

@@ -14,13 +14,13 @@ import java.util.Set;
 @DynamoDBTable(tableName = "sutdbookingapp-mobilehub-1464484747-ProfTable")
 
 public class ProfTableDO {
-
     private String _profName;
     private List<String> _profBlockedTimings;
     private String _profCalendar;
     private String _profContact;
     private String _profDescription;
     private String _profEmail;
+    private String _profId;
     private String _profImage;
     private String _profOffice;
     private String _profPassword;
@@ -74,6 +74,14 @@ public class ProfTableDO {
 
     public void setProfEmail(final String _profEmail) {
         this._profEmail = _profEmail;
+    }
+    @DynamoDBAttribute(attributeName = "ProfId")
+    public String getProfId() {
+        return _profId;
+    }
+
+    public void setProfId(final String _profId) {
+        this._profId = _profId;
     }
     @DynamoDBAttribute(attributeName = "ProfImage")
     public String getProfImage() {

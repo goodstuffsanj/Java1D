@@ -87,7 +87,7 @@ public class Completed extends Fragment {
                     if (bookingInstance != null) {
                         if (bookingInstance.getName().equals(username)|| bookingInstance.getStudentName().equals(username)) {
                             LocalDateTime timing = new LocalDateTime(bookingInstance.getTiming());
-                            if (timing.isAfter(new LocalDateTime()) && bookingInstance.getStatus().equals("Accepted")) {
+                            if (timing.isBefore(new LocalDateTime()) && bookingInstance.getStatus().equals("Accepted")) {
                                 BookingInstance booking = new BookingInstance(bookingInstance.getBookingID(), bookingInstance.getName(), bookingInstance.getStudentName(), bookingInstance.getTiming(), bookingInstance.getLocation(), "Upcoming");
                                 completeds.add(booking);
 
