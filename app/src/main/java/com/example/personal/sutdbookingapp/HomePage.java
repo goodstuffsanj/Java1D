@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -30,7 +31,10 @@ import com.applandeo.materialcalendarview.adapters.CalendarPageAdapter;
 
 // import org.joda.time.LocalDateTime;
 
+import org.joda.time.LocalDateTime;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class HomePage extends AppCompatActivity {
@@ -44,6 +48,7 @@ public class HomePage extends AppCompatActivity {
     public final static String USERNAME = "USERNAME";
     private String username;
     public String TAG = "DB";
+    HashMap<Calendar, Integer> calendars = new HashMap<Calendar, Integer>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -228,15 +233,56 @@ public class HomePage extends AppCompatActivity {
 //            }
 //        }).getAll(ProfTableDO.class);
 
-        Calendar calendar = Calendar.getInstance();
+        Database b = new Database(this);
+        b.getDataHandlerAll(new Database.DataHandlerAll() {
+            @Override
+            <T> void postQueryAll(PaginatedList<T> result) {
+                for (int i = 0; i < result.size(); i ++) {
+                    BookingInstanceTableDO bookingInstance = (BookingInstanceTableDO) result.get(i);
+                    LocalDateTime localDateTime = LocalDateTime.parse(bookingInstance.getTiming());
+                    Calendar calendar = Calendar.getInstance();
+                    calendar.set(localDateTime.getYear(),localDateTime.getMonthOfYear()-1,localDateTime.getDayOfMonth());
+                    if (calendars.containsKey(calendar)) {
+                        calendars.put(calendar,calendars.get(calendar)+1);
+                    } else {
+                        calendars.put(calendar,1);
+                    }
+                }
+
+                for (Calendar c:calendars.keySet()) {
+                    Drawable a = CalendarUtils.getDrawableText(HomePage.this,"+"+ calendars.get(c).toString(), null, R.color.green, 10);
+                    events.add(new EventDay(c, a));
+                }
+                runOnUiThread(new Runnable() {
+
+                    @Override
+                    public void run() {
+
+                        // Stuff that updates the UI
+                        calendarView.setEvents(events);
+                    }
+                });
+
+            }
+
+            @Override
+            void showOnUI(Handler handler) {
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                    }
+                });
+            }
+        }).getAll(BookingInstanceTableDO.class);
+
+        /*Calendar calendar = Calendar.getInstance();
         calendar.set(2018,10,28);
 
         Drawable a = CalendarUtils.getDrawableText(this, "+32", null, R.color.green, 10);
-        events.add(new EventDay(calendar, a));
+        events.add(new EventDay(calendar, a));*/
 
-        CalendarView calendarView = (CalendarView) findViewById(R.id.calendarView);
+        calendarView = (CalendarView) findViewById(R.id.calendarView);
         calendarView.clearFocus();
-        calendarView.setEvents(events);
         calendarView.setOnDayClickListener(new OnDayClickListener() {
             @Override
             public void onDayClick(EventDay eventDay) {
