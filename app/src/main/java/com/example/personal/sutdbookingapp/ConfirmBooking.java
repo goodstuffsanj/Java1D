@@ -2,6 +2,7 @@ package com.example.personal.sutdbookingapp;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.app.Notification;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.DialogInterface;
@@ -24,6 +25,7 @@ import java.util.Calendar;
 import org.joda.time.LocalDateTime;
 
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
 public class ConfirmBooking extends AppCompatActivity {
@@ -37,6 +39,7 @@ public class ConfirmBooking extends AppCompatActivity {
     private TextView textViewName;
     private TextView textViewDate;
     private TextView textViewTime;
+    private NotificationHelper helper;
 
 
     @Override
@@ -61,6 +64,8 @@ public class ConfirmBooking extends AppCompatActivity {
         textViewDate.setText(time.toString("E d MMM yyyy"));
         String timeSlot = time.toString("h:mm a - ") + time.plusMinutes(30).toString("h:mm a");
         textViewTime.setText(timeSlot);
+
+        helper = new NotificationHelper ( this );
 
 
         if (!isProf) {
@@ -158,6 +163,13 @@ public class ConfirmBooking extends AppCompatActivity {
 
 // get the event ID that is the last element in the Uri
                                     long eventID = Long.parseLong(uri.getLastPathSegment());
+
+
+                                    Notification.Builder builder = helper.getBOOKINGAPPChannelNotification ( "SUTD BOOKING APP CONFIRMED BOOKING", text );
+                                    helper.getManager ().notify(new Random().nextInt (),builder.build () );
+
+
+
 
                                     Intent intent = new Intent(ConfirmBooking.this, HomePage.class);
                                     startActivity(intent);
