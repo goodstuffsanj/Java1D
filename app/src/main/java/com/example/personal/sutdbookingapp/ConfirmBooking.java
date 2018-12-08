@@ -159,7 +159,7 @@ public class ConfirmBooking extends AppCompatActivity {
 // get the event ID that is the last element in the Uri
                                     long eventID = Long.parseLong(uri.getLastPathSegment());
 
-                                    Intent intent = new Intent(ConfirmBooking.this, HomePage.class);
+                                    Intent intent = new Intent(ConfirmBooking.this, ProfModeHomePage.class);
                                     startActivity(intent);
 
                                 }
@@ -221,7 +221,7 @@ public class ConfirmBooking extends AppCompatActivity {
 
                                     Toast.makeText(ConfirmBooking.this, "Confirmed booking", Toast.LENGTH_LONG).show();
 
-                                    Intent intent = new Intent(ConfirmBooking.this, ProfModeHomePage.class);
+                                    Intent intent = new Intent(ConfirmBooking.this, HomePage.class);
                                     startActivity(intent);
 
                                 }

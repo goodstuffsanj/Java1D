@@ -151,7 +151,7 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.Reques
                         b.update(booking);
                     }
                 }).getData(BookingInstanceTableDO.class, bookingID);
-                b.getDataHandler(new Database.DataHandler() {
+                b.getDataHandler(new Database.DataHandler() {                                
                     @Override
                     <T> void postReceivedData(T result) {
                         ProfTableDO prof = (ProfTableDO) result;
@@ -229,10 +229,8 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.Reques
     }
 
     private long getLongAsDate(LocalDateTime date) {
-        Calendar calendar = new GregorianCalendar();
-        calendar.set(Calendar.DAY_OF_MONTH, date.getDayOfMonth());
-        calendar.set(Calendar.MONTH, date.getMonthOfYear());
-        calendar.set(Calendar.YEAR, date.getYear());
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(date.getYear(),date.getMonthOfYear(), date.getDayOfMonth(), date.getHourOfDay(), date.getMinuteOfHour());
         return calendar.getTimeInMillis();
     }
 }

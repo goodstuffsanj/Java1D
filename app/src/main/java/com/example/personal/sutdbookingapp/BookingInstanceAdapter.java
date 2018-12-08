@@ -51,8 +51,10 @@ public class BookingInstanceAdapter extends RecyclerView.Adapter<BookingInstance
         viewHolder.bookingTime.setText(timeSlot);
         String bookingIDText = "Booking ID: " + bookingInstance.getBookingId();
         viewHolder.bookingId.setText(bookingIDText);
-        viewHolder.bookerName.setText(bookingInstance.getBookerName());
+        String bookerNameText = "Booked by: " + bookingInstance.getBookerName();
+        viewHolder.bookerName.setText(bookerNameText);
         String status = bookingInstance.getStatus();
+        Log.i("XXXX", "onBindViewHolder: " + bookingIDText + " " + status);
         switch (status) {
             case "Upcoming":
                 viewHolder.status.setText(status);

@@ -90,8 +90,12 @@ public class Completed extends Fragment {
                             completeds.add(booking);
 
                         }
-                        else if (bookingInstance.getStatus().equals("Rejected") || bookingInstance.getStatus().equals("Cancelled")) {
+                        else if (bookingInstance.getStatus().equals("Rejected")) {
                             BookingInstance booking = new BookingInstance(bookingInstance.getBookingID(), bookingInstance.getName(), bookingInstance.getStudentName(), bookingInstance.getTiming(), bookingInstance.getLocation(), "Rejected");
+                            completeds.add(booking);
+                        }
+                        else if (bookingInstance.getStatus().equals("Cancelled")) {
+                            BookingInstance booking = new BookingInstance(bookingInstance.getBookingID(), bookingInstance.getName(), bookingInstance.getStudentName(), bookingInstance.getTiming(), bookingInstance.getLocation(), "Cancelled");
                             completeds.add(booking);
                         }
                     }

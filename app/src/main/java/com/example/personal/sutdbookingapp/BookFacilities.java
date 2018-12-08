@@ -17,6 +17,8 @@ import android.view.inputmethod.EditorInfo;
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.PaginatedList;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class BookFacilities extends AppCompatActivity {
@@ -95,6 +97,12 @@ public class BookFacilities extends AppCompatActivity {
 
     private void initRecyclerView(String username) {
         RecyclerView recyclerView= findViewById(R.id.recycler_view);
+        Collections.sort(facilities, new Comparator<Bookable>() {
+            @Override
+            public int compare(Bookable o1, Bookable o2) {
+                return o1.getName().compareTo(o2.getName());
+            }
+        });
         listAdapter = new ListAdapter(facilities, this, username);
         recyclerView.setAdapter(listAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
