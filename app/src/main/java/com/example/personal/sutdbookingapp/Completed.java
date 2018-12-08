@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.PaginatedList;
 
@@ -83,12 +84,14 @@ public class Completed extends Fragment {
             <T> void postQueryAll(PaginatedList<T> result) {
                 for (int i = 0; i < result.size(); i ++) {
                     BookingInstanceTableDO bookingInstance = (BookingInstanceTableDO) result.get(i);
-                    if (bookingInstance.getName().equals(username) || bookingInstance.getStudentName().equals(username)) {
-                        LocalDateTime timing = new LocalDateTime(bookingInstance.getTiming());
-                        if (timing.isBefore(new LocalDateTime()) && bookingInstance.getStatus().equals("Accepted")) {
-                            BookingInstance booking = new BookingInstance(bookingInstance.getBookingID(), bookingInstance.getName(), bookingInstance.getStudentName(), bookingInstance.getTiming(), bookingInstance.getLocation(), "Completed");
-                            completeds.add(booking);
+                    if (bookingInstance != null) {
+                        if (bookingInstance.getName().equals(username)|| bookingInstance.getStudentName().equals(username)) {
+                            LocalDateTime timing = new LocalDateTime(bookingInstance.getTiming());
+                            if (timing.isAfter(new LocalDateTime()) && bookingInstance.getStatus().equals("Accepted")) {
+                                BookingInstance booking = new BookingInstance(bookingInstance.getBookingID(), bookingInstance.getName(), bookingInstance.getStudentName(), bookingInstance.getTiming(), bookingInstance.getLocation(), "Upcoming");
+                                completeds.add(booking);
 
+                            }
                         }
                     }
                 }

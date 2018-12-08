@@ -40,12 +40,8 @@ public class BookProf extends AppCompatActivity {
     private List<String> blockedTimings;
     private String desc;
     private String calendar;
-<<<<<<< HEAD
     private ProgressBar spinner;
-
-=======
     private String username;
->>>>>>> 6a81ab52c8acfbd288581d29c03127aa3454c8a4
 
 
     @Override

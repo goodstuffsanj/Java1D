@@ -88,14 +88,19 @@ public class Upcoming extends Fragment {
             <T> void postQueryAll(PaginatedList<T> result) {
                 for (int i = 0; i < result.size(); i ++) {
                     BookingInstanceTableDO bookingInstance = (BookingInstanceTableDO) result.get(i);
-                    if (bookingInstance.getName().equals(username)|| bookingInstance.getStudentName().equals(username)) {
-                        LocalDateTime timing = new LocalDateTime(bookingInstance.getTiming());
-                        if (timing.isAfter(new LocalDateTime()) && bookingInstance.getStatus().equals("Accepted")) {
-                            BookingInstance booking = new BookingInstance(bookingInstance.getBookingID(), bookingInstance.getName(), bookingInstance.getStudentName(), bookingInstance.getTiming(), bookingInstance.getLocation(), "Upcoming");
-                            upcomings.add(booking);
+                    if (bookingInstance != null) {
+                        Log.i("bookingInstance:", bookingInstance.toString());
+                        Log.i("username", username);
+                        if (bookingInstance.getName().equals(username)|| bookingInstance.getStudentName().equals(username)) {
+                            LocalDateTime timing = new LocalDateTime(bookingInstance.getTiming());
+                            if (timing.isAfter(new LocalDateTime()) && bookingInstance.getStatus().equals("Accepted")) {
+                                BookingInstance booking = new BookingInstance(bookingInstance.getBookingID(), bookingInstance.getName(), bookingInstance.getStudentName(), bookingInstance.getTiming(), bookingInstance.getLocation(), "Upcoming");
+                                upcomings.add(booking);
 
+                            }
                         }
                     }
+
                 }
 
             }

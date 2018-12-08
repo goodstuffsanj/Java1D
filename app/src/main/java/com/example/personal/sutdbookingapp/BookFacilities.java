@@ -29,11 +29,8 @@ public class BookFacilities extends AppCompatActivity {
     private String location;
     private List<String> blockedTimings;
     private String desc;
-<<<<<<< HEAD
     private ProgressBar spinner;
-=======
     private String username;
->>>>>>> 6a81ab52c8acfbd288581d29c03127aa3454c8a4
 
     ListAdapter listAdapter;
 
@@ -41,15 +38,12 @@ public class BookFacilities extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_facilities);
-<<<<<<< HEAD
         spinner = (ProgressBar)findViewById(R.id.progressBar1);
         spinner.setVisibility(View.VISIBLE);
-=======
 
         Intent intent = getIntent();
         username = intent.getStringExtra(HomePage.USERNAME);
         Log.i("DATABASEXXX_BookFacil", "onCreate: " + username);
->>>>>>> 6a81ab52c8acfbd288581d29c03127aa3454c8a4
         initImage();
     }
 

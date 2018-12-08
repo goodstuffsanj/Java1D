@@ -85,11 +85,14 @@ public class Waiting extends Fragment {
                     BookingInstanceTableDO bookingInstance = (BookingInstanceTableDO) result.get(i);
                     Log.i("DATABASEXXX", "postQueryAll: " + String.valueOf(bookingInstance.getName().equals(username)));
                     Log.i("DATABASEXXX", "postQueryAll: " + bookingInstance.getStudentName());
-                    if (bookingInstance.getName().equals(username) || bookingInstance.getStudentName().equals(username)) {
-                        LocalDateTime timing = new LocalDateTime(bookingInstance.getTiming());
-                        if (timing.isAfter(new LocalDateTime())&& bookingInstance.getStatus().equals("Pending")) {
-                            BookingInstance booking = new BookingInstance(bookingInstance.getBookingID(), bookingInstance.getName(), bookingInstance.getStudentName(), bookingInstance.getTiming(), bookingInstance.getLocation(), "Waiting");
-                            waitings.add(booking);
+                    if (bookingInstance != null) {
+                        if (bookingInstance.getName().equals(username)|| bookingInstance.getStudentName().equals(username)) {
+                            LocalDateTime timing = new LocalDateTime(bookingInstance.getTiming());
+                            if (timing.isAfter(new LocalDateTime()) && bookingInstance.getStatus().equals("Pending")) {
+                                BookingInstance booking = new BookingInstance(bookingInstance.getBookingID(), bookingInstance.getName(), bookingInstance.getStudentName(), bookingInstance.getTiming(), bookingInstance.getLocation(), "Upcoming");
+                                waitings.add(booking);
+
+                            }
                         }
                     }
                 }

@@ -1,15 +1,18 @@
 package com.example.personal.sutdbookingapp;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.CalendarContract;
 import android.provider.CalendarContract.Events;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -139,6 +142,18 @@ public class ConfirmBooking extends AppCompatActivity {
                                     values.put(Events.DESCRIPTION, "Group workout");
                                     values.put(Events.CALENDAR_ID, calID);
                                     values.put(Events.EVENT_TIMEZONE, "America/Los_Angeles");
+                                    if (ActivityCompat.checkSelfPermission (ConfirmBooking.this, Manifest.permission.WRITE_CALENDAR ) != PackageManager.PERMISSION_GRANTED) {
+                                        // TODO: Consider calling
+                                        //    ActivityCompat#requestPermissions
+                                        // here to request the missing permissions, and then overriding
+                                        //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                                        //                                          int[] grantResults)
+                                        // to handle the case where the user grants the permission. See the documentation
+                                        // for ActivityCompat#requestPermissions for more details.
+                                        Intent intent = new Intent(ConfirmBooking.this, HomePage.class);
+                                        startActivity(intent);
+                                        return;
+                                    }
                                     Uri uri = cr.insert(Events.CONTENT_URI, values);
 
 // get the event ID that is the last element in the Uri
@@ -198,14 +213,9 @@ public class ConfirmBooking extends AppCompatActivity {
                                     bookingInstance.setBookingID(UUID.randomUUID().toString());
                                     bookingInstance.setName(name);
                                     bookingInstance.setTiming(time.toString());
-<<<<<<< HEAD
-                                    bookingInstance.setStudentName("John Smith");
-                                    bookingInstance.setStatus("waiting");
-=======
                                     bookingInstance.setStudentName(username);
                                     Log.i(TAG, "onClick: " + username);
                                     bookingInstance.setStatus("Accepted");
->>>>>>> 6a81ab52c8acfbd288581d29c03127aa3454c8a4
                                     Log.i("Database", "Add to BookingInstanceDO: done");
                                     b.create(bookingInstance);
 
