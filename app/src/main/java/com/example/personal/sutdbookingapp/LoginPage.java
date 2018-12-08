@@ -98,6 +98,10 @@ public class LoginPage extends AppCompatActivity {
                 startActivityForResult(signInIntent, RC_SIGN_IN);
             }
         });
+
+
+
+
         imageButtonLoginStudent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

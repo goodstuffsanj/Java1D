@@ -44,11 +44,15 @@ public class ProfModeHomePage extends AppCompatActivity {
         setContentView(R.layout.activity_prof_mode_home_page);
         setTitle("My Activity");
 
-        Intent intent = getIntent();
-        username = intent.getStringExtra(USERNAME);
+        mPreferences = getSharedPreferences("sharedPrefFileStudent", MODE_PRIVATE);
+        username = mPreferences.getString(USERNAME, "");
 
-//        mPreferences = getSharedPreferences("sharedPrefFileStudent", MODE_PRIVATE);
-//        username = mPreferences.getString(USERNAMEP, "");
+        Intent intent = getIntent();
+        String username_temp = intent.getStringExtra(LoginPageNew.USERNAME);
+        if (!(username_temp == null)) {
+            //i.e. intent.getStringExtra(LoginPageNew.USERNAME, username); (default value)
+            username = username_temp;
+        }
 
         Log.i("DATABASEXXX", "onCreate: " + username);
 
@@ -138,14 +142,14 @@ public class ProfModeHomePage extends AppCompatActivity {
         });
     }
 
-//    @Override
-//    protected void onPause() {
-//        super.onPause();
-//        SharedPreferences.Editor preferenceEditor = mPreferences.edit();
-//        preferenceEditor.putString(USERNAME, username);
-//        preferenceEditor.apply();
-//        overridePendingTransition(0, 0);
-//    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        SharedPreferences.Editor preferenceEditor = mPreferences.edit();
+        preferenceEditor.putString(USERNAME, username);
+        preferenceEditor.apply();
+        overridePendingTransition(0, 0);
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
