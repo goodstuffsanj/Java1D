@@ -12,7 +12,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.ProgressBar;
 
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.PaginatedList;
 
@@ -29,6 +31,7 @@ public class BookFacilities extends AppCompatActivity {
     private String location;
     private List<String> blockedTimings;
     private String desc;
+    private ProgressBar spinner;
     private String username;
 
     ListAdapter listAdapter;
@@ -37,6 +40,8 @@ public class BookFacilities extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_facilities);
+        spinner = (ProgressBar)findViewById(R.id.progressBar1);
+        spinner.setVisibility(View.VISIBLE);
 
         Intent intent = getIntent();
         username = intent.getStringExtra(HomePage.USERNAME);
@@ -73,6 +78,15 @@ public class BookFacilities extends AppCompatActivity {
                             .setBlockedTimings(blockedTimings);
                     facilities.add(facilInfo);
                 }
+                runOnUiThread(new Runnable() {
+
+                    @Override
+                    public void run() {
+
+                        // Stuff that updates the UI
+                        spinner.setVisibility(View.GONE);
+                    }
+                });
             }
 
             @Override

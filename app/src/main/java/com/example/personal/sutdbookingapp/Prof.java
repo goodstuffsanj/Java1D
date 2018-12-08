@@ -125,4 +125,9 @@ public class Prof extends AppCompatActivity {
 
 
     }
+
+    protected void onPause() {
+        super.onPause();
+        overridePendingTransition(0, 0);
+    }
 }

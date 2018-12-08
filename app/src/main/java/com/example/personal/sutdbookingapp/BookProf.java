@@ -16,6 +16,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.ProgressBar;
 
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.PaginatedList;
 
@@ -39,6 +40,7 @@ public class BookProf extends AppCompatActivity {
     private List<String> blockedTimings;
     private String desc;
     private String calendar;
+    private ProgressBar spinner;
     private String username;
 
 
@@ -46,6 +48,8 @@ public class BookProf extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_prof);
+        spinner = (ProgressBar)findViewById(R.id.progressBar1);
+        spinner.setVisibility(View.VISIBLE);
         getData();
 
         Intent intent = getIntent();
@@ -64,6 +68,8 @@ public class BookProf extends AppCompatActivity {
         super.onPause();
         overridePendingTransition(0, 0);
     }
+
+
 
 
     //get list of profs to show
@@ -91,9 +97,19 @@ public class BookProf extends AppCompatActivity {
                             .setDescription(desc)
                             .setBlockedTimings(blockedTimings);
                     profs.add(profInfo);
+                    runOnUiThread(new Runnable() {
+
+                        @Override
+                        public void run() {
+
+                            // Stuff that updates the UI
+                            spinner.setVisibility(View.GONE);
+                        }
+                    });
                     Log.i(TAG, "postQueryAll: done");
                     Log.i(TAG, "postQueryAll: " + profs.size());
                 }
+
             }
 
             @Override

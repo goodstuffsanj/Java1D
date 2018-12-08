@@ -1,6 +1,5 @@
 package com.example.personal.sutdbookingapp;
 
-
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBAttribute;
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBHashKey;
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBIndexHashKey;
@@ -17,7 +16,6 @@ import java.util.Set;
 public class StudentTableDO {
     private String _studentID;
     private String _studentImage;
-
     private String _studentName;
     private String _studentPassword;
 
@@ -38,7 +36,6 @@ public class StudentTableDO {
     public void setStudentImage(final String _studentImage) {
         this._studentImage = _studentImage;
     }
-
     @DynamoDBAttribute(attributeName = "StudentName")
     public String getStudentName() {
         return _studentName;

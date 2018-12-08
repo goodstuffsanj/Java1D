@@ -116,6 +116,11 @@ public class BookTimings extends AppCompatActivity{
         return isProf;
     }
 
+    protected void onPause() {
+        super.onPause();
+        overridePendingTransition(0, 0);
+    }
+
 
 
 }
