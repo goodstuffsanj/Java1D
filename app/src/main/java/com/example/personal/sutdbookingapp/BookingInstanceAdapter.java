@@ -79,6 +79,11 @@ public class BookingInstanceAdapter extends RecyclerView.Adapter<BookingInstance
                 viewHolder.status.setTextColor(Color.parseColor("#e81e1e"));
                 viewHolder.buttonCancel.setVisibility(View.GONE);
                 break;
+            case "Overdue":
+                viewHolder.status.setText(status);
+                viewHolder.status.setTextColor(Color.parseColor("#e81e1e"));
+                viewHolder.buttonCancel.setVisibility(View.GONE);
+                break;
                 //viewHolder.status.setTextColor(Color.parseColor("#ffbc3f"));
         }
 //        Glide.with(context).load(bookingInstance.getImgUrl()).into(viewHolder.image);

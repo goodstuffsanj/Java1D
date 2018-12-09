@@ -69,9 +69,9 @@ public class ProfModeHomePage extends AppCompatActivity {
         NavigationView navigation = findViewById(R.id.navigation);
 
         //set username on navigation panel
-//        View header = navigation.getHeaderView(0);
-//        TextView navUsername = header.findViewById(R.id.name);
-//        navUsername.setText(username);
+        View header = navigation.getHeaderView(0);
+        TextView navUsername = header.findViewById(R.id.name);
+        navUsername.setText(username);
 
         navigation.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
