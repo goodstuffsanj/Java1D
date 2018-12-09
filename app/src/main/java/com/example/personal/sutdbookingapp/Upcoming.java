@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.PaginatedList;
 
+import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDateTime;
 
 import java.util.ArrayList;
@@ -93,7 +94,7 @@ public class Upcoming extends Fragment {
                         Log.i("username", username);
                         if (bookingInstance.getName().equals(username)|| bookingInstance.getStudentName().equals(username)) {
                             LocalDateTime timing = new LocalDateTime(bookingInstance.getTiming());
-                            if (timing.isAfter(new LocalDateTime()) && bookingInstance.getStatus().equals("Accepted")) {
+                            if (timing.isAfter(new LocalDateTime(DateTimeZone.forID("+08:00"))) && bookingInstance.getStatus().equals("Accepted")) {
                                 BookingInstance booking = new BookingInstance(bookingInstance.getBookingID(), bookingInstance.getName(), bookingInstance.getStudentName(), bookingInstance.getTiming(), bookingInstance.getLocation(), "Upcoming");
                                 upcomings.add(booking);
 
