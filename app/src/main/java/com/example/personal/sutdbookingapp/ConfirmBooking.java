@@ -165,8 +165,7 @@ public class ConfirmBooking extends AppCompatActivity {
                                     long eventID = Long.parseLong(uri.getLastPathSegment());
 
 
-                                    Notification.Builder builder = helper.getBOOKINGAPPChannelNotification ( "SUTD BOOKING APP CONFIRMED BOOKING", text );
-                                    helper.getManager ().notify(new Random().nextInt (),builder.build () );
+                                    
 
 
 
