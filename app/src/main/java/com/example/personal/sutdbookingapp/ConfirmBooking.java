@@ -125,23 +125,23 @@ public class ConfirmBooking extends AppCompatActivity {
 
                                     //add to calendar
                                     long calID = 3;
-                                    long startMillis = 0;
-                                    long endMillis = 0;
-                                    Calendar beginTime = Calendar.getInstance();
-                                    beginTime.set(2012, 9, 14, 7, 30);
-                                    startMillis = beginTime.getTimeInMillis();
-                                    Calendar endTime = Calendar.getInstance();
-                                    endTime.set(2012, 9, 14, 8, 45);
-                                    endMillis = endTime.getTimeInMillis();
+//                                    long startMillis = 0;
+//                                    long endMillis = 0;
+//                                    Calendar beginTime = Calendar.getInstance();
+//                                    beginTime.set(2012, 9, 14, 7, 30);
+//                                    startMillis = beginTime.getTimeInMillis();
+//                                    Calendar endTime = Calendar.getInstance();
+//                                    endTime.set(2012, 9, 14, 8, 45);
+//                                    endMillis = endTime.getTimeInMillis();
 
                                     ContentResolver cr = getContentResolver();
                                     ContentValues values = new ContentValues();
-                                    values.put(Events.DTSTART, startMillis);
-                                    values.put(Events.DTEND, endMillis);
-                                    values.put(Events.TITLE, "Jazzercise");
+                                    values.put(Events.DTSTART, getLongAsDate(time));
+                                    values.put(Events.DTEND, getLongAsDate(time.plusMinutes(30)));
+                                    values.put(Events.TITLE, "Booking With "  + name);
                                     values.put(Events.DESCRIPTION, "Group workout");
                                     values.put(Events.CALENDAR_ID, calID);
-                                    values.put(Events.EVENT_TIMEZONE, "America/Los_Angeles");
+                                    values.put(Events.EVENT_TIMEZONE, "Singapore");
                                     if (ActivityCompat.checkSelfPermission (ConfirmBooking.this, Manifest.permission.WRITE_CALENDAR ) != PackageManager.PERMISSION_GRANTED) {
                                         // TODO: Consider calling
                                         //    ActivityCompat#requestPermissions
@@ -156,7 +156,7 @@ public class ConfirmBooking extends AppCompatActivity {
                                     }
                                     Uri uri = cr.insert(Events.CONTENT_URI, values);
 
-// get the event ID that is the last element in the Uri
+                                    // get the event ID that is the last element in the Uri
                                     long eventID = Long.parseLong(uri.getLastPathSegment());
 
                                     Intent intent = new Intent(ConfirmBooking.this, ProfModeHomePage.class);
@@ -235,5 +235,11 @@ public class ConfirmBooking extends AppCompatActivity {
 
             }
         });
+    }
+
+    private long getLongAsDate(LocalDateTime date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(date.getYear(),date.getMonthOfYear(), date.getDayOfMonth(), date.getHourOfDay(), date.getMinuteOfHour());
+        return calendar.getTimeInMillis();
     }
 }
