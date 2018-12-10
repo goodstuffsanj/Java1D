@@ -6,6 +6,9 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_CALENDAR" />
     <uses-permission android:name="android.permission.WRITE_CALENDAR" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
 
     <application
         android:allowBackup="true"
@@ -46,7 +49,7 @@
             android:label="Book Facilities"
             android:launchMode="singleTop"
             android:parentActivityName=".HomePage"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait">z
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>

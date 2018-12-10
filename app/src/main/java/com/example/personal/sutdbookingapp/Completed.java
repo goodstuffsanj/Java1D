@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.PaginatedList;
 
+import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDateTime;
 
 import java.util.ArrayList;
@@ -87,15 +88,22 @@ public class Completed extends Fragment {
                     if (bookingInstance != null) {
                         if (bookingInstance.getName().equals(username)|| bookingInstance.getStudentName().equals(username)) {
                             LocalDateTime timing = new LocalDateTime(bookingInstance.getTiming());
-                            if (timing.isBefore(new LocalDateTime()) && bookingInstance.getStatus().equals("Accepted")) {
-                                BookingInstance booking = new BookingInstance(bookingInstance.getBookingID(), bookingInstance.getName(), bookingInstance.getStudentName(), bookingInstance.getTiming(), bookingInstance.getLocation(), "Upcoming");
+                            if (timing.isBefore(new LocalDateTime(DateTimeZone.forID("+08:00"))) && bookingInstance.getStatus().equals("Accepted")) {
+                                BookingInstance booking = new BookingInstance(bookingInstance.getBookingID(), bookingInstance.getName(), bookingInstance.getStudentName(), bookingInstance.getTiming(), bookingInstance.getLocation(), "Completed");
                                 completeds.add(booking);
-
                             }
-                        }
-                        else if (bookingInstance.getStatus().equals("Rejected") || bookingInstance.getStatus().equals("Cancelled")) {
-                            BookingInstance booking = new BookingInstance(bookingInstance.getBookingID(), bookingInstance.getName(), bookingInstance.getStudentName(), bookingInstance.getTiming(), bookingInstance.getLocation(), "Rejected");
-                            completeds.add(booking);
+                            else if (timing.isBefore(new LocalDateTime(DateTimeZone.forID("+08:00"))) && bookingInstance.getStatus().equals("Pending")) {
+                                BookingInstance booking = new BookingInstance(bookingInstance.getBookingID(), bookingInstance.getName(), bookingInstance.getStudentName(), bookingInstance.getTiming(), bookingInstance.getLocation(), "Overdue");
+                                completeds.add(booking);
+                            }
+                            else if (bookingInstance.getStatus().equals("Rejected")) {
+                                BookingInstance booking = new BookingInstance(bookingInstance.getBookingID(), bookingInstance.getName(), bookingInstance.getStudentName(), bookingInstance.getTiming(), bookingInstance.getLocation(), "Rejected");
+                                completeds.add(booking);
+                            }
+                            else if (bookingInstance.getStatus().equals("Cancelled")) {
+                                BookingInstance booking = new BookingInstance(bookingInstance.getBookingID(), bookingInstance.getName(), bookingInstance.getStudentName(), bookingInstance.getTiming(), bookingInstance.getLocation(), "Cancelled");
+                                completeds.add(booking);
+                            }
                         }
                     }
                 }

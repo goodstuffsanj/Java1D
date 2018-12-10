@@ -6,7 +6,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.example.personal.sutdbookingapp"
-        minSdkVersion 21
+        minSdkVersion 26
         compileSdkVersion 28
         targetSdkVersion 28
         versionCode 1
@@ -55,11 +55,7 @@ dependencies {
     // Dates
     implementation 'net.danlew:android.joda:2.10.1'
 
-    //    implementation 'com.applandeo:material-calendar-view:1.5.0'
-    //    implementation 'com.google.api-client:google-api-client:1.23.0'
-    //    implementation 'com.google.oauth-client:google-oauth-client-jetty:1.23.0'
-    //    implementation 'com.google.apis:google-api-services-calendar:v3-rev305-1.23.0'
-    //    //implementation 'com.android.support:multidex:1.0.3'
+
 }
 repositories {
     mavenCentral()

@@ -3,6 +3,8 @@ package com.example.personal.sutdbookingapp;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -73,110 +75,117 @@ public class LoginPageNew extends AppCompatActivity implements Student.OnFragmen
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //adapter.getItem(tabLayout.getSelectedTabPosition()).getClass())
-                if (tabLayout.getSelectedTabPosition() == 0) {
-                    Student student = (Student) adapter.getItem(tabLayout.getSelectedTabPosition());
-                    username = student.getUsername();
-                    password = student.getPassword();
-                    if (username.isEmpty()) {
-                        Toast.makeText(LoginPageNew.this, "Please type in your username", Toast.LENGTH_LONG).show();
+                if (isConnected()) {
+                    //adapter.getItem(tabLayout.getSelectedTabPosition()).getClass())
+                    if (tabLayout.getSelectedTabPosition() == 0) {
+                        Student student = (Student) adapter.getItem(tabLayout.getSelectedTabPosition());
+                        username = student.getUsername();
+                        password = student.getPassword();
+                        if (username.isEmpty()) {
+                            Toast.makeText(LoginPageNew.this, "Please type in your username", Toast.LENGTH_LONG).show();
+                        }
+                        else {
+                            b.getDataHandler(new Database.DataHandler() {
+                                Boolean usernameFail;
+                                Boolean passwordFail;
+                                @Override
+                                <T> void postReceivedData(T result) {
+                                    StudentTableDO studentDatabase = (StudentTableDO) result;
+                                    //nothing from database i.e. wrong username
+                                    //nothing from database i.e. wrong username
+                                    if (studentDatabase == null) {
+                                        usernameFail = true;
+                                        passwordFail = false;
+
+                                    }
+                                    else if (password.equals(studentDatabase.getStudentPassword())) {
+                                        name = studentDatabase.getStudentName();
+                                        usernameFail = false;
+                                        passwordFail = false;
+
+                                        Intent intent = new Intent(LoginPageNew.this,HomePage.class);
+                                        intent.putExtra(USERNAME, username);
+                                        startActivity(intent);
+                                    }
+                                    else {
+                                        usernameFail = false;
+                                        passwordFail = true;
+                                    }
+                                }
+
+                                @Override
+                                public void showOnUI(Handler handler) {
+                                    handler.post(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            makeToast(usernameFail, passwordFail);
+                                        }
+                                    });
+                                }
+                            }).getData(StudentTableDO.class, username);
+                        }
+
+
+
+
                     }
-                    else {
-                        b.getDataHandler(new Database.DataHandler() {
-                            Boolean usernameFail;
-                            Boolean passwordFail;
-                            @Override
-                            <T> void postReceivedData(T result) {
-                                StudentTableDO studentDatabase = (StudentTableDO) result;
-                                //nothing from database i.e. wrong username
-                                //nothing from database i.e. wrong username
-                                if (studentDatabase == null) {
-                                    usernameFail = true;
-                                    passwordFail = false;
+                    else if (tabLayout.getSelectedTabPosition() == 1){
+                        Staff staff = (Staff) adapter.getItem(tabLayout.getSelectedTabPosition());
+                        username = staff.getUsername();
+                        password = staff.getPassword();
+                        if (username.isEmpty()) {
+                            Toast.makeText(LoginPageNew.this, "Please type in your username", Toast.LENGTH_LONG).show();
+                        }
+                        else {
+                            //checking with database
+                            b.getDataHandler(new Database.DataHandler() {
+                                Boolean usernameFail;
+                                Boolean passwordFail;
+                                @Override
+                                <T> void postReceivedData(T result) {
+                                    ProfTableDO profDatabase= (ProfTableDO) result;
+
+                                    //nothing from database i.e. wrong username
+                                    if (profDatabase == null) {
+                                        usernameFail = true;
+                                        passwordFail = false;
+                                    }
+                                    else if (password.equals(profDatabase.getProfPassword())) {
+                                        name = profDatabase.getProfName();
+                                        usernameFail = false;
+                                        passwordFail = false;
+
+                                        Intent intent = new Intent(LoginPageNew.this, ProfModeHomePage.class);
+                                        intent.putExtra(USERNAME, username);
+                                        startActivity(intent);
+                                    }
+                                    else {
+                                        usernameFail = false;
+                                        passwordFail = true;
+                                    }
+                                }
+
+                                @Override
+                                public void showOnUI(Handler handler) {
+                                    handler.post(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            makeToast(usernameFail, passwordFail);
+                                        }
+                                    });
 
                                 }
-                                else if (password.equals(studentDatabase.getStudentPassword())) {
-                                    name = studentDatabase.getStudentName();
-                                    usernameFail = false;
-                                    passwordFail = false;
+                            }).getData(ProfTableDO.class, username);
+                        }
 
-                                    Intent intent = new Intent(LoginPageNew.this,HomePage.class);
-                                    intent.putExtra(USERNAME, username);
-                                    startActivity(intent);
-                                }
-                                else {
-                                    usernameFail = false;
-                                    passwordFail = true;
-                                    }
-                            }
 
-                            @Override
-                            public void showOnUI(Handler handler) {
-                                handler.post(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        makeToast(usernameFail, passwordFail);
-                                    }
-                                });
-                            }
-                        }).getData(StudentTableDO.class, username);
                     }
-
-
-
-
                 }
-                else if (tabLayout.getSelectedTabPosition() == 1){
-                    Staff staff = (Staff) adapter.getItem(tabLayout.getSelectedTabPosition());
-                    username = staff.getUsername();
-                    password = staff.getPassword();
-                    if (username.isEmpty()) {
-                        Toast.makeText(LoginPageNew.this, "Please type in your username", Toast.LENGTH_LONG).show();
-                    }
-                    else {
-                        //checking with database
-                        b.getDataHandler(new Database.DataHandler() {
-                            Boolean usernameFail;
-                            Boolean passwordFail;
-                            @Override
-                            <T> void postReceivedData(T result) {
-                                ProfTableDO profDatabase= (ProfTableDO) result;
-
-                                //nothing from database i.e. wrong username
-                                if (profDatabase == null) {
-                                    usernameFail = true;
-                                    passwordFail = false;
-                                }
-                                else if (password.equals(profDatabase.getProfPassword())) {
-                                    name = profDatabase.getProfName();
-                                    usernameFail = false;
-                                    passwordFail = false;
-
-                                    Intent intent = new Intent(LoginPageNew.this, ProfModeHomePage.class);
-                                    intent.putExtra(USERNAME, username);
-                                    startActivity(intent);
-                                }
-                                else {
-                                    usernameFail = false;
-                                    passwordFail = true;
-                                }
-                            }
-
-                            @Override
-                            public void showOnUI(Handler handler) {
-                                handler.post(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        makeToast(usernameFail, passwordFail);
-                                    }
-                                });
-
-                            }
-                        }).getData(ProfTableDO.class, username);
-                    }
-
-
+                else {
+                    Toast.makeText(LoginPageNew.this, "No network. Please check connection.", Toast.LENGTH_SHORT).show();
                 }
+
+
             }
         });
 
@@ -188,8 +197,13 @@ public class LoginPageNew extends AppCompatActivity implements Student.OnFragmen
         googleSignInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-                startActivityForResult(signInIntent, RC_SIGN_IN);
+                if (isConnected()) {
+                    Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+                    startActivityForResult(signInIntent, RC_SIGN_IN);
+                }
+                else {
+                    Toast.makeText(LoginPageNew.this, "No network. Please check connection.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -251,5 +265,19 @@ public class LoginPageNew extends AppCompatActivity implements Student.OnFragmen
             Toast.makeText(LoginPageNew.this, "Incorrect password", Toast.LENGTH_LONG).show();
 
         }
+    }
+
+    //check connection
+    public boolean isConnected() {
+        boolean connected = false;
+        try {
+            ConnectivityManager cm = (ConnectivityManager)getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo nInfo = cm.getActiveNetworkInfo();
+            connected = nInfo != null && nInfo.isAvailable() && nInfo.isConnected();
+            return connected;
+        } catch (Exception e) {
+            Log.e("Connectivity Exception", e.getMessage());
+        }
+        return connected;
     }
 }

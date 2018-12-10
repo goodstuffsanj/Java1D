@@ -75,9 +75,9 @@ public class HomePage extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         NavigationView navigation = findViewById(R.id.navigation);
 
-//        View header = navigation.getHeaderView(0);
-//        TextView text = header.findViewById(R.id.name);
-//        text.setText(username);
+        View header = navigation.getHeaderView(0);
+        TextView text = header.findViewById(R.id.name);
+        text.setText(username);
 //        text.setTextColor(Color.WHITE);
 
         navigation.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
