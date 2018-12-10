@@ -128,10 +128,10 @@ public class ConfirmBooking extends AppCompatActivity {
                                     long startMillis = 0;
                                     long endMillis = 0;
                                     Calendar beginTime = Calendar.getInstance();
-                                    beginTime.set(2012, 9, 14, 7, 30);
+                                    beginTime.set(2018, 12, 20, 7, 30);
                                     startMillis = beginTime.getTimeInMillis();
                                     Calendar endTime = Calendar.getInstance();
-                                    endTime.set(2012, 9, 14, 8, 45);
+                                    endTime.set(2018, 12, 20, 8, 45);
                                     endMillis = endTime.getTimeInMillis();
 
                                     ContentResolver cr = getContentResolver();
