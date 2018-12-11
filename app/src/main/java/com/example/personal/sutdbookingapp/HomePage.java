@@ -287,7 +287,7 @@ public class HomePage extends AppCompatActivity {
             @Override
             public void onDayClick(EventDay eventDay) {
                 Calendar clickedDayCalendar = eventDay.getCalendar();
-                Toast.makeText(HomePage.this,clickedDayCalendar.toString(),Toast.LENGTH_SHORT).show();
+                //Toast.makeText(HomePage.this,clickedDayCalendar.toString(),Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(HomePage.this,Bookings.class);
                 intent.putExtra(USERNAME, username);
                 startActivity(intent);
