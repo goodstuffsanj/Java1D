@@ -164,7 +164,7 @@ public class ConfirmBooking extends AppCompatActivity {
 // get the event ID that is the last element in the Uri
                                     long eventID = Long.parseLong(uri.getLastPathSegment());
 
-
+                                    
                                     
 
 
