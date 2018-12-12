@@ -11,7 +11,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.PaginatedList;
 
@@ -125,7 +124,7 @@ public class Completed extends Fragment {
 
     public void initRecycler(View rootView) {
         RecyclerView recyclerView = rootView.findViewById(R.id.recyclerView);
-        BookingInstanceAdapter adapter = new BookingInstanceAdapter(this.getContext(), completeds, username);
+        EventsAdapter adapter = new EventsAdapter(this.getContext(), completeds, username);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }

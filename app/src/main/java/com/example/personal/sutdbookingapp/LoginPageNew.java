@@ -35,11 +35,18 @@ public class LoginPageNew extends AppCompatActivity implements Student.OnFragmen
     private static final String TAG = "LoginPageNew";
     private GoogleSignInClient mGoogleSignInClient;
     public final static String USERNAME = "USERNAME";
+    private SharedPreferences mPreferences;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        mPreferences = getSharedPreferences("sharedPrefFileStudent", MODE_PRIVATE);
+        /*if (mPreferences.getString("username","")!= "") {
+            Intent intent = new Intent(LoginPageNew.this,HomePage.class);
+            intent.putExtra(USERNAME, username);
+            startActivity(intent);
+        }*/
         TabLayout tabLayout = findViewById(R.id.tabLayoutLogin);
         tabLayout.addTab(tabLayout.newTab().setText("Student"));
         tabLayout.addTab(tabLayout.newTab().setText("Staff"));

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -18,13 +19,17 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.PaginatedList;
 import com.applandeo.materialcalendarview.CalendarUtils;
 import com.applandeo.materialcalendarview.CalendarView;
 import com.applandeo.materialcalendarview.EventDay;
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener;
 
+import org.joda.time.LocalDateTime;
+
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 
 public class ProfModeHomePage extends AppCompatActivity {
@@ -37,6 +42,7 @@ public class ProfModeHomePage extends AppCompatActivity {
     public final static String USERNAME = "USERNAME";
     private String username;
     private SharedPreferences mPreferences;
+    HashMap<Calendar, Integer> calendars = new HashMap<Calendar, Integer>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +97,7 @@ public class ProfModeHomePage extends AppCompatActivity {
                 else if (id == R.id.nav_logout) {
                     Intent intent = new Intent(ProfModeHomePage.this, LoginPageNew.class);
                     startActivity(intent);
+                    finish();
                 }
 
                 // close drawer when item is tapped
@@ -99,25 +106,72 @@ public class ProfModeHomePage extends AppCompatActivity {
             }
         });
 
-
-        java.util.Calendar calendar = java.util.Calendar.getInstance();
-        calendar.set(2018,10,28);
-        Drawable a = CalendarUtils.getDrawableText(this, "+32", null, R.color.green, 10);
-        events.add(new EventDay(calendar, a));
-
         CalendarView calendarView = (CalendarView) findViewById(R.id.calendarView);
         calendarView.clearFocus();
-        calendarView.setEvents(events);
         calendarView.setOnDayClickListener(new OnDayClickListener() {
             @Override
             public void onDayClick(EventDay eventDay) {
                 Calendar clickedDayCalendar = eventDay.getCalendar();
-                Toast.makeText(ProfModeHomePage.this,clickedDayCalendar.toString(),Toast.LENGTH_SHORT).show();
+                //Toast.makeText(ProfModeHomePage.this,clickedDayCalendar.toString(),Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(ProfModeHomePage.this,Bookings.class);
                 intent.putExtra(USERNAME, username);
                 startActivity(intent);
             }
         });
+
+        /*java.util.Calendar calendar = java.util.Calendar.getInstance();
+        calendar.set(2018,10,28);
+        Drawable a = CalendarUtils.getDrawableText(this, "+32", null, R.color.green, 10);
+        events.add(new EventDay(calendar, a));*/
+
+        Database b = new Database(this);
+        b.getDataHandlerAll(new Database.DataHandlerAll() {
+            @Override
+            <T> void postQueryAll(PaginatedList<T> result) {
+                for (int i = 0; i < result.size(); i ++) {
+                    BookingInstanceTableDO bookingInstance = (BookingInstanceTableDO) result.get(i);
+
+                    if (bookingInstance.getName().toLowerCase().equals(username.toLowerCase()) && bookingInstance.getStatus().toLowerCase().equals("accepted")) {
+
+                        LocalDateTime localDateTime = LocalDateTime.parse(bookingInstance.getTiming());
+                        Calendar calendar = Calendar.getInstance();
+                        calendar.set(localDateTime.getYear(),localDateTime.getMonthOfYear()-1,localDateTime.getDayOfMonth());
+                        if (calendars.containsKey(calendar)) {
+                            calendars.put(calendar,calendars.get(calendar)+1);
+                        } else {
+                            calendars.put(calendar,1);
+                        }
+                    }
+
+                }
+
+                for (Calendar c:calendars.keySet()) {
+                    Drawable a = CalendarUtils.getDrawableText(ProfModeHomePage.this,"+"+ calendars.get(c).toString(), null, R.color.green, 10);
+                    events.add(new EventDay(c, a));
+                }
+                runOnUiThread(new Runnable() {
+
+                    @Override
+                    public void run() {
+
+                        // Stuff that updates the UI
+                        calendarView.setEvents(events);
+                    }
+                });
+
+            }
+
+            @Override
+            void showOnUI(Handler handler) {
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                    }
+                });
+            }
+        }).getAll(BookingInstanceTableDO.class);
+
+
 
 
         book_facilities = (CardView) findViewById(R.id.book_facilities);

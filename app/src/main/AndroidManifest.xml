@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_CALENDAR" />
     <uses-permission android:name="android.permission.WRITE_CALENDAR" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
 
@@ -19,6 +19,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".LoginPageNew"
+            android:noHistory="true"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme">
             <intent-filter>
@@ -49,7 +50,8 @@
             android:label="Book Facilities"
             android:launchMode="singleTop"
             android:parentActivityName=".HomePage"
-            android:screenOrientation="portrait">z
+            android:screenOrientation="portrait">
+            z
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
@@ -60,9 +62,8 @@
         </activity>
         <activity
             android:name=".BookTimings"
-            android:parentActivityName="Prof"
-            android:screenOrientation="portrait">
-        </activity>
+            android:parentActivityName=".Prof"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".HomePage"
             android:screenOrientation="portrait" />
@@ -71,8 +72,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ProfModeRequestsPage"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".ProfModeHomePage"/>
+            android:parentActivityName=".ProfModeHomePage"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Prof"
             android:parentActivityName=".BookProf"
@@ -84,20 +85,23 @@
         <activity
             android:name=".ProfModeHomePage"
             android:screenOrientation="portrait" />
-        <activity android:name=".Bookings"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".HomePage"></activity>
-        <activity android:name=".Calendar"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".Prof"></activity>
+        <activity
+            android:name=".Bookings"
+            android:parentActivityName=".ProfModeHomePage"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Calendar"
+            android:parentActivityName=".Prof"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ConfirmBooking"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".BookTimings"></activity>
+            android:parentActivityName=".BookTimings"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".History"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".HomePage"></activity>
+            android:parentActivityName=".HomePage"
+            android:screenOrientation="portrait" />
+        <activity android:name=".Events"></activity>
     </application>
 
 </manifest>

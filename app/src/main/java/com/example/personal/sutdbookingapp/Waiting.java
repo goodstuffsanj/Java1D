@@ -117,7 +117,7 @@ public class Waiting extends Fragment {
 
     public void initRecycler(View rootView) {
         RecyclerView recyclerView = rootView.findViewById(R.id.recyclerView);
-        BookingInstanceAdapter adapter = new BookingInstanceAdapter(this.getContext(), waitings, username);
+        EventsAdapter adapter = new EventsAdapter(this.getContext(), waitings, username);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }

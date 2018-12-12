@@ -123,7 +123,7 @@ public class Upcoming extends Fragment {
 
     public void initRecycler(View rootView) {
         RecyclerView recyclerView = rootView.findViewById(R.id.recyclerView);
-        BookingInstanceAdapter adapter = new BookingInstanceAdapter(this.getContext(), upcomings, username);
+        EventsAdapter adapter = new EventsAdapter(this.getContext(), upcomings, username);
         recyclerView.setLayoutManager(new LinearLayoutManager(Upcoming.this.getActivity()));
         recyclerView.setAdapter(adapter);
     }

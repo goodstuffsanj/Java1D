@@ -46,8 +46,9 @@ public class HomePage extends AppCompatActivity {
     private ActionBarDrawerToggle mToggle;
     private SharedPreferences mPreferences;
     public final static String USERNAME = "USERNAME";
+    public final static String DATE_PICKED = "DATE_PICKED";
     private String username;
-    public String TAG = "DB";
+    public String TAG = "database Longer";
     HashMap<Calendar, Integer> calendars = new HashMap<Calendar, Integer>();
 
     @Override
@@ -98,6 +99,7 @@ public class HomePage extends AppCompatActivity {
                 else if (id == R.id.nav_logout) {
                     Intent intent = new Intent(HomePage.this, LoginPageNew.class);
                     startActivity(intent);
+                    finish();
                 }
 
                 // close drawer when item is tapped
@@ -108,7 +110,7 @@ public class HomePage extends AppCompatActivity {
 
 
         // ***************************************************** database query
-        Database test = new Database(HomePage.this);
+        /*Database test = new Database(HomePage.this);
         StudentTableDO studentTableDO = new StudentTableDO();
         StudentTableDO studentTableDO1 = new StudentTableDO();
 
@@ -118,7 +120,7 @@ public class HomePage extends AppCompatActivity {
         // ***************************************************** Create Data
         Log.i(TAG,"item is creating");
         test.create(studentTableDO);
-        Log.i(TAG,"item is creating!!! yay!!!!!!!!!");
+        Log.i(TAG,"item is creating!!! yay!!!!!!!!!");*/
 
 
         // ***************************************************** Update Data
@@ -172,7 +174,7 @@ public class HomePage extends AppCompatActivity {
 ////
         // Get Data -> check Logcat dataReceived
         // hash key
-        test.getDataHandler(new Database.DataHandler() {
+        /*test.getDataHandler(new Database.DataHandler() {
             @Override
             <T> void postReceivedData(T result) {
                 StudentTableDO a = (StudentTableDO) result;
@@ -185,7 +187,7 @@ public class HomePage extends AppCompatActivity {
                 ProfTableDO a = (ProfTableDO) result;
 //                Log.i("DB_dataReceived ", (a.getProfPassword()));
             }
-        }).getData(ProfTableDO.class,"Prof 0");
+        }).getData(ProfTableDO.class,"Prof 0");*/
 /*
                 //Log.d("Yesss",);
 //                Iterator<T> iter = result.iterator();
@@ -239,14 +241,19 @@ public class HomePage extends AppCompatActivity {
             <T> void postQueryAll(PaginatedList<T> result) {
                 for (int i = 0; i < result.size(); i ++) {
                     BookingInstanceTableDO bookingInstance = (BookingInstanceTableDO) result.get(i);
-                    LocalDateTime localDateTime = LocalDateTime.parse(bookingInstance.getTiming());
-                    Calendar calendar = Calendar.getInstance();
-                    calendar.set(localDateTime.getYear(),localDateTime.getMonthOfYear()-1,localDateTime.getDayOfMonth());
-                    if (calendars.containsKey(calendar)) {
-                        calendars.put(calendar,calendars.get(calendar)+1);
-                    } else {
-                        calendars.put(calendar,1);
+
+                    if (bookingInstance.getStudentName().toLowerCase().equals(username.toLowerCase()) && bookingInstance.getStatus().toLowerCase().equals("accepted")) {
+                        Log.i(TAG, bookingInstance.getStudentName() + "  " + username);
+                        LocalDateTime localDateTime = LocalDateTime.parse(bookingInstance.getTiming());
+                        Calendar calendar = Calendar.getInstance();
+                        calendar.set(localDateTime.getYear(),localDateTime.getMonthOfYear()-1,localDateTime.getDayOfMonth());
+                        if (calendars.containsKey(calendar)) {
+                            calendars.put(calendar,calendars.get(calendar)+1);
+                        } else {
+                            calendars.put(calendar,1);
+                        }
                     }
+
                 }
 
                 for (Calendar c:calendars.keySet()) {
@@ -287,9 +294,10 @@ public class HomePage extends AppCompatActivity {
             @Override
             public void onDayClick(EventDay eventDay) {
                 Calendar clickedDayCalendar = eventDay.getCalendar();
-                Toast.makeText(HomePage.this,clickedDayCalendar.toString(),Toast.LENGTH_SHORT).show();
+                //Toast.makeText(HomePage.this,clickedDayCalendar.toString(),Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(HomePage.this,Bookings.class);
                 intent.putExtra(USERNAME, username);
+                intent.putExtra(DATE_PICKED, clickedDayCalendar.getTime());
                 startActivity(intent);
             }
         });

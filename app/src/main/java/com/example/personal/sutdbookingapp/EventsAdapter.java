@@ -17,13 +17,13 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookingInstanceAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder> {
+public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder> {
     private ArrayList<BookingInstance> bookingInstances;
     private ArrayList<BookingInstance> updatedResult;
     private Context context;
     private String username;
 
-    public BookingInstanceAdapter(Context context, ArrayList<BookingInstance> bookings, String username) {
+    public EventsAdapter(Context context, ArrayList<BookingInstance> bookings, String username) {
         this.context = context;
         this.bookingInstances = bookings;
         this.username = username;
@@ -79,7 +79,7 @@ public class BookingInstanceAdapter extends RecyclerView.Adapter<EventsAdapter.V
                 viewHolder.status.setTextColor(Color.parseColor("#e81e1e"));
                 viewHolder.buttonCancel.setVisibility(View.GONE);
                 break;
-                //viewHolder.status.setTextColor(Color.parseColor("#ffbc3f"));
+            //viewHolder.status.setTextColor(Color.parseColor("#ffbc3f"));
         }
 //        Glide.with(context).load(bookingInstance.getImgUrl()).into(viewHolder.image);
 

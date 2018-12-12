@@ -12,7 +12,7 @@
         android:layout_height="100dp"
         android:layout_gravity="center"
         android:padding="10dp"
-        android:src="@mipmap/ic_launcher"/>
+        android:src="@drawable/profile_general"/>
 
     <TextView
         android:id="@+id/name"
