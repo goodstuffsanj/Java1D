@@ -35,11 +35,23 @@ public class LoginPageNew extends AppCompatActivity implements Student.OnFragmen
     private static final String TAG = "LoginPageNew";
     private GoogleSignInClient mGoogleSignInClient;
     public final static String USERNAME = "USERNAME";
+    SharedPreferences appData;
+    SharedPreferences.Editor appDataEditor;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        appData = getSharedPreferences("appData",MODE_PRIVATE);
+        appDataEditor = appData.edit();
+
+        if (appData.getString("username","")!= "") {
+            Intent intent = new Intent(LoginPageNew.this,HomePage.class);
+            //intent.putExtra(USERNAME, username);
+            startActivity(intent);
+            finish();
+        }
         TabLayout tabLayout = findViewById(R.id.tabLayoutLogin);
         tabLayout.addTab(tabLayout.newTab().setText("Student"));
         tabLayout.addTab(tabLayout.newTab().setText("Staff"));
@@ -102,10 +114,12 @@ public class LoginPageNew extends AppCompatActivity implements Student.OnFragmen
                                         name = studentDatabase.getStudentName();
                                         usernameFail = false;
                                         passwordFail = false;
-
+                                        appDataEditor.putString("username",username);
+                                        appDataEditor.apply();
                                         Intent intent = new Intent(LoginPageNew.this,HomePage.class);
-                                        intent.putExtra(USERNAME, username);
+                                        //intent.putExtra(USERNAME, username);
                                         startActivity(intent);
+                                        finish();
                                     }
                                     else {
                                         usernameFail = false;
@@ -154,10 +168,12 @@ public class LoginPageNew extends AppCompatActivity implements Student.OnFragmen
                                         name = profDatabase.getProfName();
                                         usernameFail = false;
                                         passwordFail = false;
-
+                                        appDataEditor.putString("username",username);
+                                        appDataEditor.apply();
                                         Intent intent = new Intent(LoginPageNew.this, ProfModeHomePage.class);
                                         intent.putExtra(USERNAME, username);
                                         startActivity(intent);
+                                        finish();
                                     }
                                     else {
                                         usernameFail = false;

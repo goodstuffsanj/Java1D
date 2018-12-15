@@ -44,29 +44,26 @@ public class HomePage extends AppCompatActivity {
     private ScrollView scrollHome;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle mToggle;
-    private SharedPreferences mPreferences;
+    private SharedPreferences appData;
+    private SharedPreferences.Editor appDataEditor;
     public final static String USERNAME = "USERNAME";
     private String username;
-    public String TAG = "DB";
     HashMap<Calendar, Integer> calendars = new HashMap<Calendar, Integer>();
+    private static final String TAG = "HomePage";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        appData = getSharedPreferences("appData",MODE_PRIVATE);
+        appDataEditor = appData.edit();
+        username = appData.getString("username","no-name");
+        Log.i(TAG, "onCreate: " + username);
+
         setContentView(R.layout.activity_home_page);
         scrollHome = findViewById(R.id.scrollHome);
         scrollHome.smoothScrollTo(0,0);
         List<EventDay> events = new ArrayList<>();
-
-        mPreferences = getSharedPreferences("sharedPrefFileStudent", MODE_PRIVATE);
-        username = mPreferences.getString(USERNAME, "");
-
-        Intent intent = getIntent();
-        String username_temp = intent.getStringExtra(LoginPageNew.USERNAME);
-        if (!(username_temp == null)) {
-            //i.e. intent.getStringExtra(LoginPageNew.USERNAME, username); (default value)
-            username = username_temp;
-        }
 
         drawerLayout = findViewById(R.id.drawer);
         mToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
@@ -96,6 +93,8 @@ public class HomePage extends AppCompatActivity {
 
                 }
                 else if (id == R.id.nav_logout) {
+                    appDataEditor.putString("username","");
+                    appDataEditor.apply();
                     Intent intent = new Intent(HomePage.this, LoginPageNew.class);
                     startActivity(intent);
                 }
@@ -240,11 +239,60 @@ public class HomePage extends AppCompatActivity {
                 for (int i = 0; i < result.size(); i ++) {
                     BookingInstanceTableDO bookingInstance = (BookingInstanceTableDO) result.get(i);
                     LocalDateTime localDateTime = LocalDateTime.parse(bookingInstance.getTiming());
-                    Calendar calendar = Calendar.getInstance();
+                    Calendar a = new Calendar() {
+                        @Override
+                        protected void computeTime() {
+
+                        }
+
+                        @Override
+                        protected void computeFields() {
+
+                        }
+
+                        @Override
+                        public void add(int field, int amount) {
+
+                        }
+
+                        @Override
+                        public void roll(int field, boolean up) {
+
+                        }
+
+                        @Override
+                        public int getMinimum(int field) {
+                            return 0;
+                        }
+
+                        @Override
+                        public int getMaximum(int field) {
+                            return 0;
+                        }
+
+                        @Override
+                        public int getGreatestMinimum(int field) {
+                            return 0;
+                        }
+
+                        @Override
+                        public int getLeastMaximum(int field) {
+                            return 0;
+                        }
+                    };
+                    Calendar calendar = a.getInstance();
+                    //Calendar calendar = Calendar.getInstance();
                     calendar.set(localDateTime.getYear(),localDateTime.getMonthOfYear()-1,localDateTime.getDayOfMonth());
+
+                    Log.i(TAG, "postQueryAll: "+calendar.hashCode());
+                    Log.i(TAG, "postQueryAll: "+username +" pp");
+                    int k = 0;
                     if (calendars.containsKey(calendar)) {
                         calendars.put(calendar,calendars.get(calendar)+1);
-                    } else {
+
+                        k++;
+                        Log.i(TAG, "postQueryAll: "+i);
+                    } else if (bookingInstance.getStudentName().equals(username)){
                         calendars.put(calendar,1);
                     }
                 }
@@ -282,12 +330,10 @@ public class HomePage extends AppCompatActivity {
         events.add(new EventDay(calendar, a));*/
 
         calendarView = (CalendarView) findViewById(R.id.calendarView);
-        calendarView.clearFocus();
         calendarView.setOnDayClickListener(new OnDayClickListener() {
             @Override
             public void onDayClick(EventDay eventDay) {
                 Calendar clickedDayCalendar = eventDay.getCalendar();
-                Toast.makeText(HomePage.this,clickedDayCalendar.toString(),Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(HomePage.this,Bookings.class);
                 intent.putExtra(USERNAME, username);
                 startActivity(intent);
@@ -320,9 +366,6 @@ public class HomePage extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        SharedPreferences.Editor preferenceEditor = mPreferences.edit();
-        preferenceEditor.putString(USERNAME, username);
-        preferenceEditor.apply();
         overridePendingTransition(0, 0);
 
     }

@@ -67,9 +67,6 @@
             android:name=".HomePage"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".LoginPageStaff"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".ProfModeRequestsPage"
             android:screenOrientation="portrait"
             android:parentActivityName=".ProfModeHomePage"/>
