@@ -22,7 +22,7 @@ public class Events extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_events);
-        View rootView = inflater.inflate(R.layout.fragment_upcoming, container, false);
+        //View rootView = inflater.inflate(R.layout.fragment_upcoming, container, false);
 //        for (int i=0; i<20; i++) {
 //            BookingInstance bookingInstance = new BookingInstance("120839201","Professor "+Integer.toString(i+1),"12/11/2018","08:30","09:30","Building 1 lvl 5","https://www.biography.com/.image/t_share/MTE5NDg0MDU0OTU2OTAxOTAz/albert-einstein-9285408-1-402.jpg","upcoming");
 //            upcomings.add(bookingInstance);
