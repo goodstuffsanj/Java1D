@@ -17,7 +17,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookingInstanceAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder> {
+public class BookingInstanceAdapter extends RecyclerView.Adapter<BookingInstanceAdapter.ViewHolder> {
     private ArrayList<BookingInstance> bookingInstances;
     private ArrayList<BookingInstance> updatedResult;
     private Context context;
@@ -32,14 +32,14 @@ public class BookingInstanceAdapter extends RecyclerView.Adapter<EventsAdapter.V
 
     @NonNull
     @Override
-    public EventsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public BookingInstanceAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.booking_instance, viewGroup, false);
-        ViewHolder holder = new ViewHolder(view);
+        BookingInstanceAdapter.ViewHolder holder = new BookingInstanceAdapter.ViewHolder(view);
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull EventsAdapter.ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull BookingInstanceAdapter.ViewHolder viewHolder, int i) {
         BookingInstance bookingInstance = bookingInstances.get(i);
         viewHolder.name.setText(bookingInstance.getName());
         String timeSlot = bookingInstance.getStartTime().toString("E, d MMM yyyy, h:mm a - ") + bookingInstance.getEndTime().toString("h:mm a");

@@ -18,6 +18,7 @@ import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDateTime;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 
 /**
@@ -98,6 +99,7 @@ public class Waiting extends Fragment {
                             }
                         }
                     }
+                    Collections.sort(waitings, new BookingInstanceComparator());
                 }
 
             }

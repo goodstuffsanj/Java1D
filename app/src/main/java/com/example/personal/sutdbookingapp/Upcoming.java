@@ -18,6 +18,7 @@ import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDateTime;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 
 /**
@@ -103,7 +104,7 @@ public class Upcoming extends Fragment {
                     }
 
                 }
-
+                Collections.sort(upcomings, new BookingInstanceComparator());
             }
 
             @Override

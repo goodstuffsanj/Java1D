@@ -67,9 +67,6 @@
             android:name=".HomePage"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".LoginPageStaff"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".ProfModeRequestsPage"
             android:parentActivityName=".ProfModeHomePage"
             android:screenOrientation="portrait" />
@@ -100,7 +97,9 @@
             android:name=".History"
             android:parentActivityName=".HomePage"
             android:screenOrientation="portrait" />
-        <activity android:name=".Events"></activity>
+        <activity android:name=".Events"
+            android:parentActivityName=".HomePage"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

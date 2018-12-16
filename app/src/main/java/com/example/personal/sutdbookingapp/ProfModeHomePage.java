@@ -41,17 +41,20 @@ public class ProfModeHomePage extends AppCompatActivity {
     private ActionBarDrawerToggle mToggle;
     public final static String USERNAME = "USERNAME";
     private String username;
-    private SharedPreferences mPreferences;
+    private SharedPreferences appData;
+    private SharedPreferences.Editor appDataEditor;
     HashMap<Calendar, Integer> calendars = new HashMap<Calendar, Integer>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prof_mode_home_page);
-        setTitle("My Activity");
+        setTitle("SUTD Booking App");
 
-        mPreferences = getSharedPreferences("sharedPrefFileStudent", MODE_PRIVATE);
-        username = mPreferences.getString(USERNAME, "");
+        appData = getSharedPreferences("appData", MODE_PRIVATE);
+        appDataEditor = appData.edit();
+
+        username = appData.getString("username", "");
 
         Intent intent = getIntent();
         String username_temp = intent.getStringExtra(LoginPageNew.USERNAME);
@@ -96,6 +99,9 @@ public class ProfModeHomePage extends AppCompatActivity {
                 }
                 else if (id == R.id.nav_logout) {
                     Intent intent = new Intent(ProfModeHomePage.this, LoginPageNew.class);
+                    appDataEditor.putString("username","");
+                    appDataEditor.putString("user","");
+                    appDataEditor.apply();
                     startActivity(intent);
                     finish();
                 }
@@ -113,8 +119,8 @@ public class ProfModeHomePage extends AppCompatActivity {
             public void onDayClick(EventDay eventDay) {
                 Calendar clickedDayCalendar = eventDay.getCalendar();
                 //Toast.makeText(ProfModeHomePage.this,clickedDayCalendar.toString(),Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(ProfModeHomePage.this,Bookings.class);
-                intent.putExtra(USERNAME, username);
+                Intent intent = new Intent(ProfModeHomePage.this,Events.class);
+                intent.putExtra("data", eventDay.getCalendar().getTimeInMillis());
                 startActivity(intent);
             }
         });
@@ -136,18 +142,10 @@ public class ProfModeHomePage extends AppCompatActivity {
                         LocalDateTime localDateTime = LocalDateTime.parse(bookingInstance.getTiming());
                         Calendar calendar = Calendar.getInstance();
                         calendar.set(localDateTime.getYear(),localDateTime.getMonthOfYear()-1,localDateTime.getDayOfMonth());
-                        if (calendars.containsKey(calendar)) {
-                            calendars.put(calendar,calendars.get(calendar)+1);
-                        } else {
-                            calendars.put(calendar,1);
-                        }
+                        Drawable a = CalendarUtils.getDrawableText(ProfModeHomePage.this,"*", null, R.color.green, 10);
+                        events.add(new EventDay(calendar, a));
                     }
 
-                }
-
-                for (Calendar c:calendars.keySet()) {
-                    Drawable a = CalendarUtils.getDrawableText(ProfModeHomePage.this,"+"+ calendars.get(c).toString(), null, R.color.green, 10);
-                    events.add(new EventDay(c, a));
                 }
                 runOnUiThread(new Runnable() {
 
@@ -199,9 +197,6 @@ public class ProfModeHomePage extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        SharedPreferences.Editor preferenceEditor = mPreferences.edit();
-        preferenceEditor.putString(USERNAME, username);
-        preferenceEditor.apply();
         overridePendingTransition(0, 0);
     }
 

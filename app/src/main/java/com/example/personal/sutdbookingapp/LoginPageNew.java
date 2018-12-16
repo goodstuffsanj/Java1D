@@ -35,18 +35,31 @@ public class LoginPageNew extends AppCompatActivity implements Student.OnFragmen
     private static final String TAG = "LoginPageNew";
     private GoogleSignInClient mGoogleSignInClient;
     public final static String USERNAME = "USERNAME";
-    private SharedPreferences mPreferences;
+    SharedPreferences appData;
+    SharedPreferences.Editor appDataEditor;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        mPreferences = getSharedPreferences("sharedPrefFileStudent", MODE_PRIVATE);
-        /*if (mPreferences.getString("username","")!= "") {
-            Intent intent = new Intent(LoginPageNew.this,HomePage.class);
-            intent.putExtra(USERNAME, username);
-            startActivity(intent);
-        }*/
+
+        appData = getSharedPreferences("appData",MODE_PRIVATE);
+        appDataEditor = appData.edit();
+
+        if (appData.getString("username","")!= "") {
+            switch (appData.getString("user","")) {
+                case "student":
+                    Intent intent = new Intent(LoginPageNew.this,HomePage.class);
+                    startActivity(intent);
+                    finish();
+                    break;
+                case "prof":
+                    Intent intent1 = new Intent(LoginPageNew.this,ProfModeHomePage.class);
+                    startActivity(intent1);
+                    finish();
+                    break;
+            }
+        }
         TabLayout tabLayout = findViewById(R.id.tabLayoutLogin);
         tabLayout.addTab(tabLayout.newTab().setText("Student"));
         tabLayout.addTab(tabLayout.newTab().setText("Staff"));
@@ -109,10 +122,13 @@ public class LoginPageNew extends AppCompatActivity implements Student.OnFragmen
                                         name = studentDatabase.getStudentName();
                                         usernameFail = false;
                                         passwordFail = false;
-
+                                        appDataEditor.putString("username",username);
+                                        appDataEditor.putString("user","student");
+                                        appDataEditor.apply();
                                         Intent intent = new Intent(LoginPageNew.this,HomePage.class);
-                                        intent.putExtra(USERNAME, username);
+                                        //intent.putExtra(USERNAME, username);
                                         startActivity(intent);
+                                        finish();
                                     }
                                     else {
                                         usernameFail = false;
@@ -161,10 +177,13 @@ public class LoginPageNew extends AppCompatActivity implements Student.OnFragmen
                                         name = profDatabase.getProfName();
                                         usernameFail = false;
                                         passwordFail = false;
-
+                                        appDataEditor.putString("username",username);
+                                        appDataEditor.putString("user","prof");
+                                        appDataEditor.apply();
                                         Intent intent = new Intent(LoginPageNew.this, ProfModeHomePage.class);
                                         intent.putExtra(USERNAME, username);
                                         startActivity(intent);
+                                        finish();
                                     }
                                     else {
                                         usernameFail = false;
