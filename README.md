@@ -1,3 +1,17 @@
-# University Booking App
+# SUTD Booking App
 
-A booking application for student in university.
+One Stop Booking application for student in SUTD
+
+## Feature
+
+Students:
+- Booking People
+- Booking Facilities
+
+Professors:
+- Requests
+- Booking facilities
+
+## 
+
+DynamoDB
