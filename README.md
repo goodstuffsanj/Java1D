@@ -2,16 +2,21 @@
 
 One Stop Booking application for student in SUTD
 
-## Feature
+### Feature
 
 Students:
-- Booking People
-- Booking Facilities
+- Booking People: professors, staffs, CDC staffs
+- Booking Facilities:  meeting rooms, laser machine, fablab, etc
 
 Professors:
-- Requests
-- Booking facilities
+- Requests: student meeting requests
+- Booking facilities: meeting rooms, laser machine, fablab, etc
 
-## 
+### Technology
 
 DynamoDB
+
+### Open Source
+1. [Glide][1]
+
+[1]: https://github.com/bumptech/glide
