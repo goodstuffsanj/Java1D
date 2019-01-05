@@ -2,7 +2,7 @@
 
 One Stop Booking application for student in SUTD
 
-### Feature
+### Features
 
 Students:
 - Booking People: professors, staffs, CDC staffs
