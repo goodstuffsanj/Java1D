@@ -14,9 +14,10 @@ Professors:
 
 ### Technology
 
-DynamoDB
+1. [DynamoDB][1]
 
 ### Open Source
-1. [Glide][1]
+1. [Glide][2]
 
-[1]: https://github.com/bumptech/glide
+[1]: https://aws.amazon.com/dynamodb/
+[2]: https://github.com/bumptech/glide
