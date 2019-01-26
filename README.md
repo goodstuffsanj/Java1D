@@ -5,13 +5,13 @@ One Stop Booking application for student in SUTD
 ## UI
 
 <p align='center'>
-  <img src='images/1.png' width=100px/>
-  <img src='images/2.png' width=100px/>
-  <img src='images/3.png' width=100px/>
-  <img src='images/4.png' width=100px/>
-  <img src='images/5.png' width=100px/>
-  <img src='images/6.png' width=100px/>
-  <img src='images/7.png' width=100px/>
+  <img src='images/1.png' width=150px/>
+  <img src='images/2.png' width=150px/>
+  <img src='images/3.png' width=150px/>
+  <img src='images/4.png' width=150px/>
+  <img src='images/5.png' width=150px/>
+  <img src='images/6.png' width=150px/>
+  <img src='images/7.png' width=150px/>
 </p>
 
 ## Features
@@ -32,7 +32,7 @@ In prof version, prof also can book the school facilities like students. Instead
 ## App Flow
 
 <p align='center'>
-  <img src='images/app_flow.png' width=100px/>
+  <img src='images/app_flow.png' width=600px/>
 </p>
 
 ## Technology
