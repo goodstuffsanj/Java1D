@@ -19,12 +19,14 @@ One Stop Booking application for student in SUTD
 Students:
 - Booking People: professors, staffs, CDC staffs
 - Booking Facilities:  meeting rooms, laser machine, fablab, etc
+
 In student version, students can book school facilities and send request for consult with prof or other staff within one week. 
 
 
 Professors:
 - Requests: student meeting requests
 - Booking facilities: meeting rooms, laser machine, fablab, etc
+
 In prof version, prof also can book the school facilities like students. Instead of sending requests, profs can check the requests that they have received and accept or decline the requests flexibly.
 
 ## App Flow
