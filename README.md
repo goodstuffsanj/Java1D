@@ -51,7 +51,7 @@ In prof version, prof also can book the school facilities like students. Instead
 - James Andrew Pohadi
 - Gou Yuanyuan
 - Rachel Chua
-- Shanjay Shankar
+- Sanjay Shankar
 - Wang Zijia
 
 [1]: https://aws.amazon.com/dynamodb/
